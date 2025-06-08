@@ -32,12 +32,18 @@ class Create extends Component
         $this->slug = Str::slug($this->title);
     }
 
+    public function updatedContent($value)
+    {
+        $this->content = $value;
+    }
+
     public function submit()
     {
+        // dd($this->content);
         $validated = $this->validate([
-            'title'          => 'required|string|max:255',
+            'title'          => 'required',
             'category_id'    => 'required|exists:categories,id',
-            'content'        => 'required',
+            'content'        => 'required|string',
             'featured_image' => 'nullable|image|max:1024',
             'status'         => 'required|in:draft,pending,published,archived',
             'sub_title'      => 'nullable|string',
@@ -54,48 +60,38 @@ class Create extends Component
 
         if ($this->featured_image) {
             $imageName = "post-" . time() . '.' . $this->featured_image->getClientOriginalExtension();
+            // $this->featured_image->storeAs('public/posts', $imageName);
             $imagePath = $this->featured_image->storeAs('public/posts', $imageName);
         }
-        $post = new Post();
-        $post['user_id'] = Auth::id();
-        $post['published_at'] = $this->published_at;
-        $post['title'] = $this->title;
-        $post['sub_title'] = $this->sub_title;
-        $post['summary'] = $this->summary;
-        $post['content'] = $this->content;
-        $post['category_id'] = $this->category_id;
-        $post['status'] = $this->status;
-        $post['featured_image'] = $imagePath ?? null;
-        $post['slug'] = Str::slug($this->title);
-        $post['image_caption'] = $this->image_caption;
-        $post['video_url'] = $this->video_url;
-        $post['keywords'] = $this->keywords;
-        $post['is_featured'] = $this->is_featured;
-        $post['is_breaking'] = $this->is_breaking;
-        $post['is_slider'] = $this->is_slider;
-        $post['meta_title'] = $this->meta_title;
-        $post['meta_description'] = $this->meta_description;
-        $post['created_by'] = Auth::id();
-
-        // dd($validated);
 
         try {
-            // Post::create($post);
-            $post->save();
+            $this->featured_image->storeAs('public/posts', $imageName);
+            $post = Post::create([
+                'user_id' => Auth::id(),
+                'published_at' => $this->published_at,
+                'title' => $this->title,
+                'sub_title' => $this->sub_title,
+                'summary' => $this->summary,
+                'content' => $this->content,
+                'category_id' => $this->category_id,
+                'status' => $this->status,
+                'featured_image' => $imagePath ?? null,
+                'slug' => Str::slug($this->title),
+                'image_caption' => $this->image_caption,
+                'video_url' => $this->video_url,
+                'keywords' => $this->keywords,
+                'is_featured' => $this->is_featured,
+                'is_breaking' => $this->is_breaking,
+                'is_slider' => $this->is_slider,
+                'meta_title' => $this->meta_title,
+                'meta_description' => $this->meta_description,
+                'created_by' => Auth::id(),
+            ]);
 
             $this->succsessNotify("Post created successfully!");
-            // $this->reset([
-            //     'title', 'slug', 'sub_title', 'summary', 'content',
-            //     'featured_image', 'image_caption', 'video_url', 'keywords',
-            //     'category_id', 'status', 'is_featured', 'is_breaking',
-            //     'is_slider', 'published_at', 'meta_title', 'meta_description'
-            // ]);
             return redirect()->route('posts.index');
         } catch (\Throwable $th) {
             $this->unsuccsessNotify("Post creation failed: " . $th->getMessage());
-            // dd($th->getMessage());
-            // Optionally, you can log the error or handle it as needed
-            
         }
     }
 

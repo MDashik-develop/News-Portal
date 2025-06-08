@@ -3,6 +3,7 @@
 
 <head>
     @include('partials.head')
+
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-800">
@@ -226,9 +227,7 @@
 
     @fluxScripts
     
-    {{-- <livewire:partials.notifications /> --}}
-      <!-- Summernote Lite JS -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.js"></script>
+    {{-- <livewire:partials.notifications /> --}}      
 
       <script>
         // SweetAlert2
@@ -238,12 +237,7 @@
                     text: event.detail.message,
                     icon: event.detail.type,
                     // timer: 1500
-                    // if (event.detail.type == "success") {
-                    //     timer: 1500, // Auto close after 1.5 seconds
-                    // } else {
-                    //     timer: 10000, // Auto close after 3 seconds for errors
-                        
-                    // }
+
                 });
             })
       </script>
