@@ -1,4 +1,4 @@
-<div class="py-12">
+<section class="py-12">
     <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900">
@@ -105,11 +105,11 @@
                                 <flux:error name="video_url" />
                             </flux:field>
 
-                            <flux:field>
+                            {{-- <flux:field>
                                 <flux:label>Keywords</flux:label>
                                 <flux:input wire:model="keywords" type="text" />
                                 <flux:error name="keywords" />
-                            </flux:field>
+                            </flux:field> --}}
 
                             <flux:field>
                                 <flux:label>Status</flux:label>
@@ -153,7 +153,24 @@
                                 <flux:label>Published At</flux:label>
                                 <flux:input type="datetime-local" wire:model="published_at" />
                                 <flux:error name="published_at" />
+
                             </flux:field>
+
+                            <flux:label>Keywords or Tags</flux:label>
+                            <div id="tag-container" class="flex flex-wrap items-center border border-gray-300 rounded-lg p-2 mb-4">
+                                
+                                <!-- Tags will be added here dynamically -->
+                                <input
+                                    id="tag-input"
+                                    type="text"
+                                    class="flex-grow p-1 outline-none"
+                                    placeholder="Type a tag and press Enter"
+                                />
+                            </div>
+                            
+                            <!-- Hidden input to store tags as CSV for Livewire -->
+                            <input type="hidden" wire:model="tagsString" id="tags-hidden" value="">
+                            <flux:error name="tagsString" />
 
                             <flux:field>
                                 <flux:label>Meta Title</flux:label>
@@ -163,8 +180,7 @@
 
                             <flux:field>
                                 <flux:label>Meta Description</flux:label>
-                                <textarea wire:model="meta_description" name="meta_description"
-                                    class="border"></textarea>
+                                <flux:textarea wire:model="meta_description" rows="3" />
                                 <flux:error name="meta_description" />
                             </flux:field>
 
@@ -184,4 +200,90 @@
             </div>
         </div>
     </div>
-</div>
+                                       
+    <script>
+        function initializeTagsField() {
+            const tagContainer = document.getElementById('tag-container');
+            const tagInput = document.getElementById('tag-input');
+            const hiddenInput = document.getElementById('tags-hidden');
+
+            if (!tagContainer || !tagInput || !hiddenInput) return;
+
+            // Prevent duplicate initialization
+            if (tagContainer.getAttribute('data-initialized') === 'true') {
+                return;
+            }
+
+            tagContainer.setAttribute('data-initialized', 'true');
+
+            // Initialize tags array
+            let tags = hiddenInput.value
+                ? hiddenInput.value.split(',').map(tag => tag.trim()).filter(tag => tag !== '')
+                : [];
+
+            function renderTags() {
+                // Remove existing tags
+                tagContainer.querySelectorAll('.tag').forEach(tag => tag.remove());
+
+                // Render tags
+                tags.forEach((tag, index) => {
+                    const tagElement = document.createElement('div');
+                    tagElement.className = 'tag flex items-center bg-blue-100 text-blue-800 px-2 py-1 rounded mr-2 mb-2';
+                    tagElement.innerHTML = `
+                        <span>${tag}</span>
+                        <button type="button" class="ml-2 text-blue-500 hover:text-blue-700 font-bold" data-index="${index}">
+                            &times;
+                        </button>
+                    `;
+                    tagContainer.insertBefore(tagElement, tagInput);
+                });
+
+                // Update hidden input
+                hiddenInput.value = tags.join(',');
+                hiddenInput.dispatchEvent(new Event('input'));
+            }
+
+            renderTags(); // Initial render
+
+            // Add tag on Enter key
+            tagInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const newTag = tagInput.value.trim();
+
+                    if (newTag !== '' && !tags.includes(newTag)) {
+                        tags.push(newTag);
+                        renderTags();
+                    }
+                    tagInput.value = '';
+                }
+            });
+
+            // Remove tag on button click
+            tagContainer.addEventListener('click', function (e) {
+                if (e.target.tagName === 'BUTTON') {
+                    const index = e.target.getAttribute('data-index');
+                    tags.splice(index, 1);
+                    renderTags();
+                }
+            });
+        }
+
+        // Initial run
+        initializeTagsField();
+
+        // Run on Livewire SPA navigation
+        document.addEventListener('livewire:navigated', () => {
+            setTimeout(() => {
+                initializeTagsField();
+            }, 100);
+        });
+
+        // Run on Livewire DOM updated (important for reactive fields!)
+        document.addEventListener('livewire:updated', () => {
+            setTimeout(() => {
+                initializeTagsField();
+            }, 50);
+        });
+    </script>
+</section>

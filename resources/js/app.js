@@ -3,3 +3,5 @@
 // window.Alpine = Alpine; // Make Alpine globally available (optional, but common)
 
 // Alpine.start();
+
+import 'flowbite';

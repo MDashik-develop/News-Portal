@@ -9,7 +9,6 @@ use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class Create extends Component
 {
@@ -17,7 +16,9 @@ class Create extends Component
     use WithFileUploads;
 
     public $title, $slug, $sub_title, $summary, $content;
-    public $featured_image, $image_caption, $video_url, $keywords;
+    public $tags = []; // tags as array
+    public $tagsString = ''; // to hold tags as CSV string for binding
+    public $featured_image, $image_caption, $video_url;
     public $category_id, $status = 'draft', $is_featured = false;
     public $is_breaking = false, $is_slider = false, $published_at;
     public $meta_title, $meta_description;
@@ -27,6 +28,12 @@ class Create extends Component
         $this->published_at = now()->format('Y-m-d\TH:i');
     }
 
+    public function updateTags($tags)
+    {
+        $this->tags = $tags;
+        $this->tagsString = implode(',', $tags);
+    }
+    
     public function updatedTitle()
     {
         $this->slug = Str::slug($this->title);
@@ -39,7 +46,8 @@ class Create extends Component
 
     public function submit()
     {
-        // dd($this->content);
+        
+        // $this->tags = array_filter(array_map('trim', explode(',', $this->tagsString)));
         $validated = $this->validate([
             'title'          => 'required',
             'category_id'    => 'required|exists:categories,id',
@@ -50,22 +58,25 @@ class Create extends Component
             'summary'        => 'nullable|string',
             'image_caption'  => 'nullable|string|max:255',
             'video_url'      => 'nullable|url',
-            'keywords'       => 'nullable|string|max:255',
             'is_featured'    => 'boolean',
             'is_breaking'    => 'boolean',
             'is_slider'      => 'boolean',
             'meta_title'     => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
+            'tagsString'     => 'nullable|string', // CSV string, not array
         ]);
+
+        // Convert tagsString CSV into array & clean
+        $this->tags = array_filter(array_map('trim', explode(',', $this->tagsString)));
 
         if ($this->featured_image) {
             $imageName = "post-" . time() . '.' . $this->featured_image->getClientOriginalExtension();
-            // $this->featured_image->storeAs('public/posts', $imageName);
-            $imagePath = $this->featured_image->storeAs('public/posts', $imageName);
+            // $imagePath = $this->featured_image->storeAs('public/posts', $imageName);
+            $imagePath = $this->featured_image->storeAs('posts', $imageName, 'public');
         }
 
         try {
-            $this->featured_image->storeAs('public/posts', $imageName);
+            // dd($this->tags);
             $post = Post::create([
                 'user_id' => Auth::id(),
                 'published_at' => $this->published_at,
@@ -79,7 +90,7 @@ class Create extends Component
                 'slug' => Str::slug($this->title),
                 'image_caption' => $this->image_caption,
                 'video_url' => $this->video_url,
-                'keywords' => $this->keywords,
+                'keywords' => implode(',', $this->tags), // save tags as CSV string
                 'is_featured' => $this->is_featured,
                 'is_breaking' => $this->is_breaking,
                 'is_slider' => $this->is_slider,

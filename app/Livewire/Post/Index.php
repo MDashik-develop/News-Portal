@@ -4,6 +4,7 @@ namespace App\Livewire\Post;
 
 use App\Models\Post;
 use App\Traits\HasNotifications;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -24,6 +25,11 @@ class Index extends Component
     public function delete($id)
     {
         $post = Post::find($id);
+        // if (!empty($post->featured_image) && Storage::exists('public/' . $post->featured_image)) {
+            // Delete the featured image from storage
+            Storage::disk('public')->delete($post->featured_image);
+            // Storage::delete('public/' . $this->post->featured_image);
+        // }
         try {
             $post->delete();
             $this->succsessNotify("Post deleted successfully!");

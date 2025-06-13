@@ -101,10 +101,91 @@
                         </flux:field>
 
                         <flux:field>
-                            <flux:label>Keywords</flux:label>
-                            <flux:input wire:model="keywords" type="text" />
-                            <flux:error name="keywords" />
+
+                        <flux:label>Tags</flux:label>
+
+                            <div id="tag-container" class="flex flex-wrap items-center border border-gray-300 rounded-lg p-2 mb-4">
+                                <input
+                                    id="tag-input"
+                                    type="text"
+                                    class="flex-grow p-1 outline-none"
+                                    placeholder="Type a tag and press Enter"
+                                />
+                            </div>
+
+                            <!-- Hidden input to store tags as CSV for Livewire -->
+                            <input type="hidden" wire:model="tagsString" id="tags-hidden" value="{{ $tagsString }}">
+
+                        <script>
+                                function initializeTagsField() {
+                                const tagContainer = document.getElementById('tag-container');
+                                const tagInput = document.getElementById('tag-input');
+                                const hiddenInput = document.getElementById('tags-hidden');
+                            
+                                if (!tagContainer || !tagInput || !hiddenInput) return;
+                            
+                                let tags = hiddenInput.value
+                                    ? hiddenInput.value.split(',').map(tag => tag.trim()).filter(tag => tag !== '')
+                                    : [];
+                            
+                                function renderTags() {
+                                    tagContainer.querySelectorAll('.tag').forEach(tag => tag.remove());
+                            
+                                    tags.forEach((tag, index) => {
+                                        const tagElement = document.createElement('div');
+                                        tagElement.className = 'tag flex items-center bg-blue-100 text-blue-800 px-2 py-1 rounded mr-2 mb-2';
+                                        tagElement.innerHTML = `
+                                            <span>${tag}</span>
+                                            <button type="button" class="ml-2 text-blue-500 hover:text-blue-700 font-bold" data-index="${index}">
+                                                &times;
+                                            </button>
+                                        `;
+                                        tagContainer.insertBefore(tagElement, tagInput);
+                                    });
+                            
+                                    hiddenInput.value = tags.join(',');
+                                    hiddenInput.dispatchEvent(new Event('input'));
+                                }
+                            
+                                renderTags(); // Initial render
+                            
+                                tagInput.addEventListener('keydown', function (e) {
+                                    if (e.key === 'Enter') {
+                                        e.preventDefault();
+                                        const newTag = tagInput.value.trim();
+                            
+                                        if (newTag !== '' && !tags.includes(newTag)) {
+                                            tags.push(newTag);
+                                            renderTags();
+                                        }
+                                        tagInput.value = '';
+                                    }
+                                });
+                            
+                                tagContainer.addEventListener('click', function (e) {
+                                    if (e.target.tagName === 'BUTTON') {
+                                        const index = e.target.getAttribute('data-index');
+                                        tags.splice(index, 1);
+                                        renderTags();
+                                    }
+                                });
+                            }
+                            
+                            // Run it initially
+                            initializeTagsField();
+                            
+                            // Run it on Livewire navigation (after page is loaded)
+                            document.addEventListener('livewire:navigated', () => {
+                                setTimeout(() => {
+                                    initializeTagsField();
+                                }, 100); // small delay to allow DOM to be ready
+                            });
+                            
+                        </script>
+
+                            <flux:error name="tagsString" />
                         </flux:field>
+
 
                         <flux:field>
                             <flux:label>Status</flux:label>
