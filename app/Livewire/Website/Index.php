@@ -55,23 +55,6 @@ class Index extends Component
         $validated['meta_tags'] = $this->tagsString;
 
         try {
-            // Handle favicon upload
-            if ($this->favicon) {
-                if ($this->temp_favicon) {
-                    Storage::disk('public')->delete($this->temp_favicon);
-                }
-                $faviconName = "favicon-" . time() . '.' . $this->favicon->getClientOriginalExtension();
-                $validated['favicon'] = $this->favicon->storeAs('website', $faviconName, 'public');
-            }
-
-            // Handle logo upload
-            if ($this->logo) {
-                if ($this->temp_logo) {
-                    Storage::disk('public')->delete($this->temp_logo);
-                }
-                $logoName = "logo-" . time() . '.' . $this->logo->getClientOriginalExtension();
-                $validated['logo'] = $this->logo->storeAs('website', $logoName, 'public');
-            }
 
             if ($this->website) {
                 $this->website->update($validated);

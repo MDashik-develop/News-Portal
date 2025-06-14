@@ -6,6 +6,7 @@ use App\Livewire\Category\Index as cartegoryIndex;
 use App\Livewire\Post\Create as postCreate;
 use App\Livewire\Post\Edit as postEdit;
 use App\Livewire\Post\Index as postIndex;
+use App\Livewire\User\Index as userIndex;
 use App\Livewire\Website\Index as websiteIndex;
 use App\Livewire\Website\Logos as websiteLogos;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/posts/{id}/edit', postEdit::class)->name('posts.edit');
 
     Route::get('/admin/website', websiteIndex::class)->name('website.index');
-    Route::get('/admin/website/logo', websiteLogos::class)->name('website.logo');
+    Route::get('/admin/website/logo', websiteLogos::class)->name('website.logos');
+
+    Route::get('/admin/users', userIndex::class)->name('users.index');
 
 });

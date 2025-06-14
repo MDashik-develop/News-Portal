@@ -9,86 +9,84 @@
 <body class="min-h-screen bg-white dark:bg-zinc-800">
 
     {{-- Alpinejs nitfication --}}
-        @if (session('success') || $errors->any())
-            <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
-                 class="fixed top-5 right-5 z-50 px-6 py-4 rounded-md shadow-lg text-white transition-all duration-500" 
-                :class="{
+    @if (session('success') || $errors->any())
+    <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
+        class="fixed top-5 right-5 z-50 px-6 py-4 rounded-md shadow-lg text-white transition-all duration-500" :class="{
                     'bg-green-500': {{ session('success') ? 'true' : 'false' }}, // সরাসরি boolean মান ব্যবহার করুন
                     'bg-red-500': {{ $errors->any() ? 'true' : 'false' }}
-                }"
-            >
-                @if (session('success'))
-                <div
-                    class="fixed top-5 right-5 bg-white p-4 rounded-md shadow-lg border border-green-400 flex items-start space-x-3">
-                    <div class="flex-shrink-0">
-                        {{-- Green checkmark circle icon --}}
-                        <svg class="w-6 h-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <div class="flex-grow">
-                        <p class="text-sm font-medium text-gray-900">Post created</p>
-                        <p class="text-sm text-gray-600">
-                            {{-- Display the dynamic success message from the session --}}
-                            {{ session('success') }}
-                        </p>
-                    </div>
-                    <div class="flex-shrink-0">
-                    </div>
-                </div>
-                @endif
-                <livewire:partials.notifications />
-
-                @if ($errors->any())
-                <div x-data="{ showErrorToast: true }" x-show="showErrorToast"
-                    x-init="setTimeout(() => showErrorToast = false, 8000)" {{-- Display for 8 seconds, adjust as needed --}}
-                    x-transition:enter="transition ease-out duration-300"
-                    x-transition:enter-start="opacity-0 transform translate-y-2"
-                    x-transition:enter-end="opacity-100 transform translate-y-0"
-                    x-transition:leave="transition ease-in duration-200"
-                    x-transition:leave-start="opacity-100 transform translate-y-0"
-                    x-transition:leave-end="opacity-0 transform translate-y-2"
-                    class="fixed top-5 right-5 bg-white p-4 rounded-md shadow-lg border border-red-400 flex items-start space-x-3 z-50"
-                    role="alert">
-
-                    <div class="flex-shrink-0">
-                        {{-- Red error/warning icon --}}
-                        <svg class="w-6 h-6 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 9v3.75m0-3.75c-.026.026-.052.052-.079.079M12 9V6.75m0 6V12m6-3a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0-.414.168-.79.44-1.06S10.836 8.25 11.25 8.25s.79.168 1.06.44c.272.272.44.646.44 1.06 0 .414-.168.79-.44 1.06S11.664 11.25 11.25 11.25s-.79-.168-1.06-.44A1.49 1.49 0 019.75 9.75z" />
-                        </svg>
-                    </div>
-
-                    <div class="flex-grow">
-                        <p class="text-sm font-medium text-gray-900">
-                            {{-- You can customize this title --}}
-                            Please fix the following {{ $errors->count() > 1 ? 'errors' : 'error' }}:
-                        </p>
-                        <div class="mt-1 text-sm text-gray-600">
-                            <ul class="list-disc list-inside space-y-1">
-                                @foreach ($errors->all() as $error)
-                                <li>
-                                    <span class="flex items-center">
-                                        <flux:icon name="x-circle" class="w-4 h-4 mr-1.5 text-red-400 flex-shrink-0" />
-                                        {{ $error }}
-                                    </span>
-
-                                    {{ $error }}
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="flex-shrink-0">
-                    </div>
-                </div>
-                @endif
+                }">
+        @if (session('success'))
+        <div
+            class="fixed top-5 right-5 bg-white p-4 rounded-md shadow-lg border border-green-400 flex items-start space-x-3">
+            <div class="flex-shrink-0">
+                {{-- Green checkmark circle icon --}}
+                <svg class="w-6 h-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
             </div>
+            <div class="flex-grow">
+                <p class="text-sm font-medium text-gray-900">Post created</p>
+                <p class="text-sm text-gray-600">
+                    {{-- Display the dynamic success message from the session --}}
+                    {{ session('success') }}
+                </p>
+            </div>
+            <div class="flex-shrink-0">
+            </div>
+        </div>
         @endif
+        <livewire:partials.notifications />
+
+        @if ($errors->any())
+        <div x-data="{ showErrorToast: true }" x-show="showErrorToast"
+            x-init="setTimeout(() => showErrorToast = false, 8000)" {{-- Display for 8 seconds, adjust as needed --}}
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform translate-y-2"
+            x-transition:enter-end="opacity-100 transform translate-y-0"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 transform translate-y-0"
+            x-transition:leave-end="opacity-0 transform translate-y-2"
+            class="fixed top-5 right-5 bg-white p-4 rounded-md shadow-lg border border-red-400 flex items-start space-x-3 z-50"
+            role="alert">
+
+            <div class="flex-shrink-0">
+                {{-- Red error/warning icon --}}
+                <svg class="w-6 h-6 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 9v3.75m0-3.75c-.026.026-.052.052-.079.079M12 9V6.75m0 6V12m6-3a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0-.414.168-.79.44-1.06S10.836 8.25 11.25 8.25s.79.168 1.06.44c.272.272.44.646.44 1.06 0 .414-.168.79-.44 1.06S11.664 11.25 11.25 11.25s-.79-.168-1.06-.44A1.49 1.49 0 019.75 9.75z" />
+                </svg>
+            </div>
+
+            <div class="flex-grow">
+                <p class="text-sm font-medium text-gray-900">
+                    {{-- You can customize this title --}}
+                    Please fix the following {{ $errors->count() > 1 ? 'errors' : 'error' }}:
+                </p>
+                <div class="mt-1 text-sm text-gray-600">
+                    <ul class="list-disc list-inside space-y-1">
+                        @foreach ($errors->all() as $error)
+                        <li>
+                            <span class="flex items-center">
+                                <flux:icon name="x-circle" class="w-4 h-4 mr-1.5 text-red-400 flex-shrink-0" />
+                                {{ $error }}
+                            </span>
+
+                            {{ $error }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex-shrink-0">
+            </div>
+        </div>
+        @endif
+    </div>
+    @endif
     {{-- Alpinejs nitfication --}}
 
 
@@ -101,11 +99,14 @@
 
         <flux:navlist variant="outline">
             <flux:navlist.group :heading="__('Platform')" class="grid">
-                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                <flux:navlist.item icon="home" :href="route('website')" :current="request()->routeIs('website')" wire:navigate>{{ __('Website') }}</flux:navlist.item>
+                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
+                    wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                {{-- <flux:navlist.item icon="home" :href="route('website.index')"
+                    :current="request()->routeIs('website.index')" wire:navigate>{{ __('Website') }}</flux:navlist.item> --}}
             </flux:navlist.group>
 
-            <flux:navlist.group expandable :expanded="request()->routeIs('website.*')" heading="Websites" class="lg:grid">
+            <flux:navlist.group expandable :expanded="request()->routeIs('website.*')" heading="Websites"
+                class="lg:grid">
                 <flux:navlist.item :href="route('website.index')" :current="request()->routeIs('website.index')"
                     wire:navigate>{{ __('Details') }}</flux:navlist.item>
                 <flux:navlist.item :href="route('website.logos')" :current="request()->routeIs('website.logos')"
@@ -234,10 +235,11 @@
     {{ $slot }}
 
     @fluxScripts
-    
-    {{-- <livewire:partials.notifications /> --}}      
 
-      <script>
+    {{--
+    <livewire:partials.notifications /> --}}
+
+    <script>
         // SweetAlert2
             window.addEventListener('notify', event => {
                 Swal.fire({
@@ -248,7 +250,7 @@
 
                 });
             })
-      </script>
+    </script>
 </body>
 
 </html>
