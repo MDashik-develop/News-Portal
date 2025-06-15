@@ -8,87 +8,6 @@
 
 <body class="min-h-screen bg-white dark:bg-zinc-800">
 
-    {{-- Alpinejs nitfication --}}
-    @if (session('success') || $errors->any())
-    <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
-        class="fixed top-5 right-5 z-50 px-6 py-4 rounded-md shadow-lg text-white transition-all duration-500" :class="{
-                    'bg-green-500': {{ session('success') ? 'true' : 'false' }}, // সরাসরি boolean মান ব্যবহার করুন
-                    'bg-red-500': {{ $errors->any() ? 'true' : 'false' }}
-                }">
-        @if (session('success'))
-        <div
-            class="fixed top-5 right-5 bg-white p-4 rounded-md shadow-lg border border-green-400 flex items-start space-x-3">
-            <div class="flex-shrink-0">
-                {{-- Green checkmark circle icon --}}
-                <svg class="w-6 h-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                    stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-            </div>
-            <div class="flex-grow">
-                <p class="text-sm font-medium text-gray-900">Post created</p>
-                <p class="text-sm text-gray-600">
-                    {{-- Display the dynamic success message from the session --}}
-                    {{ session('success') }}
-                </p>
-            </div>
-            <div class="flex-shrink-0">
-            </div>
-        </div>
-        @endif
-        <livewire:partials.notifications />
-
-        @if ($errors->any())
-        <div x-data="{ showErrorToast: true }" x-show="showErrorToast"
-            x-init="setTimeout(() => showErrorToast = false, 8000)" {{-- Display for 8 seconds, adjust as needed --}}
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 transform translate-y-2"
-            x-transition:enter-end="opacity-100 transform translate-y-0"
-            x-transition:leave="transition ease-in duration-200"
-            x-transition:leave-start="opacity-100 transform translate-y-0"
-            x-transition:leave-end="opacity-0 transform translate-y-2"
-            class="fixed top-5 right-5 bg-white p-4 rounded-md shadow-lg border border-red-400 flex items-start space-x-3 z-50"
-            role="alert">
-
-            <div class="flex-shrink-0">
-                {{-- Red error/warning icon --}}
-                <svg class="w-6 h-6 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                    stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 9v3.75m0-3.75c-.026.026-.052.052-.079.079M12 9V6.75m0 6V12m6-3a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0-.414.168-.79.44-1.06S10.836 8.25 11.25 8.25s.79.168 1.06.44c.272.272.44.646.44 1.06 0 .414-.168.79-.44 1.06S11.664 11.25 11.25 11.25s-.79-.168-1.06-.44A1.49 1.49 0 019.75 9.75z" />
-                </svg>
-            </div>
-
-            <div class="flex-grow">
-                <p class="text-sm font-medium text-gray-900">
-                    {{-- You can customize this title --}}
-                    Please fix the following {{ $errors->count() > 1 ? 'errors' : 'error' }}:
-                </p>
-                <div class="mt-1 text-sm text-gray-600">
-                    <ul class="list-disc list-inside space-y-1">
-                        @foreach ($errors->all() as $error)
-                        <li>
-                            <span class="flex items-center">
-                                <flux:icon name="x-circle" class="w-4 h-4 mr-1.5 text-red-400 flex-shrink-0" />
-                                {{ $error }}
-                            </span>
-
-                            {{ $error }}
-                        </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-
-            <div class="flex-shrink-0">
-            </div>
-        </div>
-        @endif
-    </div>
-    @endif
-    {{-- Alpinejs nitfication --}}
-
 
     <flux:sidebar sticky stashable class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
@@ -99,38 +18,54 @@
 
         <flux:navlist variant="outline">
             <flux:navlist.group :heading="__('Platform')" class="grid">
-                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
-                    wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                <flux:navlist.item icon="user" :href="route('users.index')"
-                    :current="request()->routeIs('users.index')" wire:navigate>{{ __('Users') }}</flux:navlist.item>
+                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                @can('user.edit')
+                    <flux:navlist.item icon="user" :href="route('users.index')" :current="request()->routeIs('users.index')" wire:navigate>{{ __('Users') }}</flux:navlist.item>
+                @endcan   
             </flux:navlist.group>
 
-            <flux:navlist.group expandable :expanded="request()->routeIs('website.*')" heading="Websites"
-                class="lg:grid">
-                <flux:navlist.item :href="route('website.index')" :current="request()->routeIs('website.index')"
-                    wire:navigate>{{ __('Details') }}</flux:navlist.item>
-                <flux:navlist.item :href="route('website.logos')" :current="request()->routeIs('website.logos')"
-                    wire:navigate>{{ __('Logos') }}</flux:navlist.item>
-            </flux:navlist.group>
-
-            <flux:navlist.group expandable :expanded="request()->routeIs('categories.*')" heading="Categories"
-                class="lg:grid">
-                <flux:navlist.item :href="route('categories.index')" :current="request()->routeIs('categories.index')"
-                    wire:navigate>{{__('All Categories') }}</flux:navlist.item>
-                <flux:navlist.item :href="route('categories.create')" :current="request()->routeIs('categories.create')"
-                    wire:navigate>{{ __('Categories Create') }}</flux:navlist.item>
-            </flux:navlist.group>
-            <flux:navlist.group expandable :expanded="request()->routeIs('posts.*')" heading="Posts" class="lg:grid">
-                <flux:navlist.item :href="route('posts.index')" :current="request()->routeIs('posts.index')"
-                    wire:navigate>{{ __('All Posts') }}</flux:navlist.item>
-                <flux:navlist.item :href="route('posts.create')" :current="request()->routeIs('posts.create')"
-                    wire:navigate>{{ __('Post Create') }}</flux:navlist.item>
-            </flux:navlist.group>
+            @can('user.permission')
+                <flux:navlist.group expandable :expanded="request()->routeIs('permissions.*')" heading="Permission"
+                    class="lg:grid">
+                    <flux:navlist.item :href="route('permissions.index')" :current="request()->routeIs('permissions.index')"
+                        wire:navigate>{{ __('Permissions') }}</flux:navlist.item>
+                    <flux:navlist.item :href="route('permissions.roles.index')" :current="request()->routeIs('permissions.roles.index')"
+                        wire:navigate>{{ __('Roles') }}</flux:navlist.item>
+                        <flux:navlist.item :href="route('permissions.user-roles.index')" :current="request()->routeIs('permissions.user-roles.index')"
+                            wire:navigate>{{ __('User Roles') }}</flux:navlist.item>
+                </flux:navlist.group>
+            @endcan
+            @can('website.maintenance')
+                <flux:navlist.group expandable :expanded="request()->routeIs('website.*')" heading="Websites"
+                    class="lg:grid">
+                    <flux:navlist.item :href="route('website.index')" :current="request()->routeIs('website.index')"
+                        wire:navigate>{{ __('Details') }}</flux:navlist.item>
+                    <flux:navlist.item :href="route('website.logos')" :current="request()->routeIs('website.logos')"
+                        wire:navigate>{{ __('Logos') }}</flux:navlist.item>
+                </flux:navlist.group>
+            @endcan
+            @can('categories.edit')
+                <flux:navlist.group expandable :expanded="request()->routeIs('categories.*')" heading="Categories"
+                    class="lg:grid">
+                    <flux:navlist.item :href="route('categories.index')" :current="request()->routeIs('categories.index')"
+                        wire:navigate>{{__('All Categories') }}</flux:navlist.item>
+                    <flux:navlist.item :href="route('categories.create')" :current="request()->routeIs('categories.create')"
+                        wire:navigate>{{ __('Categories Create') }}</flux:navlist.item>
+                </flux:navlist.group>
+            @endcan
+            @canany(['post.maintenance', 'post.create'])
+                <flux:navlist.group expandable :expanded="request()->routeIs('posts.*')" heading="Posts" class="lg:grid">
+                    @can('post.maintenance')
+                        <flux:navlist.item :href="route('posts.index')" :current="request()->routeIs('posts.index')" wire:navigate>{{ __('All Posts') }}</flux:navlist.item>
+                    @endcan
+                        <flux:navlist.item :href="route('posts.create')" :current="request()->routeIs('posts.create')" wire:navigate>{{ __('Post Create') }}</flux:navlist.item>
+                </flux:navlist.group>
+            @endcanany
         </flux:navlist>
 
         <flux:spacer />
 
-        <flux:navlist variant="outline">
+        {{-- <flux:navlist variant="outline">
             <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit"
                 target="_blank">
                 {{ __('Repository') }}
@@ -140,7 +75,7 @@
                 target="_blank">
                 {{ __('Documentation') }}
             </flux:navlist.item>
-        </flux:navlist>
+        </flux:navlist> --}}
 
         <!-- Desktop User Menu -->
         <flux:dropdown position="bottom" align="start">

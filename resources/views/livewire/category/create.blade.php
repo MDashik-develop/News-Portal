@@ -29,6 +29,17 @@
                             </flux:field>
 
                             <flux:field class="mb-4">
+                                <flux:label>Category Image</flux:label>
+                                <flux:input wire:model.live="image" type="file" accept="image/*" />
+                                <flux:error name="image" />
+                                @if($image)
+                                    <div class="mt-2">
+                                        <img src="{{ $image->temporaryUrl() }}" class="h-20 w-20 object-cover rounded">
+                                    </div>
+                                @endif
+                            </flux:field>
+
+                            <flux:field class="mb-4">
                                 <flux:label>Parent Category</flux:label>
                                 <flux:select wire:model.live="parent_id" placeholder="Choose Parent Category...">
                                     <flux:select.option value="">None</flux:select.option>

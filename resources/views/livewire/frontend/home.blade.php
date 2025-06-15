@@ -278,4 +278,32 @@
             </div>
         </aside>
     </div>
+
+    <div class="autoplay">
+        <div class="">
+            <div class="w-100 h-[50%]">
+
+            </div>
+            <div>
+
+            </div>
+        </div>
+        <div><h3>2</h3></div>
+        <div><h3>3</h3></div>
+        <div><h3>4</h3></div>
+        <div><h3>5</h3></div>
+        <div><h3>6</h3></div>
+      </div>
+
+
+      <script>
+        $(document).ready(function(){
+          $('.autoplay').slick({
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+          });
+        });
+      </script>
 </section>

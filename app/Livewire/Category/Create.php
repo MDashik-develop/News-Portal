@@ -11,7 +11,7 @@ class Create extends Component
 {
     use HasNotifications;
      
-    public $name, $description, $parent_id, $order, $is_menu, $status;
+    public $name, $description, $parent_id, $order, $is_menu, $status, $image;
     public $categories;
     
     public function mount()
@@ -51,7 +51,7 @@ class Create extends Component
             //     'type' => 'success',
             //     'message' => 'Category created successfully!',
             // ]);
-            $this->succsessNotify("hoise banano");
+            $this->succsessNotify("Categorie created succsess");
             return $this->redirect(route('categories.index'), navigate:true );
             
         } catch (\Throwable $th) {
@@ -59,7 +59,7 @@ class Create extends Component
             //     'type' => 'error',
             //     'message' => 'Category created unsuccessfully!' . $th->getMessage(),
             // ]);
-            $this->unsuccessNotify("hoini banano");            
+            $this->unsuccessNotify("Categorie create unsuccess");            
         }
     }
     public function render()
