@@ -41,7 +41,7 @@
                     @foreach($posts as $post)
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap">{{ $post->id }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $post->title }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ Str::limit($post->title, 40, '...') }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">{{ $post->category?->name ?? 'Uncategorized' }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 

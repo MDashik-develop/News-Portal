@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Users;
+namespace App\Livewire\Permission;
 
 use Livewire\Component;
 use App\Models\User;
@@ -25,7 +25,7 @@ class UserRoleManager extends Component
 
       $roles = Role::all();
 
-      return view('livewire.users.user-role-manager', [
+      return view('livewire.permission.user-role-manager', [
          'users' => $users,
          'roles' => $roles
       ]);

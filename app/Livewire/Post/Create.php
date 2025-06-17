@@ -61,6 +61,7 @@ class Create extends Component
             'is_featured'    => 'boolean',
             'is_breaking'    => 'boolean',
             'is_slider'      => 'boolean',
+            'section'        => 'integer|min:0', // Assuming section is an integer 0-10
             'meta_title'     => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
             'tagsString'     => 'nullable|string', // CSV string, not array
@@ -94,6 +95,7 @@ class Create extends Component
                 'is_featured' => $this->is_featured,
                 'is_breaking' => $this->is_breaking,
                 'is_slider' => $this->is_slider,
+                'section' => $this->section,
                 'meta_title' => $this->meta_title,
                 'meta_description' => $this->meta_description,
                 'created_by' => Auth::id(),

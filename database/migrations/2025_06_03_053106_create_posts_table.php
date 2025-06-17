@@ -28,6 +28,7 @@ return new class extends Migration
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_breaking')->default(false);
             $table->boolean('is_slider')->default(false);
+            $table->unsignedInteger('section')->default(0);
             $table->timestamp('published_at')->nullable();
             $table->unsignedInteger('view_count')->default(0);
             $table->string('meta_title')->nullable();

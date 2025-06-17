@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Roles;
+namespace App\Livewire\Permission;
 
 use App\Traits\HasNotifications;
 use Livewire\Component;
@@ -32,7 +32,7 @@ class RoleList extends Component
 
       $permissions = Permission::all();
 
-      return view('livewire.roles.role-list', [
+      return view('livewire.permission.role-list', [
          'roles' => $roles,
          'permissions' => $permissions
       ]);

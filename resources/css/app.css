@@ -65,6 +65,117 @@ select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
 
-/* \[:where(&)\]:size-4 {
-    @apply size-4;
-} */
+.slick-next {
+    right: 25px ;
+}
+.slick-prev {
+    left: 25px;
+    z-index: 2;
+}
+
+/* --- Marquee Container Styling --- */
+        .stock-marquee-container {
+            width: 100%;
+            background-color: #ffffff;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee-animation 45s linear infinite;
+        }
+        
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+        
+        /* --- Individual Stock Item Styling --- */
+        .stock-item {
+            display: inline-flex; /* Use flexbox for alignment */
+            align-items: center;
+            padding: 0 20px;
+            border-right: 1px solid #e0e0e0; /* Vertical separator */
+            color: #333;
+        }
+
+        .stock-item:last-child {
+            border-right: none;
+        }
+
+        .stock-info {
+            display: flex;
+            flex-direction: column; /* Arrange items vertically */
+            align-items: flex-start; /* Align text to the left */
+            margin-right: 15px;
+        }
+
+        .stock-name {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .stock-price {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .stock-change-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            font-size: 14px;
+        }
+
+        .change-value {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .change-percent {
+            font-weight: bold;
+        }
+
+        /* --- Colors & Icons based on change --- */
+        .positive {
+            color: #28a745; /* Green */
+        }
+        .negative {
+            color: #dc3545; /* Red */
+        }
+        .neutral {
+            color: #007bff; /* Blue */
+        }
+
+        /* Up/Down Arrow Icons */
+        .icon-up::before {
+            content: '▲';
+            font-size: 10px;
+            margin-right: 4px;
+        }
+        .icon-down::before {
+            content: '▼';
+            font-size: 10px;
+            margin-right: 4px;
+        }
+         /* For neutral, we can show a dash or nothing */
+        .icon-neutral::before {
+            content: ''; 
+            margin-right: 4px;
+        }
+
+        /* --- Animation Definition --- */
+        @keyframes marquee-animation {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%); /* Animate to 50% for a seamless loop */
+            }
+        }
+
+        

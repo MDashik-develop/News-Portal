@@ -1,3 +1,5 @@
-<div>
-    {{-- Stop trying to control. --}}
-</div>
+@extends('layouts.app')
+
+@section('content')
+
+@endsection

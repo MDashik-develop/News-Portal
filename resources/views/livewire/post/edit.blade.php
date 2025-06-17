@@ -57,12 +57,12 @@
                                     @if ($featured_image)
                                     <div class="mt-2 w-full flex justify-center">
                                         <img src="{{ $featured_image->temporaryUrl() }}"
-                                            class="h-32 w-auto object-cover rounded-lg">
+                                            class="h-[200px] w-[300px] object-cover rounded-lg">
                                     </div>
                                     @elseif($post->featured_image)
                                     <div class="mt-2 w-full flex justify-center">
                                         <img src="{{ asset('storage/' . $post->featured_image) }}"
-                                            class="h-32 w-auto object-cover rounded-lg">
+                                            class="h-[200px] w-[300px] object-cover rounded-lg">
                                     </div>
                                     @else
                                     <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none"
@@ -72,16 +72,16 @@
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                     @endif
-                                    <div class="flex text-sm text-gray-600">
+                                    <div class="flex text-sm text-gray-600 justify-center">
                                         <div
                                             class="relative cursor-pointer bg-white rounded-md font-medium focus-within:outline-none">
                                             <span>Upload a file</span>
                                             <input id="file-upload" type="file" wire:model="featured_image"
                                                 class="sr-only">
                                         </div>
-                                        <p class="pl-1">or drag and drop</p>
+                                        <p class="pl-1 ">or drag and drop</p>
                                     </div>
-                                    <small>Image must be 800x450 px</small>
+                                    <small>Image must be 600x400 px</small>
                                     <p class="text-xs text-gray-500">PNG, JPG, GIF up to 1MB</p>
                                 </div>
                             </label>
@@ -108,7 +108,7 @@
                                 <input
                                     id="tag-input"
                                     type="text"
-                                    class="flex-grow p-1 outline-none"
+                                    class="flex-grow p-1 outline-none border-0"
                                     placeholder="Type a tag and press Enter"
                                 />
                             </div>
@@ -198,7 +198,7 @@
                             <flux:error name="status" />
                         </flux:field>
 
-                        <div class="grid grid-cols-3 gap-4">
+                        <div class="grid grid-cols-4 gap-2">
                             <flux:field>
                                 <flux:label>Is Featured</flux:label>
                                 <flux:select wire:model="is_featured">
@@ -222,6 +222,13 @@
                                     <flux:select.option value="1">Yes</flux:select.option>
                                 </flux:select>
                             </flux:field>
+
+                            <flux:field>
+                                <flux:label>Section</flux:label>
+                                <flux:input wire:model="section" type="number" />
+                                <flux:error name="section" />
+                            </flux:field>
+                        </div>
                         </div>
 
                         <flux:field>
@@ -241,15 +248,15 @@
                             <flux:textarea wire:model="meta_description" rows="3" />
                             <flux:error name="meta_description" />
                         </flux:field>
-                    </div>
 
                     <div class="flex justify-end gap-3">
                         <flux:button type="button" wire:click="$refresh" variant="danger">
                             Reset
                         </flux:button>
-                        <flux:button type="submit" variant="primary">
+                        <flux:button type="submit" variant="primary" icon="pencil">
                             Update Post
                         </flux:button>
+                    </div>
                     </div>
                 </form>
             </div>

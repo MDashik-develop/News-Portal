@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Permissions;
+namespace App\Livewire\Permission;
 
 use App\Traits\HasNotifications;
 use Livewire\Component;
@@ -27,7 +27,7 @@ class PermissionList extends Component
          $query->where('name', 'like', '%' . $this->search . '%');
       })->paginate(10);
 
-      return view('livewire.permissions.permission-list', [
+      return view('livewire.permission.permission-list', [
          'permissions' => $permissions
       ]);
    }
