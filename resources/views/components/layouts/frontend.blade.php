@@ -17,6 +17,7 @@
     <meta property="og:image" content="{{ asset('storage/' . $website->logo) }}">
     <meta property="og:url" content="{{ url('/') }}">
     <meta property="og:type" content="website">
+    
     {{-- <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $website->title ?? 'My Website' }}">
     <meta name="twitter:description" content="{{ $website->meta_description ?? 'Default description' }}">
