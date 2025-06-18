@@ -1,10 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    @php
+        $website = \App\Models\website::first();
+    @endphp
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'My Website' }}</title>
+    {{-- <title>{{ $title ?? 'My Website' }}</title> --}}
+    <title>{{ $website->title ?? 'My Website' }}</title>
+    <meta name="description" content="{{ $website->meta_description ?? 'Default description' }}">
+    <meta name="keywords" content="{{ $website->tagsString ?? 'default, tags' }}">
+    <meta name="author" content="{{ $website->title ?? 'My Website' }}">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="{{ $website->title ?? 'My Website' }}">
+    <meta property="og:description" content="{{ $website->meta_description ?? 'Default description' }}">
+    <meta property="og:image" content="{{ asset('storage/' . $website->logo) }}">
+    <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:type" content="website">
+    {{-- <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $website->title ?? 'My Website' }}">
+    <meta name="twitter:description" content="{{ $website->meta_description ?? 'Default description' }}">
+    <meta name="twitter:image" content="{{ asset('images/logo.png') }}">
+    <meta name="twitter:site" content="@your_twitter_handle">
+    <meta name="twitter:creator" content="@your_twitter_handle">
+    <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+
+    <link rel="icon" href="{{ asset('storage/' . $website->favicon) }}" type="image/x-icon">
+
+    
     <link href="https://fonts.googleapis.com/css2?family=Siyam+Rupali&amp;display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 
@@ -17,21 +40,25 @@
         body {
             font-family: 'Siyam Rupali', serif;
         }
-
-        /* #nprogress .bar, #nprogress .spinner {
-        z-index: 2000 !important;
-    } */
     </style>
 </head>
 
 <body class=" bg-white dark:bg-gray-800">
+
+<!-- Facebook SDK -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0&appId={{ $website->fb_app_id }}&autoLogAppEvents=1"
+    nonce="abcd1234">
+</script>
+
+
     {{--
     <livewire:navigate /> --}}
 
     <!-- Header with logo and social icons -->
     <header class="bg-white border-b border-gray-200">
-        <div
-            class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-4 md:px-6 py-4 md:py-6 select-none space-y-2 md:space-y-0">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-4 md:px-6 py-4 md:py-6 select-none space-y-2 md:space-y-0">
             <div class="flex-1 w-full md:w-auto text-center md:text-left">
                 <p class="text-[12px]">
                     ঢাকা, বৃহস্পতিবার ১০ জুন ২০২১
@@ -303,42 +330,24 @@
     <!-- Slick JS -->
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
-        $(document).ready(function(){
-          $('.home-autoplay-carousel').slick({
-            slidesToShow: 6,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            responsive: [
-              {
-                breakpoint: 1024,
-                settings: {
-                  slidesToShow: 6,
-                  slidesToScroll: 1
-                }
-              },
-              {
-                breakpoint: 768,
-                settings: {
-                  slidesToShow: 3,
-                  slidesToScroll: 1
-                }
-              },
-              {
-                breakpoint: 480,
-                settings: {
-                  slidesToShow: 2,
-                  slidesToScroll: 1
-                }
-              }
-            ]
-          });
-        });
-
-
-
         
+    
+    
+            document.addEventListener('DOMContentLoaded', () => {
+                if (window.initFlowbite) {
+                    window.initFlowbite();
+                }
+            });
+        
+            document.addEventListener('livewire:navigated', () => {
+                if (window.initFlowbite) {
+                    window.initFlowbite();
+                }
+            });
+    
+            
     </script>
+    @stack('scripts')
 </body>
 
 </html>

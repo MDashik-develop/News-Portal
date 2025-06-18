@@ -22,6 +22,12 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+Route::get('test', function () {
+    return phpinfo();
+})->name('test');
+
+
+
 require __DIR__ . '/auth.php';
 require __DIR__ . '/frontend.php';
 require __DIR__ . '/admin.php';

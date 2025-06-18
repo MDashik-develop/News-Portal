@@ -12,6 +12,7 @@ protected $fillable = [
     'favicon',
     'logo',
     'meta_tags',
-    'meta_description'
+    'meta_description',
+    'fb_app_id'
 ];
 }

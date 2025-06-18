@@ -23,6 +23,7 @@ class Index extends Component
     public $temp_favicon;
     public $temp_logo;
     public $website;
+    public $fb_app_id;
 
     public function mount()
     {
@@ -34,6 +35,7 @@ class Index extends Component
             $this->meta_tags = $this->website->meta_tags;
             $this->temp_favicon = $this->website->favicon;
             $this->temp_logo = $this->website->logo;
+            $this->fb_app_id = $this->website->fb_app_id;
 
             // Convert meta_tags to tags array
             $this->tags = array_filter(array_map('trim', explode(',', $this->website->meta_tags)));
@@ -49,6 +51,7 @@ class Index extends Component
             'meta_tags' => 'nullable|max:255',
             'favicon' => 'nullable|image|max:1024',
             'logo' => 'nullable|image|max:1024',
+            'fb_app_id' => 'nullable|string|max:255',
         ]);
 
         // Set meta_tags from tagsString

@@ -6,20 +6,17 @@
             </div>
             <div class="flex items-center gap-4 max-w-1/2 w-auto sm:w-full">
                 <div class="relative flex-1 sm:w-full">
-                    <flux:input wire:model.live="search" icon="magnifying-glass" placeholder="Search posts"/>
+                    <flux:input wire:model.live="search" icon="magnifying-glass" placeholder="Search posts" />
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </div>
                 </div>
             </div>
             <div class="flex gap-2">
-                <flux:button href="{{ route('posts.create') }}"
-                             variant="primary"
-                             icon="plus"
-                             wire:navigate
-                >
+                <flux:button href="{{ route('posts.create') }}" variant="primary" icon="plus" wire:navigate>
                     Add New Post
                 </flux:button>
             </div>
@@ -29,12 +26,18 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Published At</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Category</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Published At</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Actions</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -53,19 +56,15 @@
                                 {{ ucfirst($post->status) }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $post->published_at?->format('M d, Y') }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            {{ $this->getBengaliTimeAgo($post->published_at) }}
+                        </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <flux:button href="{{ route('posts.edit', $post->id) }}"
-                                         icon="pencil-square"
-                                         wire:navigate
-                                         class="mr-2"
-                            >
+                            <flux:button href="{{ route('posts.edit', $post->id) }}" icon="pencil-square" wire:navigate
+                                class="mr-2">
                             </flux:button>
-                            <flux:button variant="danger"
-                                         icon="trash"
-                                         wire:click="delete({{ $post->id }})"
-                                         wire:confirm="Are you sure you want to delete this post?"
-                            >
+                            <flux:button variant="danger" icon="trash" wire:click="delete({{ $post->id }})"
+                                wire:confirm="Are you sure you want to delete this post?">
                             </flux:button>
                         </td>
                     </tr>

@@ -25,12 +25,18 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Meta Tags</label>
                                 <div id="tag-container" class="flex flex-wrap items-center border border-gray-300 rounded-lg p-2 mb-4">
-                                    <input id="tag-input" type="text" class="flex-grow p-1 outline-none outline-0 outline-[transparent]" placeholder="Type a tag and press Enter">
+                                    <input id="tag-input" type="text" class="flex-grow p-1 outline-none border-0" placeholder="Type a tag and press Enter">
                                 </div>
 
                                 <!-- Hidden input for Livewire -->
                                 <input type="hidden" wire:model.lazy="tagsString" id="tags-hidden">
                                 @error('tagsString') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+                            <!-- fb_app_id -->
+                            <div>
+                                <label for="fb_app_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Facebook App Id</label>
+                                <input type="text" wire:model="fb_app_id" id="fb_app_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-zinc-700 dark:border-zinc-600">
+                                @error('fb_app_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
                             <!-- Save Button -->

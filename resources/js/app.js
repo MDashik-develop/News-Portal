@@ -4,4 +4,4 @@
 
 // Alpine.start();
 
-import 'flowbite';
+import "flowbite";

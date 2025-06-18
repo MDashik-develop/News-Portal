@@ -4,50 +4,49 @@
         <div class="md:w-[70%]">
             <div class="flex lg:flex-row flex-col gap-2 mb-10">
                 @foreach ( $featuredPosts as $featuredPost )
-                    <a href="{{ route('post.view', ['id' => $featuredPost->id]) }}" wire:navigate
-                        class="flex flex-col-reverse sm:flex-row gap-2 lg:w-8/12 mb-1.5 sm:">
-                        <div class="w-full md:w-2/5 flex flex-col justify-between gap-2">
-                            <h2 class="line-clamp-3 text-2xl text-blue-500">
-                                {{ $featuredPost->title }}
-                            </h2>
-                            <h1 class="line-clamp-3 text-2xl">
-                                {{ $featuredPost->summary }}
-                            </h1>
-                            <p class="line-clamp-3 text-1xl">
-                                {{ $featuredPost->content }}
-                            </p>
-                        </div>
-                        <div>
-                            <img src="{{ asset('storage/' . $featuredPost->featured_image) }}" alt="{{ $featuredPost->title }}"
-                                 class="w-[600px] max-h-[273px]">
-                        </div>
-                    </a>
+                <a href="{{ route('post.view', ['id' => $featuredPost->id]) }}" wire:navigate
+                    class="flex flex-col-reverse sm:flex-row gap-2 lg:w-8/12 mb-1.5 sm:">
+                    <div class="w-full md:w-2/5 flex flex-col justify-between gap-2">
+                        <h2 class="line-clamp-3 text-2xl text-blue-500">
+                            {{ $featuredPost->title }}
+                        </h2>
+                        <h1 class="line-clamp-3 text-2xl">
+                            {{ $featuredPost->summary }}
+                        </h1>
+                        <p class="line-clamp-3 text-1xl">
+                            {{ $featuredPost->content }}
+                        </p>
+                    </div>
+                    <div>
+                        <img src="{{ asset('storage/' . $featuredPost->featured_image) }}"
+                            alt="{{ $featuredPost->title }}" class="w-[600px] max-h-[273px]">
+                    </div>
+                </a>
                 @endforeach
                 <div class="grid grid-cols-1 pt-2 sm:pt-0 lg:w-4/12">
                     @foreach ($section1 as $s1)
-                        <a href="{{ route('post.view', ['id' => $s1->id]) }}" wire:navigate
-                            class="flex justify-between items-center gap-2 border-b-1 max-h-min">
-                            <h5 class="mb-2 w-50 leading-[24px] flex-3/4 text-base line-clamp-3 tracking-tight text-gray-900 dark:text-white overflow-hidden max-h-[70px]">
-                                {{ $s1->title }}
-                            </h5>
-                            <img src="{{ asset('storage/' . $s1->featured_image) }}" alt="{{ $s1->title }}"
-                                 class="mb-2 max-w-30 max-h-[75px]">
-                        </a>
+                    <a href="{{ route('post.view', ['id' => $s1->id]) }}" wire:navigate
+                        class="flex justify-between items-center gap-2 border-b-1 max-h-min">
+                        <h5
+                            class="mb-2 w-50 leading-[24px] flex-3/4 text-base line-clamp-3 tracking-tight text-gray-900 dark:text-white overflow-hidden max-h-[70px]">
+                            {{ $s1->title }}
+                        </h5>
+                        <img src="{{ asset('storage/' . $s1->featured_image) }}" alt="{{ $s1->title }}"
+                            class="mb-2 max-w-30 max-h-[75px]">
+                    </a>
                     @endforeach
                 </div>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-10">
                 @foreach ($section2 as $s2)
-                    <a href="{{ route('post.view', ['id' => $s2->id]) }}"
-                       wire:navigate
-                       class="p-1.5 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <img src="{{ asset('storage/' . $s2->featured_image) }}" alt="{{  $s2->title }}"
-                             class="rounded mb-1">
-                        <h5 class=" text-base line-clamp-1 tracking-tight text-gray-900 dark:text-white">
-                            {{  $s2->title }}
-                        </h5>
-                    </a>
+                <a href="{{ route('post.view', ['id' => $s2->id]) }}" wire:navigate
+                    class="p-1.5 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <img src="{{ asset('storage/' . $s2->featured_image) }}" alt="{{  $s2->title }}" class="rounded mb-1">
+                    <h5 class=" text-base line-clamp-1 tracking-tight text-gray-900 dark:text-white">
+                        {{ $s2->title }}
+                    </h5>
+                </a>
                 @endforeach
             </div>
 
@@ -148,104 +147,89 @@
                     <li class="me-2" role="presentation">
                         <button
                             class="inline-flex items-center justify-center p-4 border-b-2 border-blue-600 rounded-t-lg active hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group"
-                            id="profile-tab" data-tabs-target="#profile" type="button" role="tab"
-                            aria-controls="profile" aria-selected="true">
+                            id="latestPosts-tab" data-tabs-target="#latestPosts" type="button" role="tab"
+                            aria-controls="latestPosts" aria-selected="true">
                             সর্বশেষ
                         </button>
                     </li>
                     <li class="me-2" role="presentation">
                         <button
-                            class="inline-flex items-center justify-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group"
-                            id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab"
-                            aria-controls="dashboard" aria-selected="false">
+                            class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-blue-500 hover:border-blue-500 dark:hover:text-blue-500 group"
+                            id="todayBest-tab" data-tabs-target="#todayBest" type="button" role="tab"
+                            aria-controls="todayBest" aria-selected="false">
                             দিনের সেরা
                         </button>
                     </li>
                     <li class="me-2" role="presentation">
                         <button
-                            class="inline-flex items-center justify-center p-4 border-b-2 border-blue-600 rounded-t-lg hover:text-blue-500 active hover:border-blue-500 dark:hover:text-blue-500 group"
-                            id="settings-tab" data-tabs-target="#settings" type="button" role="tab"
-                            aria-controls="settings" aria-selected="false">
+                            class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-blue-500 hover:border-blue-500 dark:hover:text-blue-500 group"
+                            id="weekBest-tab" data-tabs-target="#weekBest" type="button" role="tab"
+                            aria-controls="weekBest" aria-selected="false">
                             সপ্তাহের সেরা
                         </button>
                     </li>
                 </ul>
             </div>
-            <div id="default-tab-content  overflow-y-auto">
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel"
-                    aria-labelledby="profile-tab">
-                    <ul class="space-y-3 text-[13px] leading-snug text-[#333]">
-                        <li class="flex items-start border-b-1 py-4 space-x-2 rtl:space-x-reverse">
-                            <i class="fas fa-play text-[#d00] mt-1">
-                            </i>
-                            <a href="{{ route('post.view', ['id' => 1]) }}" wire:navigate>
-                                <p class="">
-                                    ধোবাউড়ায় অতর্কিত হামলার শিকার ছাত্রদলের আয়ুবুর
+            <div id="default-tab-content" class="overflow-y-auto">
+                <div class="hidden p-4 my-1 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800" id="latestPosts" role="tabpanel"
+                    aria-labelledby="latestPosts-tab">
+                    <ul class="space-y-3 text-[13px] leading-snug text-[#333] max-h-[400px] overflow-y-auto">
+                        @foreach ($letetstPosts as $letetstPost)
+                            <li class="flex items-start border-b-1 py-2 space-x-2 rtl:space-x-reverse">
+                                <i class="fas fa-play text-[#d00] mt-1"></i>
+                                <a href="{{ route('post.view', ['id' => $letetstPost->id]) }}" wire:navigate>
+                                    <p class="line-clamp-2 max-h-min mb-1">
+                                        {{ $letetstPost->title }}
+                                    </p>
+                                    <p class="text-[11px]">
+                                        <i class="far fa-clock text-gray-500"></i>
+                                        {{ $this->getBengaliTimeAgo($letetstPost->published_at) }} | <span
+                                            class="text-[#d00]">{{ $letetstPost->category?->name ?? 'Uncategorized' }}</span>
+                                    </p>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="hidden p-4 my-1 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800" id="todayBest" role="tabpanel"
+                    aria-labelledby="todayBest-tab">
+                    <ul class="space-y-3 text-[13px] leading-snug text-[#333] max-h-[400px] overflow-y-auto">
+                        @foreach ($todayBestPosts as $todayBestPost)
+                        <li class="flex items-start border-b-1 py-2 space-x-2 rtl:space-x-reverse">
+                            <i class="fas fa-play text-[#d00] mt-1"></i>
+                            <a href="{{ route('post.view', ['id' => $todayBestPost->id]) }}" wire:navigate>
+                                <p class="line-clamp-2 max-h-min mb-1">
+                                    {{ $todayBestPost->title }}
                                 </p>
                                 <p class="text-[11px]">
-                                    ৭ মিনিট আগে | <span class="text-[#d00]"> সারাবাংলা</span>
+                                    <i class="far fa-clock text-gray-500"></i>
+                                    {{ $this->getBengaliTimeAgo($todayBestPost->published_at) }} | <span
+                                        class="text-[#d00]">{{ $todayBestPost->category?->name ?? 'Uncategorized' }}</span>
                                 </p>
                             </a>
                         </li>
-                        <li class="flex items-start border-b-1 py-4 space-x-2 rtl:space-x-reverse">
-                            <i class="fas fa-play  mt-1">
-                            </i>
-                            <div>
-                                <p>
-                                    কুমিল্লা জেল থেকে ছাড়া পেয়ে স্বামী সাশ্রয় অস্বীকার প্রয়াস
-                                </p>
-                                <p class="text-[11px] text-gray-600">
-                                    ১১ মিনিট আগে | <span class="text-[#d00]"> সারাবাংলা</span>
-                                </p>
-                            </div>
-                        </li>
-                        <li class="flex items-start border-b-1 py-4 space-x-2 rtl:space-x-reverse">
-                            <i class="fas fa-play  mt-1">
-                            </i>
-                            <div>
-                                <p>
-                                    ঢাকা বিশ্ববিদ্যালয়ে ছাত্রলীগের নতুন কমিটি গঠন
-                                </p>
-                                <p class="text-[11px] text-gray-600">
-                                    ১৫ মিনিট আগে | <span class="text-[#d00]"> সারাবাংলা</span>
-                                </p>
-                            </div>
-                        </li>
-                        <li class="flex items-start border-b-1 py-4 space-x-2 rtl:space-x-reverse">
-                            <i class="fas fa-play text-[#d00] mt-1">
-                            </i>
-                            <div>
-                                <p>
-                                    রাজধানীতে যানজট কমাতে নতুন উদ্যোগ
-                                </p>
-                                <p class="text-[11px] text-gray-600">
-                                    ২০ মিনিট আগে | <span class="text-[#d00]"> সারাবাংলা</span>
-                                </p>
-                            </div>
-                        </li>
-                        <li class="flex items-start border-b-1 py-4 space-x-2 rtl:space-x-reverse">
-                            <i class="fas fa-play text-[#d00] mt-1">
-                            </i>
-                            <div>
-                                <p>
-                                    দেশে করোনা পরিস্থিতি স্থিতিশীল
-                                </p>
-                                <p class="text-[11px] text-gray-600">
-                                    ৩০ মিনিট আগে | <span class="text-[#d00]"> সারাবাংলা</span>
-                                </p>
-                            </div>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard" role="tabpanel"
-                    aria-labelledby="dashboard-tab">
-                    <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the Dashboard
-                        tab's associated content.</p>
-                </div>
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings" role="tabpanel"
-                    aria-labelledby="settings-tab">
-                    <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the Settings
-                        tab's associated content.</p>
+                <div class="hidden p-4 my-1 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800" id="weekBest" role="tabpanel"
+                    aria-labelledby="weekBest-tab">
+                    <ul class="space-y-3 text-[13px] leading-snug text-[#333] max-h-[400px] overflow-y-auto">
+                        @foreach ($weekBestPosts as $weekBestPost)
+                        <li class="flex items-start border-b-1 py-2 space-x-2 rtl:space-x-reverse">
+                            <i class="fas fa-play text-[#d00] mt-1"></i>
+                            <a href="{{ route('post.view', ['id' => $weekBestPost->id]) }}" wire:navigate>
+                                <p class="line-clamp-2 max-h-min mb-1">
+                                    {{ $weekBestPost->title }}
+                                </p>
+                                <p class="text-[11px]">
+                                    <i class="far fa-clock text-gray-500"></i>
+                                    {{ $this->getBengaliTimeAgo($weekBestPost->published_at) }} | <span
+                                        class="text-[#d00]">{{ $weekBestPost->category?->name ?? 'Uncategorized' }}</span>
+                                </p>
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </aside>
@@ -531,7 +515,41 @@
     </div>
 
 
+</section>
+@push('scripts')
     <script>
+        $(document).ready(function(){
+            $('.home-autoplay-carousel').slick({
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            responsive: [
+                {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 6,
+                    slidesToScroll: 1
+                }
+                },
+                {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                }
+                },
+                {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+                }
+            ]
+            });
+
+        });
         // Data based on the provided image
         const stockData = [
             { name: 'RINS', price: 35.00, change: -0.28, percent: -0.28 },
@@ -590,4 +608,4 @@
 
         
     </script>
-</section>
+@endpush
