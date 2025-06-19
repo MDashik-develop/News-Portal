@@ -26,7 +26,8 @@ class Post extends Model
         'published_at',
         'meta_title',
         'meta_description',
-        'user_id'
+        'user_id',
+        'poll_id'
     ];
 
     protected $casts = [
@@ -41,5 +42,10 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function poll()
+    {
+        return $this->belongsTo(Poll::class);
     }
 }

@@ -65,6 +65,12 @@
                 @endcan
                 <flux:navlist.item :href="route('posts.create')" :current="request()->routeIs('posts.create')"
                     wire:navigate>{{ __('Post Create') }}</flux:navlist.item>
+                <flux:navlist.item :href="route('posts.polls.create')" :current="request()->routeIs('posts.polls.create')"
+                    wire:navigate>{{ __('Pull Create') }}</flux:navlist.item>
+                @can('polls.edit')
+                <flux:navlist.item :href="route('posts.polls.index')" :current="request()->routeIs('posts.polls.index')"
+                    wire:navigate>{{ __('All Polls') }}</flux:navlist.item>
+                @endcan
             </flux:navlist.group>
             @endcanany
         </flux:navlist>

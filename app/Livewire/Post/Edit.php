@@ -4,6 +4,7 @@ namespace App\Livewire\Post;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Poll;
 use App\Traits\HasNotifications;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -35,6 +36,7 @@ class Edit extends Component
     public $meta_title;
     public $meta_description;
     public $categories;
+    public $poll_id;
 
     public function mount($id)
     {
@@ -57,6 +59,7 @@ class Edit extends Component
         $this->meta_title = $this->post->meta_title;
         $this->meta_description = $this->post->meta_description;
         $this->categories = Category::all();
+        $this->poll_id = $this->post->poll_id;
 
         // Convert keywords to tags array
         $this->tags = array_filter(array_map('trim', explode(',', $this->post->keywords)));
@@ -84,6 +87,7 @@ class Edit extends Component
             'meta_title'    => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
             'tagsString'    => 'nullable|string',
+            'poll_id'       => 'nullable',
         ]);
 
         // Convert tagsString CSV → array
@@ -105,6 +109,7 @@ class Edit extends Component
             // Update post
             $this->post->update(array_merge($validated, [
                 'keywords' => implode(',', $this->tags),
+                'poll_id' => $this->poll_id,
             ]));
 
             $this->succsessNotify("Post updated successfully!");
@@ -117,6 +122,8 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.post.edit');
+        return view('livewire.post.edit', [
+            'polls' => Poll::all(),
+        ]);
     }
 }

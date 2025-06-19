@@ -15,13 +15,14 @@ class Create extends Component
     use HasNotifications;
     use WithFileUploads;
 
-    public $title, $slug, $sub_title, $summary, $content;
+    public $title, $slug, $sub_title, $summary, $content, $section;
     public $tags = []; // tags as array
     public $tagsString = ''; // to hold tags as CSV string for binding
     public $featured_image, $image_caption, $video_url;
     public $category_id, $status = 'draft', $is_featured = false;
     public $is_breaking = false, $is_slider = false, $published_at;
     public $meta_title, $meta_description;
+    public $poll_id;
 
     public function mount()
     {
@@ -33,7 +34,7 @@ class Create extends Component
         $this->tags = $tags;
         $this->tagsString = implode(',', $tags);
     }
-    
+
     public function updatedTitle()
     {
         $this->slug = Str::slug($this->title);
@@ -46,7 +47,7 @@ class Create extends Component
 
     public function submit()
     {
-        
+
         // $this->tags = array_filter(array_map('trim', explode(',', $this->tagsString)));
         $validated = $this->validate([
             'title'          => 'required',
@@ -65,6 +66,7 @@ class Create extends Component
             'meta_title'     => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
             'tagsString'     => 'nullable|string', // CSV string, not array
+            'poll_id'        => 'nullable|exists:polls,id',
         ]);
 
         // Convert tagsString CSV into array & clean
@@ -99,6 +101,7 @@ class Create extends Component
                 'meta_title' => $this->meta_title,
                 'meta_description' => $this->meta_description,
                 'created_by' => Auth::id(),
+                'poll_id' => $this->poll_id,
             ]);
 
             $this->succsessNotify("Post created successfully!");
@@ -112,6 +115,7 @@ class Create extends Component
     {
         return view('livewire.post.create', [
             'categories' => Category::all(),
+            'polls' => \App\Models\Poll::all(),
         ]);
     }
 }

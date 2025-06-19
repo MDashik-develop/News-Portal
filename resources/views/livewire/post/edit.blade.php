@@ -1,6 +1,6 @@
 <div class="py-12">
     <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="bg-white overflow-hidden border shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="text-2xl font-semibold">Edit Post</h2>
@@ -31,6 +31,17 @@
                             <flux:error name="category_id" />
                         </flux:field>
 
+                        <flux:field>
+                            <flux:label>Poll (Optional)</flux:label>
+                            <flux:select wire:model="poll_id">
+                                <flux:select.option value="">No Poll</flux:select.option>
+                                @foreach ($polls as $poll)
+                                    <flux:select.option value="{{ $poll->id }}">{{ $poll->question }}</flux:select.option>
+                                @endforeach
+                            </flux:select>
+                            <flux:error name="poll_id" />
+                        </flux:field>
+                        
                         <flux:field>
                             <flux:label>Sub Title</flux:label>
                             <flux:input wire:model="sub_title" type="text" />
@@ -102,21 +113,18 @@
 
                         <flux:field>
 
-                        <flux:label>Tags</flux:label>
+                            <flux:label>Tags</flux:label>
 
-                            <div id="tag-container" class="flex flex-wrap items-center border border-gray-300 rounded-lg p-2 mb-4">
-                                <input
-                                    id="tag-input"
-                                    type="text"
-                                    class="flex-grow p-1 outline-none border-0"
-                                    placeholder="Type a tag and press Enter"
-                                />
+                            <div id="tag-container"
+                                class="flex flex-wrap items-center border border-gray-300 rounded-lg p-2 mb-4">
+                                <input id="tag-input" type="text" class="flex-grow p-1 outline-none border-0"
+                                    placeholder="Type a tag and press Enter" />
                             </div>
 
                             <!-- Hidden input to store tags as CSV for Livewire -->
                             <input type="hidden" wire:model="tagsString" id="tags-hidden" value="{{ $tagsString }}">
 
-                        <script>
+                            <script>
                                 function initializeTagsField() {
                                 const tagContainer = document.getElementById('tag-container');
                                 const tagInput = document.getElementById('tag-input');
@@ -181,7 +189,7 @@
                                 }, 100); // small delay to allow DOM to be ready
                             });
                             
-                        </script>
+                            </script>
 
                             <flux:error name="tagsString" />
                         </flux:field>
@@ -229,25 +237,25 @@
                                 <flux:error name="section" />
                             </flux:field>
                         </div>
-                        </div>
+                    </div>
 
-                        <flux:field>
-                            <flux:label>Published At</flux:label>
-                            <flux:input type="datetime-local" wire:model="published_at" />
-                            <flux:error name="published_at" />
-                        </flux:field>
+                    <flux:field>
+                        <flux:label>Published At</flux:label>
+                        <flux:input type="datetime-local" wire:model="published_at" />
+                        <flux:error name="published_at" />
+                    </flux:field>
 
-                        <flux:field>
-                            <flux:label>Meta Title</flux:label>
-                            <flux:input wire:model="meta_title" type="text" />
-                            <flux:error name="meta_title" />
-                        </flux:field>
+                    <flux:field>
+                        <flux:label>Meta Title</flux:label>
+                        <flux:input wire:model="meta_title" type="text" />
+                        <flux:error name="meta_title" />
+                    </flux:field>
 
-                        <flux:field>
-                            <flux:label>Meta Description</flux:label>
-                            <flux:textarea wire:model="meta_description" rows="3" />
-                            <flux:error name="meta_description" />
-                        </flux:field>
+                    <flux:field>
+                        <flux:label>Meta Description</flux:label>
+                        <flux:textarea wire:model="meta_description" rows="3" />
+                        <flux:error name="meta_description" />
+                    </flux:field>
 
                     <div class="flex justify-end gap-3">
                         <flux:button type="button" wire:click="$refresh" variant="danger">
@@ -257,9 +265,9 @@
                             Update Post
                         </flux:button>
                     </div>
-                    </div>
-                </form>
             </div>
+            </form>
         </div>
     </div>
+</div>
 </div>

@@ -10,6 +10,8 @@ use App\Livewire\Post\Index as postIndex;
 use App\Livewire\permission\RoleList;
 use App\Livewire\User\Index as userIndex;
 use App\Livewire\permission\UserRoleManager;
+use App\Livewire\Poll\Create as createPoll;
+use App\Livewire\Poll\Index as indexPoll;
 use App\Livewire\Website\Index as websiteIndex;
 use App\Livewire\Website\Logos as websiteLogos;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +52,11 @@ Route::middleware(['auth', 'redirect.if.no.permission:admin.panel'])->group(func
         Route::get('/admin/permissions/', PermissionList::class)->name('permissions.index');
         Route::get('/admin/permissions/roles', RoleList::class)->name('permissions.roles.index');
         Route::get('/admin/permissions/user-roles', UserRoleManager::class)->name('permissions.user-roles.index');
+    });
+    
+    Route::group(['middleware' => ['redirect.if.no.permission:polls.edit|polls.create']], function () {
+        Route::get('/admin/polls/create', createPoll::class)->name('posts.polls.create');
+        Route::get('/admin/polls', indexPoll::class)->name('posts.polls.index')->middleware('permission:polls.edit');
     });
     
 

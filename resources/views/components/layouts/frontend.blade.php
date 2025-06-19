@@ -36,12 +36,14 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" />
 
+    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body {
             font-family: 'Siyam Rupali', serif;
         }
     </style>
+    @livewireStyles
 </head>
 
 <body class=" bg-white dark:bg-gray-800">
@@ -54,8 +56,7 @@
 </script>
 
 
-    {{--
-    <livewire:navigate /> --}}
+    {{-- <livewire:navigate /> --}}
 
     <!-- Header with logo and social icons -->
     <header class="bg-white border-b border-gray-200">
@@ -331,9 +332,6 @@
     <!-- Slick JS -->
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
-        
-    
-    
             document.addEventListener('DOMContentLoaded', () => {
                 if (window.initFlowbite) {
                     window.initFlowbite();
@@ -345,10 +343,9 @@
                     window.initFlowbite();
                 }
             });
-    
-            
     </script>
     @stack('scripts')
+    @livewireStyles
 </body>
 
 </html>

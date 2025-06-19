@@ -35,6 +35,7 @@ return new class extends Migration
             $table->text('meta_description')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('poll_id')->nullable();
             $table->timestamps();
             $table->softDeletes(); // For deleted_at column
 
@@ -42,6 +43,7 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('poll_id')->references('id')->on('polls')->onDelete('set null');
         });
     }
 
