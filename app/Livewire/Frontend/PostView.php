@@ -87,8 +87,8 @@ class PostView extends Component
     /**
      * Mount the component with post and poll.
      *
-     * @param int $id
-     * @return void
+    //  * @param int $id
+    //  * @return void
      */
     public function mount($id): void
     {
@@ -96,8 +96,15 @@ class PostView extends Component
             ->where('status', 'published')
             ->firstOrFail();
 
-        $this->poll = $this->post->poll ? $this->post->poll->load('options') : null;
+        $viewedPosts = session()->get('viewed_posts', []);
 
+        if (!in_array($id, $viewedPosts)) {
+            $this->post->increment('view_count');
+            $viewedPosts[] = $id;
+            session(['viewed_posts' => $viewedPosts]);
+        }
+
+        $this->poll = $this->post->poll ? $this->post->poll->load('options') : null;
         if ($this->poll) {
             $pollOptionIds = $this->poll->options->pluck('id');
             $userId = Auth::id();

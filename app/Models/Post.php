@@ -27,7 +27,8 @@ class Post extends Model
         'meta_title',
         'meta_description',
         'user_id',
-        'poll_id'
+        'poll_id',
+        'view_count',
     ];
 
     protected $casts = [

@@ -30,7 +30,7 @@ return new class extends Migration
             $table->boolean('is_slider')->default(false);
             $table->unsignedInteger('section')->default(0);
             $table->timestamp('published_at')->nullable();
-            $table->unsignedInteger('view_count')->default(0);
+            $table->integer('view_count')->default(0);
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();

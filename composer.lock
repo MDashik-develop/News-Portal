@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "24df23950a6849dc99f017a54bac1221",
+    "content-hash": "78e1d873a2a0c4a0ec568539775ee0fa",
     "packages": [
         {
             "name": "brick/math",
@@ -1056,16 +1056,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.19.2",
+            "version": "v12.19.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "97c581cb23bdc3147aab0d5087b19167d329991e"
+                "reference": "4e6ec689ef704bb4bd282f29d9dd658dfb4fb262"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/97c581cb23bdc3147aab0d5087b19167d329991e",
-                "reference": "97c581cb23bdc3147aab0d5087b19167d329991e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/4e6ec689ef704bb4bd282f29d9dd658dfb4fb262",
+                "reference": "4e6ec689ef704bb4bd282f29d9dd658dfb4fb262",
                 "shasum": ""
             },
             "require": {
@@ -1267,7 +1267,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-06-17T23:44:27+00:00"
+            "time": "2025-06-18T12:56:23+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -3482,6 +3482,62 @@
                 "source": "https://github.com/ramsey/uuid/tree/4.8.1"
             },
             "time": "2025-06-01T06:28:46+00:00"
+        },
+        {
+            "name": "ronisaha/easy-bangla-date",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ronisaha/easy-bangla-date.git",
+                "reference": "1b4132af4890a7a726e9e366f4594b93a037c806"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ronisaha/easy-bangla-date/zipball/1b4132af4890a7a726e9e366f4594b93a037c806",
+                "reference": "1b4132af4890a7a726e9e366f4594b93a037c806",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.3.*",
+                "satooshi/php-coveralls": "~0.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "EasyBanglaDate\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roni Saha",
+                    "email": "roni.cse@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Extended DateTime Class For Bangla Date and Time",
+            "homepage": "http://ronisaha.github.io/easy-bangla-date/",
+            "keywords": [
+                "Bangla",
+                "Bangla Date",
+                "Bangla DateTime"
+            ],
+            "support": {
+                "issues": "https://github.com/ronisaha/easy-bangla-date/issues",
+                "source": "https://github.com/ronisaha/easy-bangla-date"
+            },
+            "time": "2017-08-27T15:14:41+00:00"
         },
         {
             "name": "spatie/laravel-permission",
