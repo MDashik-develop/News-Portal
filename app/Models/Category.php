@@ -21,4 +21,13 @@ class Category extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    // Category.php model
+    // app/Models/Category.php
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id')->where('is_menu', true);
+    }
+    
+
 }

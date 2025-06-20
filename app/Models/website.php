@@ -13,6 +13,7 @@ protected $fillable = [
     'logo',
     'meta_tags',
     'meta_description',
-    'fb_app_id'
+    'fb_app_id',
+    'adsense_publisher_id',
 ];
 }

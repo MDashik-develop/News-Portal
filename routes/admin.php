@@ -1,5 +1,9 @@
 <?php
 
+use App\Livewire\Ads\PersonalAdManager;
+use App\Livewire\Ads\SlotForm;
+use App\Livewire\Ads\SlotIndex;
+use App\Livewire\Ads\AdSenseManager;
 use App\Livewire\Category\Create as cartegoryCreate;
 use App\Livewire\Category\Edit as categoryEdit;
 use App\Livewire\Category\Index as cartegoryIndex;
@@ -58,6 +62,13 @@ Route::middleware(['auth', 'redirect.if.no.permission:admin.panel'])->group(func
         Route::get('/admin/polls/create', createPoll::class)->name('posts.polls.create');
         Route::get('/admin/polls', indexPoll::class)->name('posts.polls.index')->middleware('permission:polls.edit');
     });
-    
 
+    Route::group(['middleware' => ['redirect.if.no.permission:ads']], function () {    
+        Route::get('admin/ads/slots', SlotIndex::class)->name('admin.ads.slots.index');
+        Route::get('admin/ads/slots/create', SlotForm::class)->name('admin.ads.slots.create');
+        Route::get('admin/ads/slots/{adSlot}/edit', SlotForm::class)->name('admin.ads.slots.edit');
+        Route::get('admin/ads/slots/{adSlot}/personal-ads', PersonalAdManager::class)->name('admin.ads.slots.personal-ads');
+        Route::get('/admin/ads/settings', AdSenseManager::class)->name('admin.ads.settings');
+    });
+        
 });

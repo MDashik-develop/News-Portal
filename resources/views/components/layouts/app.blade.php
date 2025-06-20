@@ -20,6 +20,7 @@
 </head>
 
 <body>
+    
     <x-layouts.app.sidebar :title="$title ?? null">
         {{-- <h1>hi</h1> --}}
         <flux:main>

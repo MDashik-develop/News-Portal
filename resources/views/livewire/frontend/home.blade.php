@@ -79,6 +79,11 @@
             </div>
         </div>
         <aside class="md:w-[30%]">
+            <div class="ads-aside" class="w-full h-auto">
+                {{-- <img src="https://placehold.co/300x200/DDDDDD/orange?text=Ads+Aside" alt="" class="w-full h-auto mb-3"> --}}
+                <livewire:ads.display-ad :locationKey="'home_sidebar'" lazy />
+            </div>
+
             <div id="default-carousel" class="relative w-full" data-carousel="slide">
                 <!-- Carousel wrapper -->
                 <div class="relative h-[200px] overflow-hidden rounded-lg">
@@ -235,8 +240,8 @@
         </aside>
     </div>
 
-    <div class="home-autoplay-carousel bg-[#e8f1ff] dark:bg-gray-900">
-        <div class="p-2 ">
+    <div class="home-autoplay-carousel px-4 py-1 rounded bg-[#e8f1ff] dark:bg-gray-900">
+        <div class="p-2">
             <div
                 class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <a href="{{ route('post.view', ['id' => 1]) }}" wire:navigate>

@@ -3,11 +3,14 @@
 namespace App\Livewire\Category;
 
 use App\Models\Category;
+use App\Traits\HasNotifications;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
 
 class Edit extends Component
 {
+    use HasNotifications;
+    
     public $categoryId;
     public $name;
     public $description;
@@ -18,7 +21,7 @@ class Edit extends Component
     public $categories;
 
     public function mount($id)
-    {
+    {   
         $category = Category::findOrFail($id);
         $this->categoryId = $category->id;
         $this->name = $category->name;
@@ -53,13 +56,7 @@ class Edit extends Component
             'status' => $this->status,
         ]);
 
-        // session()->flash('success', 'Category updated successfully!');
-        // return redirect()->route('categories.index');
-        
-        $this->dispatch('notify', [
-            'type' => 'success',
-            'message' => 'Category updated successfully!',
-        ]);
+        $this->succsessNotify("Category updated successfully!");
         return $this->redirect(route('categories.index'), navigate:true);
     }
 

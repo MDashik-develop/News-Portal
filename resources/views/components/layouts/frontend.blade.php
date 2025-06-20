@@ -31,14 +31,14 @@ $website = \App\Models\website::first();
     <link rel="icon" href="{{ asset('storage/' . $website->favicon) }}" type="image/x-icon">
 
 
-    <link href="https://fonts.googleapis.com/css2?family=Siyam+Rupali&amp;display=swap" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Siyam+Rupali&amp;display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" /> --}}
 
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-
+    @fluxAppearance
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body {
@@ -47,6 +47,11 @@ $website = \App\Models\website::first();
         }
     </style>
     {{-- @livewireStyles --}}
+
+    @if($website && $website->adsense_publisher_id)
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ $website->adsense_publisher_id }}"
+                crossorigin="anonymous"></script>
+    @endif
 </head>
 
 <body class=" bg-white dark:bg-gray-800">
@@ -62,8 +67,6 @@ $website = \App\Models\website::first();
         @livewire('frontend.layouts.header')
         @livewire('frontend.layouts.nav')
 
-    {{-- <livewire:navigate /> --}}
-
     {{-- Main Content --}}
         <main class="min-h-screen max-w-7xl mx-auto  py-6">
             {{-- Main content area --}}
@@ -74,15 +77,11 @@ $website = \App\Models\website::first();
         @livewire('frontend.layouts.footer')
 
     <!-- Footer Scripts -->
-        <!-- Load only the essential Font Awesome JS bundle for better performance -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" defer></script>
-
-        <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <!-- fowbite JS -->
         <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-        <!-- Slick JS -->
         <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        @fluxScripts
     <script>
         document.addEventListener('DOMContentLoaded', () => {
                 if (window.initFlowbite) {

@@ -18,14 +18,23 @@
 
         <flux:navlist variant="outline">
             <flux:navlist.group :heading="__('Platform')" class="grid">
-                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
-                    wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                @can('ads')
+                    {{-- <flux:navlist.item icon="rectangle-stack" :href="route('admin.ads.slots.index')" :current="request()->routeIs('admin.ads.slots.index')" wire:navigate>{{ __('Advertisement') }}</flux:navlist.item> --}}
+                    <flux:navlist.group expandable :expanded="request()->routeIs('admin.ads.*')" heading="Advertisements"
+                        class="lg:grid">
+                        <flux:navlist.item :href="route('admin.ads.slots.index')" :current="request()->routeIs('admin.ads.slots.index')"
+                            wire:navigate>{{ __('Advertisement') }}</flux:navlist.item>
+                        <flux:navlist.item :href="route('admin.ads.settings')"
+                            :current="request()->routeIs('admin.ads.settings')" wire:navigate>{{ __('AdSense Settings') }}
+                        </flux:navlist.item>
+                    </flux:navlist.group>
+                @endcan
                 @can('user.edit')
                 <flux:navlist.item icon="user" :href="route('users.index')" :current="request()->routeIs('users.index')"
                     wire:navigate>{{ __('Users') }}</flux:navlist.item>
                 @endcan
             </flux:navlist.group>
-
             @can('user.permission')
             <flux:navlist.group expandable :expanded="request()->routeIs('permissions.*')" heading="Permission"
                 class="lg:grid">
