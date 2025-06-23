@@ -27,6 +27,7 @@ Route::middleware(['auth', 'redirect.if.no.permission:admin.panel'])->group(func
     })->name('admin.dashboard');
     
     
+    
     Route::group(['middleware' => ['redirect.if.no.permission:categories.edit']], function () {
         Route::get('/admin/categories/', cartegoryIndex::class)->name('categories.index');
         Route::get('/admin/categories/create', cartegoryCreate::class)->name('categories.create');

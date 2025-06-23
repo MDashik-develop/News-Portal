@@ -46,7 +46,10 @@ class Index extends Component
             ->when(
                 $this->search,
                 fn($query) =>
-                $query->where('title', 'like', '%' . $this->search . '%')
+                $query->where(function($q) {
+                    $q->where('title', 'like', '%' . $this->search . '%')
+                      ->orWhere('id', 'like', '%' . $this->search . '%');
+                })
             )
             ->paginate(10);
 

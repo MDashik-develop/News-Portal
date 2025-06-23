@@ -40,7 +40,8 @@ class Edit extends Component
         $this->validate([
             'name' => ['required', Rule::unique('categories', 'name')->ignore($this->categoryId)],
             'description' => ['nullable', 'string'],
-            'parent_id' => ['nullable', 'exists:categories,id'],
+            // 'parent_id' => ['nullable', 'exists:categories,id'],
+            'parent_id' => 'nullable',
             'order' => ['nullable', 'integer', 'min:0'],
             'is_menu' => ['required', 'boolean'],
             'status' => ['required', 'boolean'],
@@ -50,7 +51,7 @@ class Edit extends Component
         $category->update([
             'name' => $this->name,
             'description' => $this->description,
-            'parent_id' => $this->parent_id,
+            'parent_id' => $this->parent_id !== '' ? $this->parent_id : null,
             'order' => $this->order,
             'is_menu' => $this->is_menu,
             'status' => $this->status,

@@ -8,10 +8,11 @@ use Livewire\Volt\Volt;
 // })->name('home');
 
 
-
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::middleware(['auth', 'redirect.if.no.permission:admin.panel'])->group(function () {
+    Route::view('dashboard', 'dashboard')
+        ->middleware(['auth', 'verified'])
+        ->name('dashboard');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');

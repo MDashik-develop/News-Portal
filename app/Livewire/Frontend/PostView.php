@@ -9,16 +9,19 @@ use App\Traits\HasBengaliNumbers;
 use App\Traits\HasNotifications;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 /**
  * Handle post viewing with poll voting support.
  */
+
+ #[Layout('components.layouts.frontend')]
 class PostView extends Component
 {
     use HasBengaliNumbers, HasNotifications;
 
-    /** @var Post */
+
     public $post;
     public $letetstPosts;
     public $todayBestPosts;
@@ -84,23 +87,18 @@ class PostView extends Component
         // $this->successNotify("");
     }
 
-    /**
-     * Mount the component with post and poll.
-     *
-    //  * @param int $id
-    //  * @return void
-     */
-    public function mount($id): void
+
+    public function mount($slug): void
     {
-        $this->post = Post::where('id', $id)
+        $this->post = Post::where('slug', $slug)
             ->where('status', 'published')
             ->firstOrFail();
 
         $viewedPosts = session()->get('viewed_posts', []);
 
-        if (!in_array($id, $viewedPosts)) {
+        if (!in_array($slug, $viewedPosts)) {
             $this->post->increment('view_count');
-            $viewedPosts[] = $id;
+            $viewedPosts[] = $slug;
             session(['viewed_posts' => $viewedPosts]);
         }
 
@@ -138,21 +136,15 @@ class PostView extends Component
             ->get();
 
         $this->relatedPosts = Post::where('category_id', $this->post->category_id)
-            ->where('id', '!=', $id)
+            ->where('slug', '!=', $slug)
             ->where('status', 'published')
             ->latest()
             ->take(4)
             ->get();
     }
 
-    /**
-     * Render the component.
-     *
-     * @return \Illuminate\View\View
-     */
     public function render()
     {
-        return view('livewire.frontend.post-view')
-            ->layout('components.layouts.frontend');
+        return view('livewire.frontend.post-view');
     }
 }

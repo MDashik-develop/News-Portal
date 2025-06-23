@@ -5,20 +5,66 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
+use App\Traits\HasNotifications;
+use Illuminate\Support\Str;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
-new class extends Component {
+new class extends Component 
+{
+    use HasNotifications, WithFileUploads;
+
     public string $name = '';
     public string $email = '';
+    public  $user;
+    public $profile_image;
+    public $temp_profile_image;
 
     /**
      * Mount the component.
      */
     public function mount(): void
     {
+        $this->user = Auth::user();
+        
         $this->name = Auth::user()->name;
         $this->email = Auth::user()->email;
+
+        if ($this->user) {
+            $this->temp_profile_image = $this->user->profile_image ? Storage::url($this->user->profile_image) : null;
+        }
     }
 
+    public function saveImage()
+    {
+        $validated = $this->validate([
+            'profile_image' => 'nullable|image|max:1024',
+        ]);
+
+        try {
+            $data = [];
+            // Handle profile_image upload only if a new one is selected
+            if ($this->profile_image) {
+                // Delete old profile_image if exists
+                if ($this->user && $this->user->profile_image) {
+                    Storage::disk('public')->delete($this->user->profile_image);
+                }
+                $profile_imageName = "profile_image-" . time() . '.' . $this->profile_image->getClientOriginalExtension();
+                $data['profile_image'] = $this->profile_image->storeAs('user', $profile_imageName, 'public');
+            }
+
+            if ($this->user) {
+                $this->user->update($data);
+            } else {
+                User::create($data);
+            }
+
+            $this->succsessNotify("profile_image settings saved successfully!");
+            // return redirect()->route('website.index');
+        } catch (\Throwable $th) {
+            $this->unsuccsessNotify("Failed to save profile_image settings: " . $th->getMessage());
+        }
+    }
     /**
      * Update the profile information for the currently authenticated user.
      */
@@ -73,7 +119,8 @@ new class extends Component {
     @include('partials.settings-heading')
 
     <x-settings.layout :heading="__('Profile')" :subheading="__('Update your name and email address')">
-        <form wire:submit="updateProfileInformation" class="my-6 w-full space-y-6">
+
+        <form wire:submit="updateProfileInformation" class="my-6 w-full space-y-6 border p-4 shadow-lg rounded-lg bg-white dark:bg-gray-800">
             <flux:input wire:model="name" :label="__('Name')" type="text" required autofocus autocomplete="name" />
 
             <div>
@@ -106,6 +153,34 @@ new class extends Component {
                 <x-action-message class="me-3" on="profile-updated">
                     {{ __('Saved.') }}
                 </x-action-message>
+            </div>
+        </form>
+
+        <form wire:submit.prevent="saveImage" class="border p-4 shadow-lg rounded-lg bg-white dark:bg-gray-800">
+            <div class="space-y-6">
+                <!-- Logo -->
+                <div>
+                    <label for="profile_image" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Change Profile Pucture</label>
+                    <small>Image maximum size 1mb</small>
+                    <input type="file" wire:model="profile_image" id="profile_image"
+                        class="mt-1 block w-full text-sm text-gray-500 file:bg-indigo-50 file:text-indigo-700 dark:file:bg-zinc-700 dark:file:text-zinc-300">
+                    @error('profile_image') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    <div class="mt-2">
+                        @if($profile_image)
+                        <img src="{{ $profile_image->temporaryUrl() }}" class="h-32 w-auto">
+                        @elseif($temp_profile_image)
+                        <img src="{{ $temp_profile_image }}" class="h-32 w-auto">
+                        @endif
+                    </div>
+                </div>
+
+
+                <!-- Save Button -->
+                <div class="flex justify-end">
+                    <button type="submit" wire:loading.attr="disabled"
+                        class="px-4 py-2 bg-black text-white rounded-md hover:bg-indigo-700 ">Save
+                        Picture</button>
+                </div>
             </div>
         </form>
 

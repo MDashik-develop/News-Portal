@@ -22,44 +22,38 @@ class Home extends Component
 
     public function mount()
     {
-        $this->featuredPosts = Post::where('is_featured', 1)
-            ->where('status', 'published')
-            ->orderBy('published_at', 'desc')
-            ->take(1)
-            ->get();
+         
+                       
+            $this->letetstPosts = Post::where('status', 'published')
+                ->orderBy('published_at', 'desc')
+                ->whereDate('published_at', '<=', now())
+                ->take(6)
+                ->get();
+    
+            $this->todayBestPosts = Post::where('status', 'published')
+                ->whereDate('published_at', now())
+                ->orderBy('published_at', 'desc')
+                ->whereDate('published_at', '<=', now())
+                ->orderByDesc('view_count')
+                ->take(6)
+                ->get();
+    
+            $this->weekBestPosts = Post::where('status', 'published')
+                ->whereBetween('published_at', [now()->startOfWeek(), now()->endOfWeek()])
+                ->orderBy('published_at', 'desc')
+                ->whereDate('published_at', '<=', now())
+                ->orderByDesc('view_count')
+                ->take(6)
+                ->get();
             
-        $this->letetstPosts = Post::where('status', 'published')
-            ->orderBy('published_at', 'desc')
-            ->take(6)
-            ->get();
-
-        $this->todayBestPosts = Post::where('status', 'published')
-            ->whereDate('published_at', now())
-            ->orderBy('published_at', 'desc')
-            ->take(6)
-            ->get();
-
-        $this->weekBestPosts = Post::where('status', 'published')
-            ->whereBetween('published_at', [now()->startOfWeek(), now()->endOfWeek()])
-            ->orderBy('published_at', 'desc')
-            ->take(6)
-            ->get();
+        
             
-        $this->section1 = Post::where('section', 1)
-            ->where('status', 'published')
-            ->orderBy('published_at', 'desc')
-            ->take(3)
-            ->get();
-            
-        $this->section2 = Post::where('section', 2)
-            ->where('status', 'published')
-            ->orderBy('published_at', 'desc')
-            ->take(12)
-            ->get();
+        
             
         $this->section3 = Post::where('section', 3)
             ->where('status', 'published')
             ->orderBy('published_at', 'desc')
+            ->whereDate('published_at', '<=', now())
             ->take(9)
             ->get();
             

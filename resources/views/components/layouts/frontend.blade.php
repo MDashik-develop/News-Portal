@@ -1,35 +1,29 @@
 <!DOCTYPE html>
 <html lang="bn">
 @php
-$website = \App\Models\website::first();
+    $website = \App\Models\website::first();
+    // $postHead = request()->is('post/*') ? 1 : 0; 
 @endphp
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{-- <title>{{ $title ?? 'My Website' }}</title> --}}
-    <title>{{ $website->title ?? 'My Website' }}</title>
-    <meta name="description" content="{{ $website->meta_description ?? 'Default description' }}">
-    <meta name="keywords" content="{{ $website->tagsString ?? 'default, tags' }}">
-    <meta name="author" content="{{ $website->title ?? 'My Website' }}">
-    <meta name="theme-color" content="#ffffff">
-    <meta property="og:title" content="{{ $website->title ?? 'My Website' }}">
-    <meta property="og:description" content="{{ $website->meta_description ?? 'Default description' }}">
-    <meta property="og:image" content="{{ asset('storage/' . $website->logo) }}">
-    <meta property="og:url" content="{{ url('/') }}">
+    {{-- <meta name="theme-color" content="#ffffff"> --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta property="og:type" content="website">
-
-    {{--
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $website->title ?? 'My Website' }}">
-    <meta name="twitter:description" content="{{ $website->meta_description ?? 'Default description' }}">
-    <meta name="twitter:image" content="{{ asset('images/logo.png') }}">
-    <meta name="twitter:site" content="@your_twitter_handle">
-    <meta name="twitter:creator" content="@your_twitter_handle">
-    <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{ asset('storage/' . $website->favicon) }}" type="image/x-icon">
-
+    @if (!trim($__env->yieldPushContent('post-head')))
+        <title>{{ $website->title ?? 'My Website' }}</title>
+        <meta name="description" content="{{ $website->meta_description ?? 'Default description' }}">
+        <meta name="keywords" content="{{ $website->meta_tags ?? 'default, tags' }}">
+        <meta property="og:title" content="{{ $website->title ?? 'My Website' }}">
+        <meta property="og:description" content="{{ $website->meta_description ?? 'Default description' }}">
+        <meta property="og:image" content="{{ asset('storage/' . $website->logo) }}">
+        <meta property="og:url" content="{{ url('/') }}">
+        <meta name="author" content="{{ $website->title ?? 'My Website' }}">
+    @else
+        @stack('post-head')
+    @endif
 
     {{-- <link href="https://fonts.googleapis.com/css2?family=Siyam+Rupali&amp;display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" /> --}}
@@ -64,8 +58,8 @@ $website = \App\Models\website::first();
     </script>
 
     <!-- Header with logo and social icons -->
-        @livewire('frontend.layouts.header')
-        @livewire('frontend.layouts.nav')
+        <livewire:frontend.layouts.header />
+        <livewire:frontend.layouts.nav />
 
     {{-- Main Content --}}
         <main class="min-h-screen max-w-7xl mx-auto  py-6">
@@ -74,7 +68,7 @@ $website = \App\Models\website::first();
         </main>
 
     {{-- Footer --}}
-        @livewire('frontend.layouts.footer')
+        <livewire:frontend.layouts.footer />
 
     <!-- Footer Scripts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" defer></script>

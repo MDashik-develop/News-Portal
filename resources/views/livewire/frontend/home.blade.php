@@ -2,9 +2,9 @@
     {{-- top sectio --}}
     <div class="flex gap-2 p-2 mb-2 sm:flex-row flex-col">
         <div class="md:w-[70%]">
-            <div class="flex lg:flex-row flex-col gap-2 mb-10">
-                @foreach ( $featuredPosts as $featuredPost )
-                <a href="{{ route('post.view', ['id' => $featuredPost->id]) }}" wire:navigate
+            <div class="flex lg:flex-row flex-col gap-2 mb-10" lazy>
+                {{-- @foreach ( $featuredPosts as $featuredPost )
+                <a href="{{ route('post.view', ['slug' => $featuredPost->slug]) }}" wire:navigate
                     class="flex flex-col-reverse sm:flex-row gap-2 lg:w-8/12 mb-1.5 sm:">
                     <div class="w-full md:w-2/5 flex flex-col justify-between gap-2">
                         <h2 class="line-clamp-3 text-2xl text-blue-500">
@@ -22,40 +22,36 @@
                             alt="{{ $featuredPost->title }}" class="w-[600px] max-h-[273px]">
                     </div>
                 </a>
-                @endforeach
-                <div class="grid grid-cols-1 pt-2 sm:pt-0 lg:w-4/12">
-                    @foreach ($section1 as $s1)
-                    <a href="{{ route('post.view', ['id' => $s1->id]) }}" wire:navigate
-                        class="flex justify-between items-center gap-2 border-b-1 max-h-min">
-                        <h5
-                            class="mb-2 w-50 leading-[24px] flex-3/4 text-base line-clamp-3 tracking-tight text-gray-900 dark:text-white overflow-hidden max-h-[70px]">
-                            {{ $s1->title }}
-                        </h5>
-                        <img src="{{ asset('storage/' . $s1->featured_image) }}" alt="{{ $s1->title }}"
-                            class="mb-2 max-w-30 max-h-[75px]">
-                    </a>
-                    @endforeach
-                </div>
+                @endforeach --}}
+                {{-- s1 --}}
+                <livewire:frontend.sections.featured-post />
+                <livewire:frontend.sections.s1 />
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-10">
-                @foreach ($section2 as $s2)
-                <a href="{{ route('post.view', ['id' => $s2->id]) }}" wire:navigate
-                    class="p-1.5 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <img src="{{ asset('storage/' . $s2->featured_image) }}" alt="{{  $s2->title }}" class="rounded mb-1">
-                    <h5 class=" text-base line-clamp-1 tracking-tight text-gray-900 dark:text-white">
-                        {{ $s2->title }}
-                    </h5>
-                </a>
-                @endforeach
-            </div>
+            <livewire:frontend.sections.s2 />
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
-                <a href="{{ route('post.view', ['id' => 1]) }}" wire:navigate class="flex justify-between gap-2 ">
+                {{-- s3 --}}
+                <a href="{{ route('post.view', ['slug' => 1]) }}" wire:navigate class="flex justify-between gap-2 ">
                     <img src="https://placehold.co/300x200" alt="" class="mb-2 max-w-30">
                     <h5 class="w-50 mb-2 text-base line-clamp-3 tracking-tight text-gray-900 dark:text-white">
-                        n Noteworthy technology acquisitions 2021</h5>
+                        laasN oteworthy technology acquisitions 2021</h5>
                 </a>
+                <div href="#" class="flex justify-between gap-2 ">
+                    <img src="https://placehold.co/300x200" alt="" class="mb-2 max-w-30">
+                    <h5 class="w-50 mb-2 text-base line-clamp-3 tracking-tight text-gray-900 dark:text-white">
+                        Noteworthy technology acquisitions 2021</h5>
+                </div>
+                <div href="#" class="flex justify-between gap-2 ">
+                    <img src="https://placehold.co/300x200" alt="" class="mb-2 max-w-30">
+                    <h5 class="w-50 mb-2 text-base line-clamp-3 tracking-tight text-gray-900 dark:text-white">
+                        Noteworthy technology acquisitions 2021</h5>
+                </div>
+                <div href="#" class="flex justify-between gap-2 ">
+                    <img src="https://placehold.co/300x200" alt="" class="mb-2 max-w-30">
+                    <h5 class="w-50 mb-2 text-base line-clamp-3 tracking-tight text-gray-900 dark:text-white">
+                        Noteworthy technology acquisitions 2021</h5>
+                </div>
                 <div href="#" class="flex justify-between gap-2 ">
                     <img src="https://placehold.co/300x200" alt="" class="mb-2 max-w-30">
                     <h5 class="w-50 mb-2 text-base line-clamp-3 tracking-tight text-gray-900 dark:text-white">
@@ -80,7 +76,6 @@
         </div>
         <aside class="md:w-[30%]">
             <div class="ads-aside" class="w-full h-auto">
-                {{-- <img src="https://placehold.co/300x200/DDDDDD/orange?text=Ads+Aside" alt="" class="w-full h-auto mb-3"> --}}
                 <livewire:ads.display-ad :locationKey="'home_sidebar'" lazy />
             </div>
 
@@ -88,13 +83,10 @@
                 <!-- Carousel wrapper -->
                 <div class="relative h-[200px] overflow-hidden rounded-lg">
                     <!-- Item 1 -->
-                    <a href="{{ route('post.view', ['id' => 1]) }}" wire:navigate
+                    <a href="{{ route('post.view', ['slug' => 1]) }}" wire:navigate
                         class="hidden duration-700 ease-in-out" data-carousel-item>
                         <img src="https://placehold.co/300x200"
                             class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                        {{-- <a href="#" class="line-clamp-1">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae, facilis.
-                        </a> --}}
                     </a>
                     <!-- Item 2 -->
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
@@ -179,241 +171,85 @@
                 <div class="hidden p-4 my-1 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800" id="latestPosts" role="tabpanel"
                     aria-labelledby="latestPosts-tab">
                     <ul class="space-y-3 text-[13px] leading-snug text-[#333] max-h-[400px] overflow-y-auto">
-                        @foreach ($letetstPosts as $letetstPost)
-                            <li class="flex items-start border-b-1 py-2 space-x-2 rtl:space-x-reverse">
-                                <i class="fas fa-play text-[#d00] mt-1"></i>
-                                <a href="{{ route('post.view', ['id' => $letetstPost->id]) }}" wire:navigate>
-                                    <p class="line-clamp-2 max-h-min mb-1">
-                                        {{ $letetstPost->title }}
-                                    </p>
-                                    <p class="text-[11px]">
-                                        <i class="far fa-clock text-gray-500"></i>
-                                        {{ $this->getBengaliTimeAgo($letetstPost->published_at) }} | <span
-                                            class="text-[#d00]">{{ $letetstPost->category?->name ?? 'Uncategorized' }}</span>
-                                    </p>
-                                </a>
-                            </li>
-                        @endforeach
+                        @if ($letetstPosts->isNotEmpty())
+                            @foreach ($letetstPosts as $letetstPost)
+                                <li class="flex items-start border-b-1 py-2 space-x-2 rtl:space-x-reverse">
+                                    <i class="fas fa-play text-[#d00] mt-1"></i>
+                                    <a href="{{ route('post.view', ['slug' => $letetstPost->slug]) }}" wire:navigate>
+                                        <p class="line-clamp-2 max-h-min mb-1">
+                                            {{ $letetstPost->title }}
+                                        </p>
+                                        <p class="text-[11px]">
+                                            <i class="far fa-clock text-gray-500"></i>
+                                            {{ $this->getBengaliTimeAgo($letetstPost->published_at) }} |
+                                            <span class="text-[#d00]">{{ $letetstPost->category?->name ?? 'Uncategorized' }}</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            @endforeach
+                        @else
+                            <li class="text-center text-gray-500">কোনো পোস্ট নেই</li>
+                        @endif
+
                     </ul>
                 </div>
                 <div class="hidden p-4 my-1 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800" id="todayBest" role="tabpanel"
                     aria-labelledby="todayBest-tab">
                     <ul class="space-y-3 text-[13px] leading-snug text-[#333] max-h-[400px] overflow-y-auto">
-                        @foreach ($todayBestPosts as $todayBestPost)
-                        <li class="flex items-start border-b-1 py-2 space-x-2 rtl:space-x-reverse">
-                            <i class="fas fa-play text-[#d00] mt-1"></i>
-                            <a href="{{ route('post.view', ['id' => $todayBestPost->id]) }}" wire:navigate>
-                                <p class="line-clamp-2 max-h-min mb-1">
-                                    {{ $todayBestPost->title }}
-                                </p>
-                                <p class="text-[11px]">
-                                    <i class="far fa-clock text-gray-500"></i>
-                                    {{ $this->getBengaliTimeAgo($todayBestPost->published_at) }} | <span
-                                        class="text-[#d00]">{{ $todayBestPost->category?->name ?? 'Uncategorized' }}</span>
-                                </p>
-                            </a>
-                        </li>
-                        @endforeach
+                        @if ($todayBestPosts->isNotEmpty())
+                            @foreach ($todayBestPosts as $todayBestPost)
+                                <li class="flex items-start border-b-1 py-2 space-x-2 rtl:space-x-reverse">
+                                    <i class="fas fa-play text-[#d00] mt-1"></i>
+                                    <a href="{{ route('post.view', ['slug' => $todayBestPost->slug]) }}" wire:navigate>
+                                        <p class="line-clamp-2 max-h-min mb-1">
+                                            {{ $todayBestPost->title }}
+                                        </p>
+                                        <p class="text-[11px]">
+                                            <i class="far fa-clock text-gray-500"></i>
+                                            {{ $this->getBengaliTimeAgo($todayBestPost->published_at) }} | 
+                                            <span class="text-[#d00]">
+                                                {{ $todayBestPost->category?->name ?? 'Uncategorized' }}
+                                            </span>
+                                        </p>
+                                    </a>
+                                </li>
+                            @endforeach
+                        @else
+                            <li class="text-center text-gray-500">কোনো পোস্ট নেই</li>
+                        @endif
+
                     </ul>
                 </div>
                 <div class="hidden p-4 my-1 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800" id="weekBest" role="tabpanel"
                     aria-labelledby="weekBest-tab">
                     <ul class="space-y-3 text-[13px] leading-snug text-[#333] max-h-[400px] overflow-y-auto">
-                        @foreach ($weekBestPosts as $weekBestPost)
-                        <li class="flex items-start border-b-1 py-2 space-x-2 rtl:space-x-reverse">
-                            <i class="fas fa-play text-[#d00] mt-1"></i>
-                            <a href="{{ route('post.view', ['id' => $weekBestPost->id]) }}" wire:navigate>
-                                <p class="line-clamp-2 max-h-min mb-1">
-                                    {{ $weekBestPost->title }}
-                                </p>
-                                <p class="text-[11px]">
-                                    <i class="far fa-clock text-gray-500"></i>
-                                    {{ $this->getBengaliTimeAgo($weekBestPost->published_at) }} | <span
-                                        class="text-[#d00]">{{ $weekBestPost->category?->name ?? 'Uncategorized' }}</span>
-                                </p>
-                            </a>
-                        </li>
-                        @endforeach
+                        @if ($weekBestPosts->isEmpty()) 
+                            @foreach ($weekBestPosts as $weekBestPost)
+                                <li class="flex items-start border-b-1 py-2 space-x-2 rtl:space-x-reverse">
+                                    <i class="fas fa-play text-[#d00] mt-1"></i>
+                                    <a href="{{ route('post.view', ['slug' => $weekBestPost->slug]) }}" wire:navigate>
+                                        <p class="line-clamp-2 max-h-min mb-1">
+                                            {{ $weekBestPost->title }}
+                                        </p>
+                                        <p class="text-[11px]">
+                                            <i class="far fa-clock text-gray-500"></i>
+                                            {{ $this->getBengaliTimeAgo($weekBestPost->published_at) }} | <span
+                                                class="text-[#d00]">{{ $weekBestPost->category?->name ?? 'Uncategorized' }}</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            @endforeach
+                        @else
+                            <li class="text-center text-gray-500">কোনো পোস্ট নেই</li>
+                        @endif
                     </ul>
                 </div>
             </div>
         </aside>
     </div>
 
-    <div class="home-autoplay-carousel px-4 py-1 rounded bg-[#e8f1ff] dark:bg-gray-900">
-        <div class="p-2">
-            <div
-                class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <a href="{{ route('post.view', ['id' => 1]) }}" wire:navigate>
-                    <div class="h-[50%]">
-                        <img src="https://placehold.co/300x200" alt="" class="w-full h-auto ">
-                    </div>
-                    <div class="px-2 py-1">
-                        <p class="line-clamp-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, animi.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="p-2 ">
-            <div
-                class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <a href="#">
-                    <div class="h-[50%]">
-                        <img src="https://placehold.co/300x200" alt="" class="w-full h-auto ">
-                    </div>
-                    <div class="px-2 py-1">
-                        <p class="line-clamp-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, animi.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="p-2 ">
-            <div
-                class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <a href="#">
-                    <div class="h-[50%]">
-                        <img src="https://placehold.co/300x200" alt="" class="w-full h-auto ">
-                    </div>
-                    <div class="px-2 py-1">
-                        <p class="line-clamp-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, animi.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="p-2 ">
-            <div
-                class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <a href="#">
-                    <div class="h-[50%]">
-                        <img src="https://placehold.co/300x200" alt="" class="w-full h-auto ">
-                    </div>
-                    <div class="px-2 py-1">
-                        <p class="line-clamp-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, animi.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="p-2 ">
-            <div
-                class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <a href="#">
-                    <div class="h-[50%]">
-                        <img src="https://placehold.co/300x200" alt="" class="w-full h-auto ">
-                    </div>
-                    <div class="px-2 py-1">
-                        <p class="line-clamp-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, animi.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="p-2 ">
-            <div
-                class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <a href="#">
-                    <div class="h-[50%]">
-                        <img src="https://placehold.co/300x200" alt="" class="w-full h-auto ">
-                    </div>
-                    <div class="px-2 py-1">
-                        <p class="line-clamp-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, animi.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="p-2 ">
-            <div
-                class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <a href="#">
-                    <div class="h-[50%]">
-                        <img src="https://placehold.co/300x200" alt="" class="w-full h-auto ">
-                    </div>
-                    <div class="px-2 py-1">
-                        <p class="line-clamp-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, animi.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 p-2 mb-3">
-        <div class="p-1 sm:p-2">
-            <div
-                class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <a href="{{ route('post.view', ['id' => 1]) }}" wire:navigate>
-                    <div class="h-[50%]">
-                        <img src="https://placehold.co/300x200" alt="" class="w-full h-auto ">
-                    </div>
-                    <div class="px-2 py-1">
-                        <p class="line-clamp-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, animi.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="p-1 sm:p-2">
-            <div
-                class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <a href="#">
-                    <div class="h-[50%]">
-                        <img src="https://placehold.co/300x200" alt="" class="w-full h-auto ">
-                    </div>
-                    <div class="px-2 py-1">
-                        <p class="line-clamp-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, animi.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="p-1 sm:p-2">
-            <div
-                class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <a href="#">
-                    <div class="h-[50%]">
-                        <img src="https://placehold.co/300x200" alt="" class="w-full h-auto ">
-                    </div>
-                    <div class="px-2 py-1">
-                        <p class="line-clamp-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, animi.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="p-1 sm:p-2">
-            <div
-                class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <a href="#">
-                    <div class="h-[50%]">
-                        <img src="https://placehold.co/300x200" alt="" class="w-full h-auto ">
-                    </div>
-                    <div class="px-2 py-1">
-                        <p class="line-clamp-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, animi.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="p-1 sm:p-2">
-            <div
-                class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <a href="#">
-                    <div class="h-[50%]">
-                        <img src="https://placehold.co/300x200" alt="" class="w-full h-auto ">
-                    </div>
-                    <div class="px-2 py-1">
-                        <p class="line-clamp-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, animi.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="p-1 sm:p-2">
-            <div
-                class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <a href="#">
-                    <div class="h-[50%]">
-                        <img src="https://placehold.co/300x200" alt="" class="w-full h-auto ">
-                    </div>
-                    <div class="px-2 py-1">
-                        <p class="line-clamp-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, animi.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
+    <livewire:frontend.sections.home-carousel />
+    <livewire:frontend.sections.s4 lazy />
 
     <div>
         <div class="stock-marquee-container">
@@ -523,38 +359,7 @@
 </section>
 @push('scripts')
     <script>
-        $(document).ready(function(){
-            $('.home-autoplay-carousel').slick({
-            slidesToShow: 6,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            responsive: [
-                {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 6,
-                    slidesToScroll: 1
-                }
-                },
-                {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1
-                }
-                },
-                {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1
-                }
-                }
-            ]
-            });
 
-        });
         // Data based on the provided image
         const stockData = [
             { name: 'RINS', price: 35.00, change: -0.28, percent: -0.28 },

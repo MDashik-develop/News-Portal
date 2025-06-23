@@ -90,7 +90,7 @@ class Create extends Component
                 'category_id' => $this->category_id,
                 'status' => $this->status,
                 'featured_image' => $imagePath ?? null,
-                'slug' => Str::slug($this->title),
+                'slug' => Str::slug($this->title) . '-' . uniqid(),
                 'image_caption' => $this->image_caption,
                 'video_url' => $this->video_url,
                 'keywords' => implode(',', $this->tags), // save tags as CSV string

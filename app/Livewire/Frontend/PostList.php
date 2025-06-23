@@ -7,54 +7,50 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
 
+#[Layout('components.layouts.frontend')]
 class PostList extends Component
 {
+    
     use WithPagination;
 
-    public $search = '';
-    public $featuredPosts;
-    public $categories;
-    public $popularTags;
+    public string $searchQuery;
 
-    public function mount()
+    public function mount(string $searchQuery)
     {
-        $this->featuredPosts = Post::where('status', 'published')
-            ->where('is_featured', true)
-            ->latest()
-            ->take(5)
-            ->get();
-
-        $this->categories = \App\Models\Category::withCount('posts')
-            ->orderBy('posts_count', 'desc')
-            ->take(10)
-            ->get();
-
-        $this->popularTags = \App\Models\Tag::withCount('posts')
-            ->orderBy('posts_count', 'desc')
-            ->take(10)
-            ->get();
+        $this->searchQuery = $searchQuery;
     }
 
-    public function updatingSearch()
+    public function updatingSearchQuery()
     {
         $this->resetPage();
     }
 
-    #[Layout('components.layouts.frontend')]
     public function render()
     {
-        $posts = Post::where('status', 'published')
-            ->when($this->search, function ($query) {
-                $query->where(function ($q) {
-                    $q->where('title', 'like', '%' . $this->search . '%')
-                        ->orWhere('content', 'like', '%' . $this->search . '%');
-                });
+        // $posts = Post::where('title', 'like', '%' . $this->searchQuery . '%')
+        //     ->orWhere('content', 'like', '%' . $this->searchQuery . '%')
+        //     ->orWhere('summary', 'like', '%' . $this->searchQuery . '%')
+        //     ->orWhere('users>nam', 'like', '%' . $this->searchQuery . '%')
+        //     ->paginate(10);
+
+        $posts = Post::where(function ($query) {
+            $query->where('title', 'like', '%' . $this->searchQuery . '%')
+                  ->orWhere('content', 'like', '%' . $this->searchQuery . '%')
+                  ->orWhere('summary', 'like', '%' . $this->searchQuery . '%')
+                  ->orWhereHas('user', function ($q) {
+                      $q->where('name', 'like', '%' . $this->searchQuery . '%');
+                  });
             })
-            ->latest()
-            ->paginate(12);
+            ->where('status', 'published')
+            ->whereDate('published_at', '<=', now())
+            ->orderBy('published_at', 'desc')
+            ->paginate(10);
+
+
+        
 
         return view('livewire.frontend.post-list', [
-            'posts' => $posts
+            'posts' => $posts,
         ]);
     }
 } 

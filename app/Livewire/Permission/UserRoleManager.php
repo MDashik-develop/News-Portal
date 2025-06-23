@@ -20,7 +20,8 @@ class UserRoleManager extends Component
    {
       $users = User::with('roles')->when($this->search, function ($query) {
          $query->where('name', 'like', '%' . $this->search . '%')
-            ->orWhere('email', 'like', '%' . $this->search . '%');
+            ->orWhere('email', 'like', '%' . $this->search . '%')
+            ->orWhere('username', 'like', '%' . $this->search . '%');
       })->paginate(10);
 
       $roles = Role::all();
