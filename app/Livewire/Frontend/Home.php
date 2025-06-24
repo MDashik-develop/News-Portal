@@ -17,48 +17,56 @@ class Home extends Component
     public $section1;
     public $section2;
     public $section3;
+    public $AsideCarousels;
     public $section4;
     public $section5;
 
     public function mount()
     {
          
+        $this->featuredPosts = Post::where('is_featured', 1)
+        ->where('status', 'published')
+        ->orderBy('published_at', 'desc')
+        ->whereDate('published_at', '<=', now())
+        ->take(1)
+        ->get();
                        
-            $this->letetstPosts = Post::where('status', 'published')
-                ->orderBy('published_at', 'desc')
-                ->whereDate('published_at', '<=', now())
-                ->take(6)
-                ->get();
-    
-            $this->todayBestPosts = Post::where('status', 'published')
-                ->whereDate('published_at', now())
-                ->orderBy('published_at', 'desc')
-                ->whereDate('published_at', '<=', now())
-                ->orderByDesc('view_count')
-                ->take(6)
-                ->get();
-    
-            $this->weekBestPosts = Post::where('status', 'published')
-                ->whereBetween('published_at', [now()->startOfWeek(), now()->endOfWeek()])
-                ->orderBy('published_at', 'desc')
-                ->whereDate('published_at', '<=', now())
-                ->orderByDesc('view_count')
-                ->take(6)
-                ->get();
-            
-        
-            
-        
-            
-        $this->section3 = Post::where('section', 3)
-            ->where('status', 'published')
+        $this->letetstPosts = Post::where('status', 'published')
             ->orderBy('published_at', 'desc')
             ->whereDate('published_at', '<=', now())
-            ->take(9)
+            ->take(6)
             ->get();
-            
-        $this->section4 = 'Popular Categories';
-        $this->section5 = 'Contact Us for More Information';
+
+        $this->todayBestPosts = Post::where('status', 'published')
+            ->whereDate('published_at', now())
+            ->orderByDesc('view_count')
+            ->orderBy('published_at', 'desc')
+            ->whereDate('published_at', '<=', now())
+            ->take(6)
+            ->get();
+    
+        $this->weekBestPosts = Post::where('status', 'published')
+            ->whereBetween('published_at', [now()->startOfWeek(), now()->endOfWeek()])
+            ->orderByDesc('view_count')
+            ->orderBy('published_at', 'desc')
+            ->whereDate('published_at', '<=', now())
+            ->take(6)
+            ->get();
+        
+        $this->section3 = Post::where('section', 3)
+        ->where('status', 'published')
+        ->orderBy('published_at', 'desc')
+        ->whereDate('published_at', '<=', now())
+        ->take(9)
+        ->get();
+        
+        
+        $this->AsideCarousels = Post::where('is_slider', '2')
+        ->where('status', 'published')
+        ->orderBy('published_at', 'desc')
+        ->whereDate('published_at', '<=', now())
+        ->take(5)
+        ->get();
     }
     public function render()
     {

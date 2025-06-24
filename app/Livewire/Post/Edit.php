@@ -81,7 +81,7 @@ class Edit extends Component
             'status'        => 'required|in:draft,pending,published,archived',
             'is_featured'   => 'required|in:0,1',
             'is_breaking'   => 'required|in:0,1',
-            'is_slider'     => 'required|in:0,1',
+            'is_slider'     => 'required|in:0,1,2',
             'section'       => 'integer',
             'published_at'  => 'nullable|date',
             'meta_title'    => 'nullable|string|max:255',

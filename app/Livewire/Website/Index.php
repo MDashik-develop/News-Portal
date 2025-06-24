@@ -11,17 +11,13 @@ use Illuminate\Support\Facades\Storage;
 
 class Index extends Component
 {
-    use HasNotifications, WithFileUploads;
+    use HasNotifications;
 
     public $title;
     public $tags = [];
     public $tagsString = '';
     public $meta_description;
     public $meta_tags;
-    public $favicon;
-    public $logo;
-    public $temp_favicon;
-    public $temp_logo;
     public $website;
     public $fb_app_id;
 
@@ -33,8 +29,6 @@ class Index extends Component
             $this->title = $this->website->title;
             $this->meta_description = $this->website->meta_description;
             $this->meta_tags = $this->website->meta_tags;
-            $this->temp_favicon = $this->website->favicon;
-            $this->temp_logo = $this->website->logo;
             $this->fb_app_id = $this->website->fb_app_id;
 
             // Convert meta_tags to tags array
@@ -49,8 +43,6 @@ class Index extends Component
             'title' => 'required|min:3|max:255',
             'meta_description' => 'nullable',
             'meta_tags' => 'nullable|max:255',
-            'favicon' => 'nullable|image|max:1024',
-            'logo' => 'nullable|image|max:1024',
             'fb_app_id' => 'nullable|string|max:255',
         ]);
 

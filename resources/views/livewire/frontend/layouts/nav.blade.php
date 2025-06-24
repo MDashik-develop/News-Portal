@@ -4,7 +4,7 @@
             <flux:navbar.item icon="bars-3" label="menu-flyout" />
         </flux:modal.trigger>
         <flux:navbar style="" class="overflow-x-auto scrollbar-hidden max-w-10/12 hidden md:flex">
-            <flux:navbar.item href="{{ route('home') }}"></flux:navbar.item>
+            <flux:navbar.item href="{{ route('home') }}" icon="home"></flux:navbar.item>
             @foreach ($menuCategories as $category)
                 @if ($category->children->isNotEmpty())
                     <flux:dropdown class="max-lg:hidden">

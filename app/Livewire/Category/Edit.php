@@ -37,28 +37,32 @@ class Edit extends Component
 
     public function update()
     {
-        $this->validate([
-            'name' => ['required', Rule::unique('categories', 'name')->ignore($this->categoryId)],
-            'description' => ['nullable', 'string'],
-            // 'parent_id' => ['nullable', 'exists:categories,id'],
-            'parent_id' => 'nullable',
-            'order' => ['nullable', 'integer', 'min:0'],
-            'is_menu' => ['required', 'boolean'],
-            'status' => ['required', 'boolean'],
-        ]);
+        try {
+            $this->validate([
+                'name' => ['required', Rule::unique('categories', 'name')->ignore($this->categoryId)],
+                'description' => ['nullable', 'string'],
+                // 'parent_id' => ['nullable', 'exists:categories,id'],
+                'parent_id' => 'nullable',
+                'order' => ['nullable', 'integer', 'min:0'],
+                'is_menu' => ['required', 'boolean'],
+                'status' => ['required', 'boolean'],
+            ]);
 
-        $category = Category::findOrFail($this->categoryId);
-        $category->update([
-            'name' => $this->name,
-            'description' => $this->description,
-            'parent_id' => $this->parent_id !== '' ? $this->parent_id : null,
-            'order' => $this->order,
-            'is_menu' => $this->is_menu,
-            'status' => $this->status,
-        ]);
+            $category = Category::findOrFail($this->categoryId);
+            $category->update([
+                'name' => $this->name,
+                'description' => $this->description,
+                'parent_id' => $this->parent_id !== '' ? $this->parent_id : null,
+                'order' => $this->order,
+                'is_menu' => $this->is_menu,
+                'status' => $this->status,
+            ]);
 
-        $this->succsessNotify("Category updated successfully!");
-        return $this->redirect(route('categories.index'), navigate:true);
+            $this->succsessNotify("Category updated successfully!");
+            return $this->redirect(route('categories.index'), navigate:true);
+        } catch (\Throwable $th) {
+            $this->unsuccsessNotify("Failed to update category: " . $th->getMessage());
+        }
     }
 
     public function render()

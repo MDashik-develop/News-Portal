@@ -2,7 +2,6 @@
 <html lang="bn">
 @php
     $website = \App\Models\website::first();
-    // $postHead = request()->is('post/*') ? 1 : 0; 
 @endphp
 
 <head>
@@ -25,9 +24,6 @@
         @stack('post-head')
     @endif
 
-    {{-- <link href="https://fonts.googleapis.com/css2?family=Siyam+Rupali&amp;display=swap" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" /> --}}
-
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" />
@@ -36,7 +32,6 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body {
-            /* font-family: 'Siyam Rupali', serif; */
             font-family: 'Noto Serif Bengali', 'Siyam Rupali', serif;
         }
     </style>
@@ -88,6 +83,39 @@
                     window.initFlowbite();
                 }
             });
+            
+        $(document).ready(function(){
+        $('.home-autoplay-carousel').slick({
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        responsive: [
+            {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 6,
+                slidesToScroll: 1
+            }
+            },
+            {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1
+            }
+            },
+            {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+            }
+        ]
+        });
+    
+    });
     </script>
     @stack('scripts')
     {{-- @livewireStyles --}}

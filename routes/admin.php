@@ -16,6 +16,7 @@ use App\Livewire\User\Index as userIndex;
 use App\Livewire\permission\UserRoleManager;
 use App\Livewire\Poll\Create as createPoll;
 use App\Livewire\Poll\Index as indexPoll;
+use App\Livewire\Post\Published as postPublished;
 use App\Livewire\Website\Index as websiteIndex;
 use App\Livewire\Website\Logos as websiteLogos;
 use Illuminate\Support\Facades\Route;
@@ -37,8 +38,9 @@ Route::middleware(['auth', 'redirect.if.no.permission:admin.panel'])->group(func
     // Route::get('admin/posts/', postIndex::class)->name('posts.index');
     // Route::get('admin/posts/create', postCreate::class)->name('posts.create');
     // Route::get('admin/posts/{id}/edit', postEdit::class)->name('posts.edit');
-    Route::group(['middleware' => ['redirect.if.no.permission:post.maintenance|post.create']], function () {
+    Route::group(['middleware' => ['redirect.if.no.permission:post.maintenance|post.create|post.published']], function () {
         Route::get('admin/posts/', PostIndex::class)->name('posts.index')->middleware('permission:post.maintenance');
+        Route::get('admin/posts/published', postPublished::class)->name('posts.published')->middleware('permission:post.maintenance|post.published');
         Route::get('admin/posts/create', PostCreate::class)->name('posts.create'); 
         Route::get('admin/posts/{id}/edit', PostEdit::class)->name('posts.edit')->middleware('permission:post.maintenance');
     });
@@ -59,7 +61,7 @@ Route::middleware(['auth', 'redirect.if.no.permission:admin.panel'])->group(func
         Route::get('/admin/permissions/user-roles', UserRoleManager::class)->name('permissions.user-roles.index');
     });
     
-    Route::group(['middleware' => ['redirect.if.no.permission:polls.edit|polls.create']], function () {
+    Route::group(['middleware' => ['redirect.if.no.permission:post.maintenance|polls.edit|polls.create']], function () {
         Route::get('/admin/polls/create', createPoll::class)->name('posts.polls.create');
         Route::get('/admin/polls', indexPoll::class)->name('posts.polls.index')->middleware('permission:polls.edit');
     });

@@ -1,4 +1,4 @@
-<section>
+<section >
 @push('post-head')
     @php
         $website = \App\Models\website::first();
@@ -24,37 +24,156 @@
     <div class="container mx-auto px-2 py-6 text-ellipsis whitespace-nowrap">
         <flux:breadcrumbs>
             <flux:breadcrumbs.item href="{{ route('home') }}">Home</flux:breadcrumbs.item>
-            <flux:breadcrumbs.item href="#">{{ $post->category?->name ?? 'Uncategorized' }}</flux:breadcrumbs.item>
+            <flux:breadcrumbs.item href="{{ route('search.category', ['searchQuery' => $post->category?->slug]) }}" wire:navigate >{{ $post->category?->name ?? 'Uncategorized' }}</flux:breadcrumbs.item>
             <flux:breadcrumbs.item>{{ Str::limit($post->title, 40, '...') }}</flux:breadcrumbs.item>
         </flux:breadcrumbs>
     </div>
     <div class="min-h-screen">
         <!-- Post Content -->
-        <div class="container mx-auto flex flex-col lg:flex-row gap-4">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4">
             <div class="md:w-[70%]">
                 <div class=" mb-5 px-3 py-3 rounded-xl border bg-gray-50 dark:bg-gray-900 shadow-md">
                     <div class="mb-8">
                         <img src="{{  asset('storage/' . $post->featured_image) }}" alt="{{ $post->title }}"
                             class="w-full h-auto object-cover rounded-lg shadow-lg">
                     </div>
-                    <div class="mb-8">
+                    <div class=" mb-8">
                         <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
                             {{ $post->title }}
                         </h1>
-                        <div class="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
-                            <span><i class="far fa-calendar-alt mr-1"></i>{{ $post->created_at->format('F j, Y')
-                                }}</span>
-                            <span class="flex items-center gap-1.5">
-                                <img src="{{ asset('storage' . $post->user?->profile_image ?? 'Unknown') }}"
-                                    alt="{{  $post->user?->name }}" class=" rounded-full w-6 h-6 mb-1">
-                                {{ $post->user?->name ?? 'Unknown' }}
-                            </span>
-                            <span><i class="far fa-eye mr-1"></i>{{ $post->view_count ?? 0 }} views</span>
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between space-x-4 text-sm text-gray-600 dark:text-gray-400">
+                            <div class="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
+                                <span><i class="far fa-calendar-alt mr-1"></i>{{ $post->created_at->format('F j, Y')
+                                    }}</span>
+                                <span class="flex items-center gap-1.5">
+                                    <img src="{{ asset('storage/' . $post->user?->profile_image ?? 'Unknown') }}"
+                                        alt="{{  $post->user?->name }}" class=" rounded-full w-6 h-6 mb-1">
+                                    {{ $post->user?->name ?? 'Unknown' }}
+                                </span>
+                                <span><i class="far fa-eye mr-1"></i>{{ $post->view_count ?? 0 }} views</span>
+                            </div>
+
+                            <div class="flex items-start space-x-4 text-sm text-gray-600 dark:text-gray-400">
+                                <!-- Modern Social Media Share -->
+                                <div class="flex md:flex-row-reverse items-center space-x-3">
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Share</span>
+                                    
+                                    <!-- Facebook -->
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" 
+                                    target="_blank" 
+                                    class="group relative p-2 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 rounded-full transition-all duration-200 hover:scale-110"
+                                    title="Share on Facebook">
+                                        <i class="fab fa-facebook-f text-blue-600 dark:text-blue-400 text-sm"></i>
+                                        <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                                            Facebook
+                                        </div>
+                                    </a>
+                                    
+                                    <!-- Twitter/X -->
+                                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($post->title) }}" 
+                                    target="_blank" 
+                                    class="group relative p-2 bg-sky-50 hover:bg-sky-100 dark:bg-sky-900/20 dark:hover:bg-sky-900/30 rounded-full transition-all duration-200 hover:scale-110"
+                                    title="Share on Twitter">
+                                        <i class="fab fa-twitter text-sky-500 dark:text-sky-400 text-sm"></i>
+                                        <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                                            Twitter
+                                        </div>
+                                    </a>
+                                    
+                                    <!-- LinkedIn -->
+                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(url()->current()) }}" 
+                                    target="_blank" 
+                                    class="group relative p-2 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 rounded-full transition-all duration-200 hover:scale-110"
+                                    title="Share on LinkedIn">
+                                        <i class="fab fa-linkedin-in text-blue-700 dark:text-blue-400 text-sm"></i>
+                                        <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                                            LinkedIn
+                                        </div>
+                                    </a>
+                                    
+                                    <!-- WhatsApp -->
+                                    <a href="https://wa.me/?text={{ urlencode($post->title . ' ' . url()->current()) }}" 
+                                    target="_blank" 
+                                    class="group relative p-2 bg-green-50 hover:bg-green-100 dark:bg-green-900/20 dark:hover:bg-green-900/30 rounded-full transition-all duration-200 hover:scale-110"
+                                    title="Share on WhatsApp">
+                                        <i class="fab fa-whatsapp text-green-600 dark:text-green-400 text-sm"></i>
+                                        <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                                            WhatsApp
+                                        </div>
+                                    </a>
+                                    
+                                    <!-- Telegram -->
+                                    <a href="https://t.me/share/url?url={{ urlencode(url()->current()) }}&text={{ urlencode($post->title) }}" 
+                                    target="_blank" 
+                                    class="group relative p-2 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 rounded-full transition-all duration-200 hover:scale-110"
+                                    title="Share on Telegram">
+                                        <i class="fab fa-telegram-plane text-blue-500 dark:text-blue-400 text-sm"></i>
+                                        <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                                            Telegram
+                                        </div>
+                                    </a>
+                                    
+                                    <!-- Reddit -->
+                                    <a href="https://reddit.com/submit?url={{ urlencode(url()->current()) }}&title={{ urlencode($post->title) }}" 
+                                    target="_blank" 
+                                    class="group relative p-2 bg-orange-50 hover:bg-orange-100 dark:bg-orange-900/20 dark:hover:bg-orange-900/30 rounded-full transition-all duration-200 hover:scale-110"
+                                    title="Share on Reddit">
+                                        <i class="fab fa-reddit-alien text-orange-600 dark:text-orange-400 text-sm"></i>
+                                        <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                                            Reddit
+                                        </div>
+                                    </a>
+                                    
+                                    <!-- Pinterest -->
+                                    <a href="https://pinterest.com/pin/create/button/?url={{ urlencode(url()->current()) }}&media={{ urlencode(asset('storage/' . $post->featured_image)) }}&description={{ urlencode($post->title) }}" 
+                                    target="_blank" 
+                                    class="group relative p-2 bg-red-50 hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/30 rounded-full transition-all duration-200 hover:scale-110"
+                                    title="Share on Pinterest">
+                                        <i class="fab fa-pinterest-p text-red-600 dark:text-red-400 text-sm"></i>
+                                        <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                                            Pinterest
+                                        </div>
+                                    </a>
+                                    
+                                    <!-- Copy Link -->
+                                    <button onclick="copyToClipboard('{{ url()->current() }}')" 
+                                            class="group relative p-2 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-full transition-all duration-200 hover:scale-110"
+                                            title="Copy Link">
+                                        <i class="fas fa-link text-gray-600 dark:text-gray-400 text-sm"></i>
+                                        <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                                            Copy Link
+                                        </div>
+                                    </button>
+                                </div>
+                                
+                                <script>
+                                    function copyToClipboard(text) {
+                                        navigator.clipboard.writeText(text).then(function() {
+                                            // Modern toast notification
+                                            const toast = document.createElement('div');
+                                            toast.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 transform transition-all duration-300 translate-x-full';
+                                            toast.textContent = 'Link copied to clipboard!';
+                                            document.body.appendChild(toast);
+                                            
+                                            setTimeout(() => {
+                                                toast.classList.remove('translate-x-full');
+                                            }, 100);
+                                            
+                                            setTimeout(() => {
+                                                toast.classList.add('translate-x-full');
+                                                setTimeout(() => {
+                                                    document.body.removeChild(toast);
+                                                }, 300);
+                                            }, 2000);
+                                        });
+                                    }
+                                </script>
+                            </div>
                         </div>
                     </div>
-                    <div class="prose prose-lg max-w-none dark:prose-invert mb-12">
+                    <article class=" text-[20.4px] md:text-[18px] md:leading-[1.66] leading-[1.85] prose prose-lg max-w-none dark:prose-invert my-12" style="word-spacing: 3.3px">
                         {!! $post->content !!}
-                    </div>
+                    </article>
                 </div>
 
                 @if ($poll)

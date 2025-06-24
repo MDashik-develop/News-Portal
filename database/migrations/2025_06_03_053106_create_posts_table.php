@@ -27,7 +27,8 @@ return new class extends Migration
             $table->enum('status', ['draft', 'pending', 'published', 'archived'])->default('draft');
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_breaking')->default(false);
-            $table->boolean('is_slider')->default(false);
+            // $table->boolean('is_slider')->default(false);
+            $table->enum('is_slider', ['0', '1', '3'])->default('0');
             $table->unsignedInteger('section')->default(0);
             $table->timestamp('published_at')->nullable();
             $table->integer('view_count')->default(0);

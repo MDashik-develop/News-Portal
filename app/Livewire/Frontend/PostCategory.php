@@ -4,16 +4,15 @@ namespace App\Livewire\Frontend;
 
 use App\Models\Category;
 use Livewire\Component;
-use Livewire\WithPagination;
 use App\Models\Post;
 use Livewire\Attributes\Layout;
 
 #[Layout('components.layouts.frontend')]
 class PostCategory extends Component
 {
-    use WithPagination;
 
     public string $searchQuery;
+    public $amount = 6;
 
     public function mount(string $searchQuery)
     {
@@ -24,14 +23,23 @@ class PostCategory extends Component
     {
         $this->resetPage();
     }
+
+    public function loadMore()
+    {
+        // $this->resetPage();
+        $this->amount += 6;
+        
+    }
     public function render()
     {
         $category = Category::where('slug', $this->searchQuery)->first();
+        
 
         // If no matching category found, return empty posts
         if (! $category) {
             return view('livewire.frontend.post-category', [
                 'posts' => collect(),
+                'category' => $category,
             ]);
         }
 
@@ -39,10 +47,19 @@ class PostCategory extends Component
             ->where('status', 'published')
             ->whereDate('published_at', '<=', now())
             ->orderByDesc('published_at')
-            ->paginate(10);
+            ->take($this->amount)
+            ->get();
+
+        $totalPosts = Post::where('category_id', $category->id)
+            ->where('status', 'published')
+            ->whereDate('published_at', '<=', now())
+            ->count();
 
         return view('livewire.frontend.post-category', [
             'posts' => $posts,
+            'category' => $category,
+            'hasMore' => $posts->count() < $totalPosts,
+            
         ]);
     }
 

@@ -49,6 +49,7 @@
                             <flux:field class="mb-4">
                                 <flux:label>Show in Menu</flux:label>
                                 <flux:select wire:model.live="is_menu">
+                                    <flux:select.option value="">Select options</flux:select.option>
                                     <flux:select.option value="1">Yes</flux:select.option>
                                     <flux:select.option value="0">No</flux:select.option>
                                 </flux:select>
@@ -58,6 +59,7 @@
                             <flux:field class="mb-4">
                                 <flux:label>Status</flux:label>
                                 <flux:select wire:model.live="status">
+                                    <flux:select.option value="">Select options</flux:select.option>
                                     <flux:select.option value="1">Active</flux:select.option>
                                     <flux:select.option value="0">Inactive</flux:select.option>
                                 </flux:select>
@@ -67,10 +69,10 @@
                     </div>
 
                     <div class="flex items-center justify-end mt-6">
-                        <flux:button type="button" wire:click="$refresh" class="mr-3 danger">
+                        <flux:button type="button" wire:click="$refresh" variant="danger" class="mr-3 danger">
                             Reset
                         </flux:button>
-                        <flux:button type="submit">
+                        <flux:button type="submit" variant="primary">
                             Update Category
                         </flux:button>
                     </div>

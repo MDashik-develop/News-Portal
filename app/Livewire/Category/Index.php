@@ -37,6 +37,8 @@ class Index extends Component
         $categories = Category::query()
             ->when($this->search, fn($query) =>
                 $query->where('name', 'like', '%' . $this->search . '%')
+                ->orWhere('id', 'like', '%' . $this->search . '%')
+                ->orWhere('order', 'like', '%' . $this->search . '%')
             )
             ->paginate(10);
 

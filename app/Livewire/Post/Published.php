@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Published extends Component
 {
     use HasNotifications;
     use WithPagination;
@@ -48,19 +48,20 @@ class Index extends Component
 
     public function render()
     {
-        $posts = Post::query()
+        $posts = Post::where('status', 'pending')
             ->when(
                 $this->search,
-                fn($query) =>
-                $query->where(function($q) {
-                    $q->where('title', 'like', '%' . $this->search . '%')
-                      ->orWhere('id', 'like', '%' . $this->search . '%')
-                      ->orWhere('keywords', 'like', '%' . $this->search . '%');
-                })
+                function($query) {
+                    $query->where(function($q) {
+                        $q->where('title', 'like', '%' . $this->search . '%')
+                          ->orWhere('id', 'like', '%' . $this->search . '%');
+                    });
+                }
             )
+            ->orderBy('published_at', 'desc')
             ->paginate(10);
 
-        return view('livewire.post.index', [
+        return view('livewire.post.published', [
             'posts' => $posts
         ]);
     }

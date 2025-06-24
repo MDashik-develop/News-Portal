@@ -28,5 +28,11 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id')->where('is_menu', true);
     }
     
+    // Category model all childrenn
+    public function childrenAll()
+    {
+        return $this->hasMany(Category::class, 'parent_id')->where('status', true);
+    }
+    
 
 }

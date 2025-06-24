@@ -43,11 +43,11 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    @if($posts->isNotEmpty()) 
+                    @if ($posts->isNotEmpty()) 
                         @foreach($posts as $post)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $post->id }}</td>
-                                <td class="px-6 py-2 whitespace-nowrap">{{ Str::limit($post->title, 40, '...') }}</td>
+                                <td class="px-6 py- text-center whitespace-nowrap">{{ Str::limit($post->title, 40, '...') }}</td>
                                 <td class="px-6 py-4 text-center whitespace-nowrap">{{ $post->category?->name ?? 'Uncategorized' }}</td>
                                 <td class="px-6 py-4 text-center whitespace-nowrap">{{ $post->category?->order }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">

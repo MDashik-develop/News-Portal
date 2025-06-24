@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class RedirectWithoutPermission
 {
-    public function handle(Request $request, Closure $next, $permission)
+    public function handle(Request $request, Closure $next, $permissions)
     {
-        if (!Auth::user()->can($permission)) {
-            // return redirect()->route('admin.dashboard');
+        $permissionsArray = explode('|', $permissions);
+
+        if (!Auth::user()->canany($permissionsArray)) {
             $userHaveAnyPermission = auth()->user()->roles->isNotEmpty() ? 1 : 0;
+
             if ($userHaveAnyPermission) {
                 return redirect()->route('admin.dashboard');
             } else {
@@ -22,4 +24,5 @@ class RedirectWithoutPermission
 
         return $next($request);
     }
+
 }

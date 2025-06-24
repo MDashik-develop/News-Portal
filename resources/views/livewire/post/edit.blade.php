@@ -200,8 +200,10 @@
                             <flux:select wire:model="status">
                                 <flux:select.option value="draft">Draft</flux:select.option>
                                 <flux:select.option value="pending">Pending</flux:select.option>
-                                <flux:select.option value="published">Published</flux:select.option>
-                                <flux:select.option value="archived">Archived</flux:select.option>
+                                @canany(['post.maintenance', 'post.published'])
+                                    <flux:select.option value="published">Published</flux:select.option>
+                                    <flux:select.option value="archived">Archived</flux:select.option>
+                                @endcanany
                             </flux:select>
                             <flux:error name="status" />
                         </flux:field>
@@ -227,7 +229,8 @@
                                 <flux:label>Is Slider</flux:label>
                                 <flux:select wire:model="is_slider">
                                     <flux:select.option value="0">No</flux:select.option>
-                                    <flux:select.option value="1">Yes</flux:select.option>
+                                    <flux:select.option value="1">Main</flux:select.option>
+                                    <flux:select.option value="2">Sidebar</flux:select.option>
                                 </flux:select>
                             </flux:field>
 

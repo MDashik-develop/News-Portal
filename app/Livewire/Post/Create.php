@@ -15,12 +15,13 @@ class Create extends Component
     use HasNotifications;
     use WithFileUploads;
 
-    public $title, $slug, $sub_title, $summary, $content, $section;
+    public $title, $slug, $sub_title, $summary, $content;
+    public $section = 0;
     public $tags = []; // tags as array
     public $tagsString = ''; // to hold tags as CSV string for binding
     public $featured_image, $image_caption, $video_url;
     public $category_id, $status = 'draft', $is_featured = false;
-    public $is_breaking = false, $is_slider = false, $published_at;
+    public $is_breaking = false, $is_slider = '0', $published_at;
     public $meta_title, $meta_description;
     public $poll_id;
 
@@ -61,7 +62,7 @@ class Create extends Component
             'video_url'      => 'nullable|url',
             'is_featured'    => 'boolean',
             'is_breaking'    => 'boolean',
-            'is_slider'      => 'boolean',
+            'is_slider'      => 'integer|min:0',
             'section'        => 'integer|min:0', // Assuming section is an integer 0-10
             'meta_title'     => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',

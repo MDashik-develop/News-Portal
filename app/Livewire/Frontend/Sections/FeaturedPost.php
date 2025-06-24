@@ -11,6 +11,7 @@ class FeaturedPost extends Component
 
     public function mount()
     {
+        sleep(2);
         $this->featuredPosts = Post::where('is_featured', 1)
             ->where('status', 'published')
             ->orderBy('published_at', 'desc')

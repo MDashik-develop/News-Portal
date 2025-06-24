@@ -27,7 +27,7 @@ class Create extends Component
     public function submit()
     {
         $this->validate([
-            'name' => 'required|min:3',
+            'name' => 'required|min:3|unique:categories,name',
             'description' => 'required|min:3',
             'parent_id' => 'nullable|integer',
             'order' => 'required|integer',
@@ -47,19 +47,11 @@ class Create extends Component
         try {
             $category->save();
             $this->refresh();
-            // $this->dispatch('notify', [
-            //     'type' => 'success',
-            //     'message' => 'Category created successfully!',
-            // ]);
             $this->succsessNotify("Categorie created succsess");
             return $this->redirect(route('categories.index'), navigate:true );
             
         } catch (\Throwable $th) {
-            // $this->dispatch('notify', [
-            //     'type' => 'error',
-            //     'message' => 'Category created unsuccessfully!' . $th->getMessage(),
-            // ]);
-            $this->unsuccessNotify("Categorie create unsuccess");            
+            $this->unsuccsessNotify("Categorie create unsuccess");            
         }
     }
     public function render()

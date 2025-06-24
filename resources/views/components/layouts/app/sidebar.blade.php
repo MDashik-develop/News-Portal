@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
-
+    @php
+        $website = \App\Models\website::first();
+    @endphp
 <head>
     @include('partials.head')
 
@@ -13,7 +15,10 @@
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
             <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
-                <x-app-logo />
+                @if (!empty($website) && !empty($website->logo))
+                    <img src="{{ asset('storage/' . $website->logo) }}" alt="{{ $website->title }}" class=" w-18 h-auto">
+                    <h1 class=" max-w-9/12">{{ $website->title }}</h1>
+                @endif
             </a>
 
             <flux:navlist variant="outline">
@@ -59,29 +64,37 @@
                         </flux:navlist.group>
                 @endcan
                 @can('categories.edit')
-                <flux:navlist.group expandable :expanded="request()->routeIs('categories.*')" heading="Categories"
-                    class="lg:grid">
-                    <flux:navlist.item :href="route('categories.index')" :current="request()->routeIs('categories.index')"
-                        wire:navigate>{{__('All Categories') }}</flux:navlist.item>
-                    <flux:navlist.item :href="route('categories.create')" :current="request()->routeIs('categories.create')"
-                        wire:navigate>{{ __('Categories Create') }}</flux:navlist.item>
-                </flux:navlist.group>
+                    <flux:navlist.group expandable :expanded="request()->routeIs('categories.*')" heading="Categories"
+                        class="lg:grid">
+                        <flux:navlist.item :href="route('categories.index')" :current="request()->routeIs('categories.index')"
+                            wire:navigate>{{__('All Categories') }}</flux:navlist.item>
+                        <flux:navlist.item :href="route('categories.create')" :current="request()->routeIs('categories.create')"
+                            wire:navigate>{{ __('Categories Create') }}</flux:navlist.item>
+                    </flux:navlist.group>
                 @endcan
-                @canany(['post.maintenance', 'post.create'])
-                <flux:navlist.group expandable :expanded="request()->routeIs('posts.*')" heading="Posts" class="lg:grid">
-                    @can('post.maintenance')
-                    <flux:navlist.item :href="route('posts.index')" :current="request()->routeIs('posts.index')"
-                        wire:navigate>{{ __('All Posts') }}</flux:navlist.item>
-                    @endcan
-                    <flux:navlist.item :href="route('posts.create')" :current="request()->routeIs('posts.create')"
-                        wire:navigate>{{ __('Post Create') }}</flux:navlist.item>
-                    <flux:navlist.item :href="route('posts.polls.create')" :current="request()->routeIs('posts.polls.create')"
-                        wire:navigate>{{ __('Pull Create') }}</flux:navlist.item>
-                    @can('polls.edit')
-                    <flux:navlist.item :href="route('posts.polls.index')" :current="request()->routeIs('posts.polls.index')"
-                        wire:navigate>{{ __('All Polls') }}</flux:navlist.item>
-                    @endcan
-                </flux:navlist.group>
+                @canany(['post.maintenance', 'post.create', 'post.published', 'polls.edit', 'polls.create'])
+                    <flux:navlist.group expandable :expanded="request()->routeIs('posts.*')" heading="Posts" class="lg:grid">
+                        @can('post.maintenance')
+                            <flux:navlist.item :href="route('posts.index')" :current="request()->routeIs('posts.index')"
+                                wire:navigate>{{ __('All Posts') }}</flux:navlist.item>
+                        @endcan
+                        @canany(['post.maintenance', 'post.create'])
+                            <flux:navlist.item :href="route('posts.create')" :current="request()->routeIs('posts.create')"
+                                wire:navigate>{{ __('Post Create') }}</flux:navlist.item>
+                        @endcanany
+                        @canany(['post.maintenance', 'post.published'])
+                            <flux:navlist.item :href="route('posts.published')" :current="request()->routeIs('posts.published')"
+                                wire:navigate>{{ __('Posts Published') }}</flux:navlist.item>
+                        @endcanany
+                        @canany(['post.maintenance', 'polls.create', 'polls.edit'])
+                            <flux:navlist.item :href="route('posts.polls.create')" :current="request()->routeIs('posts.polls.create')"
+                                wire:navigate>{{ __('Pull Create') }}</flux:navlist.item>
+                        @endcanany
+                        @canany(['post.maintenance', 'polls.edit'])
+                            <flux:navlist.item :href="route('posts.polls.index')" :current="request()->routeIs('posts.polls.index')"
+                                wire:navigate>{{ __('All Polls') }}</flux:navlist.item>
+                        @endcanany
+                    </flux:navlist.group>
                 @endcanany
             </flux:navlist>
 
