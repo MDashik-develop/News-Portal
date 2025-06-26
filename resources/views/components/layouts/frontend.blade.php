@@ -30,9 +30,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     @fluxAppearance
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
+        /* Custom styles */
         body {
-            font-family: 'Noto Serif Bengali', 'Siyam Rupali', serif;
+            font-family: 'Hind Siliguri', 'Inter', sans-serif;
         }
     </style>
     {{-- @livewireStyles --}}

@@ -7,16 +7,29 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $title ?? config('app.name') }}</title>
-
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+    
     <!-- Summernote Dependencies -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {{-- <script src="//unpkg.com/alpinejs" defer></script> --}}
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    @stack('cdns')
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Hind Siliguri', 'Inter', sans-serif;
+        }
+    </style>
 </head>
 
 <body>
@@ -27,6 +40,8 @@
             {{ $slot }}
         </flux:main>
     </x-layouts.app.sidebar>
+
+    @stack('scripts')
 </body>
 
 </html>

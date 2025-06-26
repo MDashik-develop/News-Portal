@@ -55,7 +55,11 @@ class Create extends Component
       }
       // session()->flash('success', ' successfully!');
       $this->succsessNotify("Poll created successfully!");
-      return $this->redirect(route('posts.polls.index'), navigate: true);
+      if (Auth::user()->can('post.maintenance')) {
+          return $this->redirect(route('posts.polls.index'), navigate: true);
+      } else {
+          return $this->redirect(route('settings.posts'), navigate: true);
+      }
    }
 
    public function render()

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Frontend;
 
+use App\Models\Category;
 use App\Models\Post;
 use Livewire\Component;
 use App\Traits\HasBengaliNumbers;
@@ -18,6 +19,7 @@ class Home extends Component
     public $section2;
     public $section3;
     public $AsideCarousels;
+    public $CategoriesShowPosts;
     public $section4;
     public $section5;
 
@@ -34,7 +36,7 @@ class Home extends Component
         $this->letetstPosts = Post::where('status', 'published')
             ->orderBy('published_at', 'desc')
             ->whereDate('published_at', '<=', now())
-            ->take(6)
+            ->take(10)
             ->get();
 
         $this->todayBestPosts = Post::where('status', 'published')
@@ -42,7 +44,7 @@ class Home extends Component
             ->orderByDesc('view_count')
             ->orderBy('published_at', 'desc')
             ->whereDate('published_at', '<=', now())
-            ->take(6)
+            ->take(10)
             ->get();
     
         $this->weekBestPosts = Post::where('status', 'published')
@@ -50,7 +52,7 @@ class Home extends Component
             ->orderByDesc('view_count')
             ->orderBy('published_at', 'desc')
             ->whereDate('published_at', '<=', now())
-            ->take(6)
+            ->take(10)
             ->get();
         
         $this->section3 = Post::where('section', 3)
@@ -67,6 +69,11 @@ class Home extends Component
         ->whereDate('published_at', '<=', now())
         ->take(5)
         ->get();
+
+        $this->CategoriesShowPosts = Category::where('home_category_show', 1)
+            ->where('status', 1)
+            ->orderBy('home_category_show_order', 'asc')
+            ->get();
     }
     public function render()
     {

@@ -69,6 +69,22 @@
                                 </flux:select>
                                 <flux:error name="status" />
                             </flux:field>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <flux:field>
+                                    <flux:label>Is Show Home Category</flux:label>
+                                    <flux:select wire:model="home_category_show">
+                                        <flux:select.option value="0">No</flux:select.option>
+                                        <flux:select.option value="1">yes</flux:select.option>
+                                    </flux:select>
+                                </flux:field>
+    
+                                <flux:field>
+                                    <flux:label>Home Category Show Order</flux:label>
+                                    <flux:input wire:model="home_category_show_order" type="number" />
+                                    <flux:error name="home_category_show_order" />
+                                </flux:field>
+                            </div>
                         </div>
                     </div>
 

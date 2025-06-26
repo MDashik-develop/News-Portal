@@ -15,6 +15,8 @@ class Category extends Model
         'is_menu',
         'status',
         'slug',
+        'home_category_show',
+        'home_category_show_order',
     ];
 
     public function posts()

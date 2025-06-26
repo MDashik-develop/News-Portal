@@ -123,7 +123,7 @@ class Edit extends Component
     public function render()
     {
         return view('livewire.post.edit', [
-            'polls' => Poll::all(),
+            'polls' => Poll::where('status','active')->where('start_date', '<=', now())->where('end_date', '>=', now())->latest()->get(),
         ]);
     }
 }

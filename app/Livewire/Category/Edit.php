@@ -19,6 +19,8 @@ class Edit extends Component
     public $is_menu = 1;
     public $status = 1;
     public $categories;
+    public $home_category_show = 1;
+    public $home_category_show_order = 0;
 
     public function mount($id)
     {   
@@ -30,6 +32,8 @@ class Edit extends Component
         $this->order = $category->order ?? 0;
         $this->is_menu = $category->is_menu ?? 1;
         $this->status = $category->status ?? 1;
+        $this->home_category_show = $category->home_category_show ?? 1;
+        $this->home_category_show_order = $category->home_category_show_order ?? 0;
 
         // Load all categories except current one to avoid selecting itself as parent
         $this->categories = Category::where('id', '!=', $this->categoryId)->get();
@@ -46,6 +50,9 @@ class Edit extends Component
                 'order' => ['nullable', 'integer', 'min:0'],
                 'is_menu' => ['required', 'boolean'],
                 'status' => ['required', 'boolean'],
+                'home_category_show' => ['required', 'boolean'],
+                'home_category_show_order' => ['required', 'integer'],
+                
             ]);
 
             $category = Category::findOrFail($this->categoryId);
@@ -56,6 +63,8 @@ class Edit extends Component
                 'order' => $this->order,
                 'is_menu' => $this->is_menu,
                 'status' => $this->status,
+                'home_category_show' => $this->home_category_show,
+                'home_category_show_order' => $this->home_category_show_order,
             ]);
 
             $this->succsessNotify("Category updated successfully!");

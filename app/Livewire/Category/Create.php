@@ -13,6 +13,8 @@ class Create extends Component
      
     public $name, $description, $parent_id, $order, $is_menu, $status, $image;
     public $categories;
+    public $home_category_show = false;
+    public $home_category_show_order = 0;
     
     public function mount()
     {
@@ -21,7 +23,7 @@ class Create extends Component
 
     public function refresh()
     {
-        $this->reset(['name', 'description', 'parent_id', 'order', 'is_menu', 'status']);
+        $this->reset(['name', 'description', 'parent_id', 'order', 'is_menu', 'status', 'home_category_show', 'home_category_show_order']);
     }
     
     public function submit()
@@ -33,6 +35,8 @@ class Create extends Component
             'order' => 'required|integer',
             'is_menu' => 'required|integer',
             'status' => 'required|integer',
+            'home_category_show' => 'required|integer',
+            'home_category_show_order' => 'required|integer',
         ]);
         
         $category = new Category();
@@ -43,6 +47,8 @@ class Create extends Component
         $category->is_menu = $this->is_menu;
         $category->status = $this->status;
         $category->slug = Str::slug($this->name);
+        $category->home_category_show = $this->home_category_show;
+        $category->home_category_show_order = $this->home_category_show_order;
         
         try {
             $category->save();

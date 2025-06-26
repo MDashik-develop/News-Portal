@@ -27,6 +27,11 @@
 
                            <div class="col-span-2">
                                <label for="ad_image" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Ad Image</label>
+                               <small>
+                                       Banner ad size: <span class="font-semibold">970x90</span> pixels
+                                       or
+                                       Normal ad size: <span class="font-semibold">300x250</span> pixels
+                               </small>
                                {{-- <input type="file" id="ad_image" wire:model="ad_image" class="block mt-1 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-200 dark:file:bg-gray-700 file:text-gray-700 dark:file:text-gray-200 hover:file:bg-gray-300"> --}}
                                <flux:input type="file" wire:model="ad_image" id="ad_image"/>
                                

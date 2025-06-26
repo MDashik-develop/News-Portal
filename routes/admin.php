@@ -35,9 +35,6 @@ Route::middleware(['auth', 'redirect.if.no.permission:admin.panel'])->group(func
         Route::get('/admin/categories/{id}/edit', categoryEdit::class)->name('categories.edit');
     });
 
-    // Route::get('admin/posts/', postIndex::class)->name('posts.index');
-    // Route::get('admin/posts/create', postCreate::class)->name('posts.create');
-    // Route::get('admin/posts/{id}/edit', postEdit::class)->name('posts.edit');
     Route::group(['middleware' => ['redirect.if.no.permission:post.maintenance|post.create|post.published']], function () {
         Route::get('admin/posts/', PostIndex::class)->name('posts.index')->middleware('permission:post.maintenance');
         Route::get('admin/posts/published', postPublished::class)->name('posts.published')->middleware('permission:post.maintenance|post.published');

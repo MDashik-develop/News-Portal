@@ -58,6 +58,7 @@ class Index extends Component
                       ->orWhere('keywords', 'like', '%' . $this->search . '%');
                 })
             )
+            ->latest()
             ->paginate(10);
 
         return view('livewire.post.index', [

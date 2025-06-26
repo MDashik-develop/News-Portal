@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('favicon')->nullable();
-            $table->string('logo')->nullable();
             $table->string('meta_tags')->nullable();
             $table->string('fb_app_id')->nullable();
             $table->text('meta_description')->nullable();

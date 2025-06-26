@@ -7,13 +7,18 @@ use App\Livewire\Frontend\PostView;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', Home::class)->name('home');
-Route::get('/', function () {
-    return view('home');
-})->name('home');
 
-Route::get('post/{slug}', PostView::class)->name('post.view');
-Route::get('search/{searchQuery}', PostList::class)->name('search.post');
-Route::get('search/category/{searchQuery}', PostCategory::class)->name('search.category');
+Route::middleware('log_visitor')->group(function () {
 
+    // Route::get('/', Home::class)->name('home');
+
+    Route::get('/', function () {
+        return view('home');
+    })->name('home');
+
+    Route::get('post/{slug}', PostView::class)->name('post.view');
+    Route::get('search/{searchQuery}', PostList::class)->name('search.post');
+    Route::get('search/category/{searchQuery}', PostCategory::class)->name('search.category');
+
+});
 // RouteGroup

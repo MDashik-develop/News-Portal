@@ -46,10 +46,10 @@
                     @if($posts->isNotEmpty()) 
                         @foreach($posts as $post)
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $post->id }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $this->convertToBengaliNumbers($post->id) }}</td>
                                 <td class="px-6 py-2 whitespace-nowrap">{{ Str::limit($post->title, 40, '...') }}</td>
                                 <td class="px-6 py-4 text-center whitespace-nowrap">{{ $post->category?->name ?? 'Uncategorized' }}</td>
-                                <td class="px-6 py-4 text-center whitespace-nowrap">{{ $post->category?->order }}</td>
+                                <td class="px-6 py-4 text-center whitespace-nowrap">{{ $this->convertToBengaliNumbers($post->section) }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
                                         @if($post->status === 'published') bg-green-100 text-green-800

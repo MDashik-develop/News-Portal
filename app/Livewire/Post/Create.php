@@ -4,6 +4,7 @@ namespace App\Livewire\Post;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Poll;
 use App\Traits\HasNotifications;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -106,7 +107,11 @@ class Create extends Component
             ]);
 
             $this->succsessNotify("Post created successfully!");
-            return redirect()->route('posts.index');
+            if (Auth::user()->can('post.maintenance')) {
+                return $this->redirect(route('posts.index'), navigate: true);
+            } else {
+                return $this->redirect(route('settings.posts'), navigate: true);
+            }
         } catch (\Throwable $th) {
             $this->unsuccsessNotify("Post creation failed: " . $th->getMessage());
         }
@@ -116,7 +121,7 @@ class Create extends Component
     {
         return view('livewire.post.create', [
             'categories' => Category::all(),
-            'polls' => \App\Models\Poll::all(),
+            'polls' => Poll::where('status','active')->where('start_date', '<=', now())->where('end_date', '>=', now())->latest()->get(),
         ]);
     }
 }

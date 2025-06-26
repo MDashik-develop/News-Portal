@@ -1,5 +1,4 @@
-<div class="ad-slot-container mb-4 text-center max-w-7xl  mx-auto">
-    {{-- প্রথমে চেক করা হচ্ছে যে এই লোকেশনের জন্য কোনো فعال Ad Slot পাওয়া গেছে কি না --}}
+<div class="banner-ad-slot-container w-full my-1 p-0 bg-gray-100  mx-auto">
     @if ($adSlot)
 
     {{-- যদি Ad Slot-এর ধরন 'google' হয় --}}
@@ -9,10 +8,12 @@
 
     {{-- যদি Ad Slot-এর ধরন 'personal' হয় এবং দেখানোর জন্য একটি পার্সোনাল অ্যাডও পাওয়া যায় --}}
     @elseif ($adSlot->ad_type === 'personal' && $personalAd)
-    <a href="{{ $personalAd->target_link }}" target="_blank" rel="noopener noreferrer sponsored">
-        <img src="{{ asset('storage/' . $personalAd->ad_image) }}" alt="Advertisement"
-            class="inline-block max-w-full w-full h-auto">
-    </a>
+        <a href="{{ $personalAd->target_link }}" target="_blank" rel="noopener noreferrer sponsored"
+            class="container mx-auto">
+            <div class="h-[90px] w-full max-w-[970px] mx-auto">
+                <img src="{{ asset('storage/' . $personalAd->ad_image) }}" alt="Banner Advertisement">
+            </div>
+        </a>
     @endif
 
     @endif

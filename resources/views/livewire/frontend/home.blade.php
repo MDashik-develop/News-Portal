@@ -179,9 +179,20 @@
         </div>
     </div>
 
-    <livewire:frontend.sections.sports />
+    @if ($CategoriesShowPosts->isNotEmpty())
+        @foreach ($CategoriesShowPosts as $CategoriesShowPost)
+        <div class="my-4">
+            <livewire:ads.display-ads-banner :locationKey="'home_body_banner'" lazy />
+        </div>
+            <livewire:frontend.sections.category cetagories="{{ $CategoriesShowPost->name }}" />
+        @endforeach
+    @endif
 
-
+    <div class="my-4">
+        <livewire:ads.display-ads-banner :locationKey="'home_body_banner'" lazy />
+    </div>
+    
+    <livewire:frontend.sections.all-post />
 </section>
 @push('scripts')
     <script>

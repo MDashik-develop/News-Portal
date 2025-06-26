@@ -5,6 +5,7 @@ namespace App\Livewire\Frontend;
 use App\Models\Post;
 use App\Models\PollOption;
 use App\Models\PollVote;
+use App\Traits\ammountFormater;
 use App\Traits\HasBengaliNumbers;
 use App\Traits\HasNotifications;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,7 @@ use Livewire\Component;
  #[Layout('components.layouts.frontend')]
 class PostView extends Component
 {
-    use HasBengaliNumbers, HasNotifications;
+    use ammountFormater, HasBengaliNumbers, HasNotifications;
 
 
     public $post;
@@ -31,6 +32,14 @@ class PostView extends Component
     public $poll;
     public $selectedOption;
     public $votedOptionId = null;
+
+
+    public function formatToBengali($number)
+    {
+        $formattedNumber = $this->formatLakh($number);
+
+        return $this->convertToBengaliNumbers($formattedNumber);
+    }
 
     /**
      * Handle poll vote submission.
@@ -118,28 +127,12 @@ class PostView extends Component
             }
         }
 
-        $this->letetstPosts = Post::where('status', 'published')
-            ->orderBy('published_at', 'desc')
-            ->take(6)
-            ->get();
-
-        $this->todayBestPosts = Post::where('status', 'published')
-            ->whereDate('published_at', now())
-            ->orderBy('published_at', 'desc')
-            ->take(6)
-            ->get();
-
-        $this->weekBestPosts = Post::where('status', 'published')
-            ->whereBetween('published_at', [now()->startOfWeek(), now()->endOfWeek()])
-            ->orderBy('published_at', 'desc')
-            ->take(6)
-            ->get();
 
         $this->relatedPosts = Post::where('category_id', $this->post->category_id)
             ->where('slug', '!=', $slug)
             ->where('status', 'published')
             ->latest()
-            ->take(4)
+            ->take(15)
             ->get();
     }
 

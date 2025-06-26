@@ -43,14 +43,18 @@
                         </h1>
                         <div class="flex flex-col md:flex-row md:items-center md:justify-between space-x-4 text-sm text-gray-600 dark:text-gray-400">
                             <div class="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
-                                <span><i class="far fa-calendar-alt mr-1"></i>{{ $post->created_at->format('F j, Y')
-                                    }}</span>
+                                <span><i class="far fa-calendar-alt mr-1"></i>
+                                    {{ $this->formatToBengali($post->created_at->format('M j, Y')) }}</span>
+                                    <span>
+                                        {{-- আপনার কাস্টম হেলপার ক্লাস ব্যবহার করে তারিখ ফরম্যাট করা হচ্ছে --}}
+                                        {{ \App\Helpers\BanglaDateHelper::formattedLineThree($post->created_at) }}
+                                    </span>
                                 <span class="flex items-center gap-1.5">
                                     <img src="{{ asset('storage/' . $post->user?->profile_image ?? 'Unknown') }}"
                                         alt="{{  $post->user?->name }}" class=" rounded-full w-6 h-6 mb-1">
                                     {{ $post->user?->name ?? 'Unknown' }}
                                 </span>
-                                <span><i class="far fa-eye mr-1"></i>{{ $post->view_count ?? 0 }} views</span>
+                                <span><i class="far fa-eye mr-1"></i>{{ $this->convertToBengaliNumbers($post->view_count ?? 0) }} views</span>
                             </div>
 
                             <div class="flex items-start space-x-4 text-sm text-gray-600 dark:text-gray-400">
@@ -61,9 +65,9 @@
                                     <!-- Facebook -->
                                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" 
                                     target="_blank" 
-                                    class="group relative p-2 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 rounded-full transition-all duration-200 hover:scale-110"
+                                    class="group relative border h-8 w-8 flex items-center justify-center bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 rounded-full transition-all duration-200 hover:scale-110"
                                     title="Share on Facebook">
-                                        <i class="fab fa-facebook-f text-blue-600 dark:text-blue-400 text-sm"></i>
+                                        <i class="fab fa-facebook-f text-blue-600 dark:text-blue-400 text-[16px]"></i>
                                         <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                                             Facebook
                                         </div>
@@ -72,9 +76,9 @@
                                     <!-- Twitter/X -->
                                     <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($post->title) }}" 
                                     target="_blank" 
-                                    class="group relative p-2 bg-sky-50 hover:bg-sky-100 dark:bg-sky-900/20 dark:hover:bg-sky-900/30 rounded-full transition-all duration-200 hover:scale-110"
+                                    class="group relative border h-8 w-8 flex items-center justify-center bg-sky-50 hover:bg-sky-100 dark:bg-sky-900/20 dark:hover:bg-sky-900/30 rounded-full transition-all duration-200 hover:scale-110"
                                     title="Share on Twitter">
-                                        <i class="fab fa-twitter text-sky-500 dark:text-sky-400 text-sm"></i>
+                                        <i class="fab fa-twitter text-sky-500 dark:text-sky-400 text-[16px]"></i>
                                         <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                                             Twitter
                                         </div>
@@ -83,9 +87,9 @@
                                     <!-- LinkedIn -->
                                     <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(url()->current()) }}" 
                                     target="_blank" 
-                                    class="group relative p-2 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 rounded-full transition-all duration-200 hover:scale-110"
+                                    class="group relative border h-8 w-8 flex items-center justify-center bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 rounded-full transition-all duration-200 hover:scale-110"
                                     title="Share on LinkedIn">
-                                        <i class="fab fa-linkedin-in text-blue-700 dark:text-blue-400 text-sm"></i>
+                                        <i class="fab fa-linkedin-in text-blue-700 dark:text-blue-400 text-[16px]"></i>
                                         <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                                             LinkedIn
                                         </div>
@@ -94,9 +98,9 @@
                                     <!-- WhatsApp -->
                                     <a href="https://wa.me/?text={{ urlencode($post->title . ' ' . url()->current()) }}" 
                                     target="_blank" 
-                                    class="group relative p-2 bg-green-50 hover:bg-green-100 dark:bg-green-900/20 dark:hover:bg-green-900/30 rounded-full transition-all duration-200 hover:scale-110"
+                                    class="group relative border h-8 w-8 flex items-center justify-center bg-green-50 hover:bg-green-100 dark:bg-green-900/20 dark:hover:bg-green-900/30 rounded-full transition-all duration-200 hover:scale-110"
                                     title="Share on WhatsApp">
-                                        <i class="fab fa-whatsapp text-green-600 dark:text-green-400 text-sm"></i>
+                                        <i class="fab fa-whatsapp text-green-600 dark:text-green-400 text-[16px]"></i>
                                         <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                                             WhatsApp
                                         </div>
@@ -105,9 +109,9 @@
                                     <!-- Telegram -->
                                     <a href="https://t.me/share/url?url={{ urlencode(url()->current()) }}&text={{ urlencode($post->title) }}" 
                                     target="_blank" 
-                                    class="group relative p-2 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 rounded-full transition-all duration-200 hover:scale-110"
+                                    class="group relative border h-8 w-8 flex items-center justify-center bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 rounded-full transition-all duration-200 hover:scale-110"
                                     title="Share on Telegram">
-                                        <i class="fab fa-telegram-plane text-blue-500 dark:text-blue-400 text-sm"></i>
+                                        <i class="fab fa-telegram-plane text-blue-500 dark:text-blue-400 text-[16px]"></i>
                                         <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                                             Telegram
                                         </div>
@@ -116,9 +120,9 @@
                                     <!-- Reddit -->
                                     <a href="https://reddit.com/submit?url={{ urlencode(url()->current()) }}&title={{ urlencode($post->title) }}" 
                                     target="_blank" 
-                                    class="group relative p-2 bg-orange-50 hover:bg-orange-100 dark:bg-orange-900/20 dark:hover:bg-orange-900/30 rounded-full transition-all duration-200 hover:scale-110"
+                                    class="group relative border h-8 w-8 flex items-center justify-center bg-orange-50 hover:bg-orange-100 dark:bg-orange-900/20 dark:hover:bg-orange-900/30 rounded-full transition-all duration-200 hover:scale-110"
                                     title="Share on Reddit">
-                                        <i class="fab fa-reddit-alien text-orange-600 dark:text-orange-400 text-sm"></i>
+                                        <i class="fab fa-reddit-alien text-orange-600 dark:text-orange-400 text-[16px]"></i>
                                         <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                                             Reddit
                                         </div>
@@ -127,9 +131,9 @@
                                     <!-- Pinterest -->
                                     <a href="https://pinterest.com/pin/create/button/?url={{ urlencode(url()->current()) }}&media={{ urlencode(asset('storage/' . $post->featured_image)) }}&description={{ urlencode($post->title) }}" 
                                     target="_blank" 
-                                    class="group relative p-2 bg-red-50 hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/30 rounded-full transition-all duration-200 hover:scale-110"
+                                    class="group relative border h-8 w-8 flex items-center justify-center bg-red-50 hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/30 rounded-full transition-all duration-200 hover:scale-110"
                                     title="Share on Pinterest">
-                                        <i class="fab fa-pinterest-p text-red-600 dark:text-red-400 text-sm"></i>
+                                        <i class="fab fa-pinterest-p text-red-600 dark:text-red-400 text-[16px]"></i>
                                         <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                                             Pinterest
                                         </div>
@@ -137,9 +141,9 @@
                                     
                                     <!-- Copy Link -->
                                     <button onclick="copyToClipboard('{{ url()->current() }}')" 
-                                            class="group relative p-2 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-full transition-all duration-200 hover:scale-110"
+                                            class="group mr-2.5 relative border h-8 w-8 flex items-center justify-center bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-full transition-all duration-200 hover:scale-110"
                                             title="Copy Link">
-                                        <i class="fas fa-link text-gray-600 dark:text-gray-400 text-sm"></i>
+                                        <i class="fas fa-link text-gray-600 dark:text-gray-400 text-[16px]"></i>
                                         <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                                             Copy Link
                                         </div>
@@ -237,7 +241,7 @@
 
                     {{-- Total Votes --}}
                     <div class="mt-4 text-right">
-                        <small class="text-gray-600 dark:text-gray-400">Total Votes: {{ $totalVotes }}</small>
+                        <small class="text-gray-600 dark:text-gray-400">মোট ভোট: {{ $this->convertToBengaliNumbers($totalVotes) }}</small>
                     </div>
                 </div>
                 @endif
@@ -261,20 +265,20 @@
     <div>
         @if ($relatedPosts->count())
         <div class="bg-[#e8f1ff] border rounded-xl dark:bg-gray-900">
-            <div class="container mx-auto px-2 py-2 text-center">
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Related Posts</h2>
+            <div class="container mx-auto px-2 pb-2 pt-3 text-center">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">সম্পর্কিত পোস্ট</h2>
             </div>
             <div wire:ignore class="post-view-autoplay-carousel">
-                @foreach ($relatedPosts as $related)
+                @foreach ($relatedPosts as $relatedPost)
                 <div class="p-2">
                     <div
                         class="p-1.5 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <a href="{{ route('post.view', ['slug' => $related->slug]) }}" wire:navigate>
+                        <a href="{{ route('post.view', ['slug' => $relatedPost->slug]) }}" wire:navigate>
                             <div class="h-[50%]">
-                                <img src="https://placehold.co/300x200" alt="" class="w-full h-auto rounded">
+                                <img src="{{ asset('storage/' . $relatedPost->featured_image) }}" alt="{{ $relatedPost->title }}" class="w-full h-auto rounded">
                             </div>
                             <div class="px-2 py-1">
-                                <p class="line-clamp-2">{{ $related->title }}</p>
+                                <p class="line-clamp-2">{{ $relatedPost->title }}</p>
                             </div>
                         </a>
                     </div>

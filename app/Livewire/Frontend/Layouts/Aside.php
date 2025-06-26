@@ -28,7 +28,7 @@ class Aside extends Component
             ->orderBy('published_at', 'desc')
             ->where('status', 'published')
             ->whereDate('published_at', '<=', now())
-            ->take(6)
+            ->take(10)
             ->get();
 
         $this->todayBestPosts = Post::where('status', 'published')
@@ -36,7 +36,7 @@ class Aside extends Component
             ->orderByDesc('view_count')
             ->orderBy('published_at', 'desc')
             ->whereDate('published_at', '<=', now())
-            ->take(6)
+            ->take(10)
             ->get();
 
         $this->weekBestPosts = Post::where('status', 'published')
@@ -44,7 +44,7 @@ class Aside extends Component
             ->orderByDesc('view_count')
             ->orderBy('published_at', 'desc')
             ->whereDate('published_at', '<=', now())
-            ->take(6)
+            ->take(10)
             ->get();
     }
     public function render()

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('order')->default(0);
             $table->boolean('is_menu')->default(true);
             $table->boolean('status')->default(true);
+            $table->boolean('home_category_show')->default(0);
+            $table->integer('home_category_show_order')->default(0);
             $table->timestamps();
         });
     }

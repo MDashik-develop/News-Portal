@@ -136,7 +136,6 @@
                         </flux:field>
 
                         <div class="grid grid-cols-4 gap-2">
-
                             <flux:field>
                                 <flux:label>Is Featured</flux:label>
                                 <flux:select wire:model="is_featured">
