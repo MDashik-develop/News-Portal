@@ -29,7 +29,8 @@ class AllPost extends Component
         // Create the base query that can be reused
         $postsQuery = Post::where('status', 'published')
             ->whereDate('published_at', '<=', now())
-            ->orderBy('published_at', 'desc');
+            ->orderBy('published_at', 'desc')
+            ->whereNotNull('featured_image');
 
         // ✨ Get the total count of all matching posts BEFORE applying any limit.
         // We clone the query builder object to avoid affecting the original query.

@@ -10,7 +10,7 @@
                                 <img src="{{ asset('storage/' . $HomeCarousel->featured_image) }}" alt="{{ $HomeCarousel->title }}" class="w-full h-auto ">
                             </div>
                             <div class="px-2 py-1">
-                                <p class="line-clamp-2 ">{{ $HomeCarousel->title }}</p>
+                                <p class="line-clamp-2 dark:text-gray-300">{{ $HomeCarousel->title }}</p>
                             </div>
                         </a>
                     </div>

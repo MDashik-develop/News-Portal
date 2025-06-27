@@ -47,12 +47,14 @@ class PostCategory extends Component
             ->where('status', 'published')
             ->whereDate('published_at', '<=', now())
             ->orderByDesc('published_at')
+            ->whereNotNull('featured_image')
             ->take($this->amount)
             ->get();
 
         $totalPosts = Post::where('category_id', $category->id)
             ->where('status', 'published')
             ->whereDate('published_at', '<=', now())
+            ->whereNotNull('featured_image')
             ->count();
 
         return view('livewire.frontend.post-category', [

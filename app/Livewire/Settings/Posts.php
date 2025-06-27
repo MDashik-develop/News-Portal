@@ -34,9 +34,9 @@ class Posts extends Component
     {
 
                 // ডাটাবেস থেকে পোস্টের সংখ্যা গণনা করা হচ্ছে
-                $publishedPosts   = Post::where('status', 'published')->count();
-                $pendingPosts = Post::where('status', 'pending')->count();
-                $draftPosts   = Post::where('status', 'draft')->count();
+                $publishedPosts   = Post::where('status', 'published')->where('user_id', auth()->id())->count();
+                $pendingPosts = Post::where('status', 'pending')->where('user_id', auth()->id())->count();
+                $draftPosts   = Post::where('status', 'draft')->where('user_id', auth()->id())->count();
 
                 $totalView = Post::where('user_id', auth()->id())->count('view_count');
 

@@ -10,7 +10,7 @@
                 <flux:navbar.item icon="bars-3" label="menu-flyout" />
             </flux:modal.trigger>
             <flux:navbar style="" class="overflow-x-auto scrollbar-hidden max-w-10/12 hidden md:flex">
-                <flux:navbar.item href="{{ route('home') }}" icon="home"></flux:navbar.item>
+                <flux:navbar.item href="{{ route('home') }}" icon="home" wire:navigate ></flux:navbar.item>
                 @foreach ($menuCategories as $category)
                     @if ($category->children->isNotEmpty())
                         <flux:dropdown class="max-lg:hidden">
@@ -19,12 +19,12 @@
                             </flux:navbar.item>
                             <flux:navmenu>
                                 @foreach ($category->children as $child)
-                                    <flux:navmenu.item href="{{ route('search.category', ['searchQuery' => $child->slug]) }}">{{ $child->name }}</flux:navmenu.item>
+                                    <flux:navmenu.item href="{{ route('search.category', ['searchQuery' => $child->slug]) }}" wire:navigate >{{ $child->name }}</flux:navmenu.item>
                                 @endforeach
                             </flux:navmenu>
                         </flux:dropdown>
                     @else
-                        <flux:navbar.item href="{{ route('search.category', ['searchQuery' => $category->slug]) }}">{{ $category->name }}</flux:navbar.item>
+                        <flux:navbar.item href="{{ route('search.category', ['searchQuery' => $category->slug]) }}" wire:navigate >{{ $category->name }}</flux:navbar.item>
                     @endif
                 @endforeach
             </flux:navbar>
@@ -131,11 +131,11 @@
                                     }
                                 </style>
                                 @foreach ($category->children as $child)
-                                    <flux:navlist.item href="{{ route('search.category', ['searchQuery' => $child->slug]) }}">{{ $child->name }}</flux:navlist.item>
+                                    <flux:navlist.item href="{{ route('search.category', ['searchQuery' => $child->slug]) }}" wire:navigate >{{ $child->name }}</flux:navlist.item>
                                 @endforeach
                             </flux:navlist.group>
                         @else
-                            <flux:navlist.item href="{{ route('search.category', ['searchQuery' => $category->slug]) }}">{{ $category->name }}</flux:navlist.item>
+                            <flux:navlist.item href="{{ route('search.category', ['searchQuery' => $category->slug]) }}" wire:navigate >{{ $category->name }}</flux:navlist.item>
                         @endif
                     @endforeach
                 </flux:navlist>

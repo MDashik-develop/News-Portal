@@ -23,9 +23,9 @@
         {{-- Actual Post --}}
         <template x-if="ready">
             <a href="{{ route('post.view', ['slug' => $s2->slug]) }}" wire:navigate
-                class=" block p-1.5 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                class=" block p-1.5 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:bg-zinc-700">
                 <img src="{{ asset('storage/' . $s2->featured_image) }}" alt="{{  $s2->title }}" class="rounded mb-1">
-                <h5 class="mt-1.5 text-base line-clamp-2 tracking-tight text-gray-900 dark:text-white">
+                <h5 class="mt-1.5 text-base line-clamp-2 tracking-tight text-gray-900  dark:text-gray-300">
                     {{ $s2->title }}
                 </h5>
             </a>

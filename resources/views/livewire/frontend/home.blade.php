@@ -1,4 +1,4 @@
-<section>
+<section class="bg-white dark:bg-zinc-900 md:px-2">
     {{-- top sectio --}}
     <div class="flex gap-2 p-2 mb-2 sm:flex-row flex-col">
         <div class="md:w-[70%]">
@@ -89,18 +89,18 @@
                 </ul>
             </div>
             <div id="default-tab-content" class="overflow-y-auto">
-                <div class="hidden p-4 my-1 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800" id="latestPosts" role="tabpanel"
+                <div class="hidden p-4 my-1 border border-zinc-300 dark:border-zinc-700 rounded-lg bg-gray-50 dark:bg-zinc-800" id="latestPosts" role="tabpanel"
                     aria-labelledby="latestPosts-tab">
-                    <ul class="space-y-3 text-[13px] leading-snug text-[#333] max-h-[400px] overflow-y-auto">
+                    <ul class="space-y-3 text-[13px] leading-snug text-[#333] max-h-[441px] overflow-y-auto">
                         @if ($letetstPosts->isNotEmpty())
                             @foreach ($letetstPosts as $letetstPost)
-                                <li class="flex items-start border-b-1 py-2 space-x-2 rtl:space-x-reverse">
+                                <li class="flex items-start border-b-1 dark:border-zinc-700 py-2 space-x-2 rtl:space-x-reverse">
                                     <i class="fas fa-play text-[#d00] mt-1"></i>
                                     <a href="{{ route('post.view', ['slug' => $letetstPost->slug]) }}" wire:navigate>
-                                        <p class="line-clamp-2 max-h-min mb-1">
+                                        <p class="line-clamp-2 max-h-min mb-1  dark:text-gray-300">
                                             {{ $letetstPost->title }}
                                         </p>
-                                        <p class="text-[11px]">
+                                        <p class="text-[11px]  dark:text-gray-300">
                                             <i class="far fa-clock text-gray-500"></i>
                                             {{ $this->getBengaliTimeAgo($letetstPost->published_at) }} |
                                             <span class="text-[#d00]">{{ $letetstPost->category?->name ?? 'Uncategorized' }}</span>
@@ -114,18 +114,18 @@
 
                     </ul>
                 </div>
-                <div class="hidden p-4 my-1 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800" id="todayBest" role="tabpanel"
+                <div class="hidden p-4 my-1 border border-zinc-300 dark:border-zinc-700 rounded-lg bg-gray-50 dark:bg-zinc-800" id="todayBest" role="tabpanel"
                     aria-labelledby="todayBest-tab">
                     <ul class="space-y-3 text-[13px] leading-snug text-[#333] max-h-[400px] overflow-y-auto">
                         @if ($todayBestPosts->isNotEmpty())
                             @foreach ($todayBestPosts as $todayBestPost)
-                                <li class="flex items-start border-b-1 py-2 space-x-2 rtl:space-x-reverse">
+                                <li class="flex items-start border-b-1 dark:border-zinc-700 py-2 space-x-2 rtl:space-x-reverse">
                                     <i class="fas fa-play text-[#d00] mt-1"></i>
                                     <a href="{{ route('post.view', ['slug' => $todayBestPost->slug]) }}" wire:navigate>
-                                        <p class="line-clamp-2 max-h-min mb-1">
+                                        <p class="line-clamp-2 max-h-min mb-1 dark:text-gray-300">
                                             {{ $todayBestPost->title }}
                                         </p>
-                                        <p class="text-[11px]">
+                                        <p class="text-[11px] dark:text-gray-300">
                                             <i class="far fa-clock text-gray-500"></i>
                                             {{ $this->getBengaliTimeAgo($todayBestPost->published_at) }} | 
                                             <span class="text-[#d00]">
@@ -141,18 +141,18 @@
 
                     </ul>
                 </div>
-                <div class="hidden p-4 my-1 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800" id="weekBest" role="tabpanel"
+                <div class="hidden p-4 my-1 border border-zinc-300 dark:border-zinc-700 rounded-lg bg-gray-50 dark:bg-zinc-800" id="weekBest" role="tabpanel"
                     aria-labelledby="weekBest-tab">
                     <ul class="space-y-3 text-[13px] leading-snug text-[#333] max-h-[400px] overflow-y-auto">
                         @if ($weekBestPosts->isNotEmpty())
                             @foreach ($weekBestPosts as $weekBestPost)
-                                <li class="flex items-start border-b-1 py-2 space-x-2 rtl:space-x-reverse">
+                                <li class="flex items-start border-b-1 dark:border-zinc-700 py-2 space-x-2 rtl:space-x-reverse">
                                     <i class="fas fa-play text-[#d00] mt-1"></i>
                                     <a href="{{ route('post.view', ['slug' => $weekBestPost->slug]) }}" wire:navigate>
-                                        <p class="line-clamp-2 max-h-min mb-1">
+                                        <p class="line-clamp-2 max-h-min mb-1 dark:text-gray-300">
                                             {{ $weekBestPost->title }}
                                         </p>
-                                        <p class="text-[11px]">
+                                        <p class="text-[11px] dark:text-gray-300">
                                             <i class="far fa-clock text-gray-500"></i>
                                             {{ $this->getBengaliTimeAgo($weekBestPost->published_at) }} | <span
                                                 class="text-[#d00]">{{ $weekBestPost->category?->name ?? 'Uncategorized' }}</span>
@@ -193,6 +193,8 @@
     </div>
     
     <livewire:frontend.sections.all-post />
+
+    <livewire:frontend.sections.reel />
 </section>
 @push('scripts')
     <script>

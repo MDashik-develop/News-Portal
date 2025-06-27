@@ -12,7 +12,7 @@
                     <a href="{{ route('post.view', ['slug' => $sportsLeft->slug]) }}" wire:navigate class="flex space-x-3 items-center" href="#">
                         <img alt="বাংলাদেশের ফেন টাইমআউট টার্গেট করেছিল তা জানেন না ম্যাথিউস"
                             class="max-w-30 h-auto object-cover flex-shrink-0" src="{{ asset('storage/' . $sportsLeft->featured_image) }}" alt="{{ $sportsLeft->title }}" />
-                        <p class="text-sm  text-justify line-clamp-3">
+                        <p class="text-sm  text-justify line-clamp-3 dark:text-gray-300">
                             {{ $sportsLeft->title }}
                         </p>
                     </a>
@@ -26,7 +26,7 @@
                     <a href="{{ route('post.view', ['slug' => $sportsCenter->slug]) }}" wire:navigate>
                         <img src="{{ asset('storage/' . $sportsCenter->featured_image) }}" class="h-[83%] w-full object-cover"
                             alt="{{ $sportsCenter->title }}" />
-                        <h3 class="mt-3 text-base font-semibold leading-tight text-justify">
+                        <h3 class="mt-3 text-base font-semibold leading-tight text-justify dark:text-gray-300">
                             {{ $sportsCenter->title }}
                         </h3>
                         <p class="mt-1 text-sm text-gray-500 text-justify h-min overflow-hidden line-clamp-2">
@@ -42,7 +42,7 @@
                     <a class="flex space-x-3 items-center mb-[7px]" href="{{ route('post.view', ['slug' => $sportsRight->slug]) }}" wire:navigate>
                         <img alt="বাংলাদেশের ফেন টাইমআউট টার্গেট করেছিল তা জানেন না ম্যাথিউস"
                             class="max-w-30 h-auto object-cover flex-shrink-0" src="{{ asset('storage/' . $sportsRight->featured_image) }}" alt="{{ $sportsRight->title }}" />
-                        <p class="text-sm  text-justify line-clamp-3">
+                        <p class="text-sm text-justify line-clamp-3  dark:text-gray-300">
                             {{ $sportsRight->title }}
                         </p>
                     </a>

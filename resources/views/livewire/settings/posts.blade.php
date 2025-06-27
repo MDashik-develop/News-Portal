@@ -44,11 +44,11 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                         
                         <!-- Card 1: Published Posts -->
-                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        <div class="bg-white dark:bg-zinc-700 dark:border-zinc-600 dark:text-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <p class="text-sm font-medium text-slate-500">প্রকাশিত পোস্ট</p>
-                                    <p class="text-3xl font-bold text-slate-900 mt-1">{{ $this->formatToBengali($publishedPosts) }}</p>
+                                    <p class="text-sm font-medium text-slate-500 dark:text-slate-200">প্রকাশিত পোস্ট</p>
+                                    <p class="text-3xl font-bold text-slate-900 mt-1 dark:text-white">{{ $this->formatToBengali($publishedPosts) }}</p>
                                 </div>
                                  <div class="bg-green-100 p-3 rounded-full">
                                     <!-- CheckCircle Icon -->
@@ -57,11 +57,11 @@
                             </div>
                         </div>
                         <!-- Card 2: Drafts -->
-                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        <div class="bg-white dark:bg-zinc-700 dark:border-zinc-600 dark:text-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <p class="text-sm font-medium text-slate-500">অপেক্ষমাণ পোস্ট</p>
-                                    <p class="text-3xl font-bold text-slate-900 mt-1">{{ $this->formatToBengali($pendingPosts) }}</p>
+                                    <p class="text-sm font-medium text-slate-500 dark:text-slate-200">অপেক্ষমাণ পোস্ট</p>
+                                    <p class="text-3xl font-bold text-slate-900 mt-1 dark:text-white">{{ $this->formatToBengali($pendingPosts) }}</p>
                                 </div>
                                  <div class="bg-blue-100 p-3 rounded-full">
                                      <!-- Edit3 Icon -->
@@ -70,11 +70,11 @@
                             </div>
                         </div>
                         <!-- Card 3: Total Posts -->
-                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        <div class="bg-white dark:bg-zinc-700 dark:border-zinc-600 dark:text-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <p class="text-sm font-medium text-slate-500">ড্রাফট পোস্ট</p>
-                                    <p class="text-3xl font-bold text-slate-900 mt-1">{{ $this->formatToBengali($draftPosts) }}</p>
+                                    <p class="text-sm font-medium text-slate-500 dark:text-slate-200">ড্রাফট পোস্ট</p>
+                                    <p class="text-3xl font-bold text-slate-900 dark:text-white mt-1">{{ $this->formatToBengali($draftPosts) }}</p>
                                 </div>
                                 <div class="bg-amber-100 p-3 rounded-full">
                                     <!-- FileText Icon -->
@@ -83,11 +83,11 @@
                             </div>
                         </div>
                         <!-- Card 4: Visitors -->
-                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        <div class="bg-white dark:bg-zinc-700 dark:border-zinc-600 dark:text-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <p class="text-sm font-medium text-slate-500">মোট ভিউ</p>
-                                    <p class="text-md font-bold text-slate-900 mt-1">{{ $this->formatToBengali($totalView) }}</p>
+                                    <p class="text-sm font-medium text-slate-500 dark:text-slate-200">মোট ভিউ</p>
+                                    <p class="text-md font-bold text-slate-900 dark:text-white mt-1">{{ $this->formatToBengali($totalView) }}</p>
                                 </div>
                                  <div class="bg-red-100 p-3 rounded-full">
                                     <!-- Users Icon -->
@@ -128,36 +128,36 @@
                             </div>
                         </div>
 
-                        <div class="overflow-x-auto bg-white rounded-lg border mb-2.5">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
+                        <div class="overflow-x-auto bg-white dark:bg-zinc-800 dark:border-zinc-700 rounded-lg border mb-2.5">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-zinc-700">
+                                <thead class="bg-gray-50 dark:bg-zinc-700 dark:border-zinc-700">
                                     <tr>
                                         <th
-                                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             ID
                                         </th>
                                         <th
-                                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Title
                                         </th>
                                         <th
-                                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Category</th>
                                         <th
-                                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Order</th>
-                                            <th
-                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                View</th>
                                         <th
-                                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            View</th>
+                                        <th
+                                            class="px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Status</th>
                                         <th
-                                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Published</th>
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
+                                <tbody class="bg-white divide-y divide-gray-200 dark:divide-zinc-700 dark:bg-zinc-800 ">
                                     @if($posts->isNotEmpty())
                                     @foreach($posts as $post)
                                     <tr>

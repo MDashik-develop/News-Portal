@@ -22,15 +22,15 @@
             </div>
         </div>
 
-        <div class="overflow-x-auto bg-white dark:bg-zinc-800 rounded-lg border mb-6">
+        <div class="overflow-x-auto bg-white dark:bg-zinc-800 rounded-lg border dark:border-zinc-700 mb-6">
             <table class="min-w-full divide-y divide-gray-200 dark:divide-zinc-700">
                 <thead class="bg-gray-50 dark:bg-zinc-700">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">#</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Username</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-300 uppercase">#</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-300 uppercase">Name</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-300 uppercase">Username</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-300 uppercase">Email</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-300 uppercase">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200 dark:bg-zinc-800 dark:divide-zinc-700">
@@ -75,34 +75,34 @@
                 <form wire:submit.prevent="{{ $user ? 'updateUser' : 'createUser' }}">
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium mb-1">Name</label>
-                            <input type="text" wire:model="name" class="w-full rounded border-gray-300">
+                            <label class="block text-sm font-medium mb-1 dark:text-gray-300">Name</label>
+                            <input type="text" wire:model="name" class="w-full rounded border-gray-300 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-300">
                             @error('name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                         </div>
 
                         @if(!$user)
                         <div>
-                            <label class="block text-sm font-medium mb-1">Username</label>
-                            <input type="text" wire:model="username" class="w-full rounded border-gray-300">
+                            <label class="block text-sm font-medium mb-1 dark:text-gray-300">Username</label>
+                            <input type="text" wire:model="username" class="w-full rounded border-gray-300 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-300">
                             @error('username') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                         </div>
                         @endif
 
                         <div>
-                            <label class="block text-sm font-medium mb-1">Email</label>
-                            <input type="email" wire:model="email" class="w-full rounded border-gray-300">
+                            <label class="block text-sm font-medium mb-1 dark:text-gray-300">Email</label>
+                            <input type="email" wire:model="email" class="w-full rounded border-gray-300 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-300">
                             @error('email') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium mb-1">Password</label>
-                            <input type="password" wire:model="password" class="w-full rounded border-gray-300">
+                            <label class="block text-sm font-medium mb-1 dark:text-gray-300">Password</label>
+                            <input type="password" wire:model="password" class="w-full rounded border-gray-300 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-300">
                             @error('password') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium mb-1">Confirm Password</label>
-                            <input type="password" wire:model="password_confirmation" class="w-full rounded border-gray-300">
+                            <label class="block text-sm font-medium mb-1 dark:text-gray-300">Confirm Password</label>
+                            <input type="password" wire:model="password_confirmation" class="w-full rounded border-gray-300 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-300">
                         </div>
 
                         <div class="flex justify-end gap-2 mt-6">

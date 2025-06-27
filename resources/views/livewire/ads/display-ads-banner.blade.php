@@ -1,4 +1,4 @@
-<div class="banner-ad-slot-container w-full my-1 p-0 bg-gray-100  mx-auto">
+<div class="banner-ad-slot-container w-full my-1 p-0 bg-gray-100 dark:bg-gray-700 mx-auto">
     @if ($adSlot)
 
     {{-- যদি Ad Slot-এর ধরন 'google' হয় --}}

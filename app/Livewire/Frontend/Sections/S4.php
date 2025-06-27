@@ -16,6 +16,7 @@ class S4 extends Component
         $this->section4 = Post::where('section', 4)
             ->where('status', 'published')
             ->orderBy('published_at', 'desc')
+            ->whereNotNull('featured_image')
             ->take(9)
             ->get();
     }

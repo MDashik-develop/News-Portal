@@ -1,4 +1,4 @@
-<aside class="md:w-[30%] lg:sticky lg:top-[50px] h-screen overflow-y-auto scrollbar-hidden rounded-xl border bg-[#e8f1ff] dark:bg-gray-900 p-3 mb-3">
+<aside class="md:w-[30%] lg:sticky lg:top-[50px] h-screen overflow-y-auto scrollbar-hidden rounded-xl border bg-[#e8f1ff] dark:bg-gray-900 dark:border-zinc-700 p-3 mb-3">
     <div class="ads-aside" class="w-full h-auto">
         <livewire:ads.display-ad :locationKey="'home_sidebar'" lazy />
     </div>
@@ -83,10 +83,10 @@
                         <li class="flex items-start border-b-1 py-2 space-x-2 rtl:space-x-reverse">
                             <i class="fas fa-play text-[#d00] mt-1"></i>
                             <a href="{{ route('post.view', ['slug' => $letetstPost->slug]) }}" wire:navigate>
-                                <p class="line-clamp-2 max-h-min mb-1">
+                                <p class="line-clamp-2 max-h-min mb-1 dark:text-gray-300">
                                     {{ $letetstPost->title }}
                                 </p>
-                                <p class="text-[11px]">
+                                <p class="text-[11px] dark:text-gray-300">
                                     <i class="far fa-clock text-gray-500"></i>
                                     {{ $this->getBengaliTimeAgo($letetstPost->published_at) }} | <span
                                         class="text-[#d00]">{{ $letetstPost->category?->name ?? 'Uncategorized'
@@ -108,10 +108,10 @@
                         <li class="flex items-start border-b-1 py-2 space-x-2 rtl:space-x-reverse">
                             <i class="fas fa-play text-[#d00] mt-1"></i>
                             <a href="{{ route('post.view', ['slug' => $todayBestPost->slug]) }}" wire:navigate>
-                                <p class="line-clamp-2 max-h-min mb-1">
+                                <p class="line-clamp-2 max-h-min mb-1 dark:text-gray-300">
                                     {{ $todayBestPost->title }}
                                 </p>
-                                <p class="text-[11px]">
+                                <p class="text-[11px] dark:text-gray-300">
                                     <i class="far fa-clock text-gray-500"></i>
                                     {{ $this->getBengaliTimeAgo($todayBestPost->published_at) }} | <span
                                         class="text-[#d00]">{{ $todayBestPost->category?->name ?? 'Uncategorized'
@@ -133,10 +133,10 @@
                         <li class="flex items-start border-b-1 py-2 space-x-2 rtl:space-x-reverse">
                             <i class="fas fa-play text-[#d00] mt-1"></i>
                             <a href="{{ route('post.view', ['slug' => $weekBestPost->slug]) }}" wire:navigate>
-                                <p class="line-clamp-2 max-h-min mb-1">
+                                <p class="line-clamp-2 max-h-min mb-1 dark:text-gray-300">
                                     {{ $weekBestPost->title }}
                                 </p>
-                                <p class="text-[11px]">
+                                <p class="text-[11px] dark:text-gray-300">
                                     <i class="far fa-clock text-gray-500"></i>
                                     {{ $this->getBengaliTimeAgo($weekBestPost->published_at) }} | <span
                                         class="text-[#d00]">{{ $weekBestPost->category?->name ?? 'Uncategorized'

@@ -31,6 +31,7 @@ class Category extends Component
                 ->where('status', 'published')
                 ->whereDate('published_at', '<=', now())
                 ->orderBy('published_at', 'desc')
+                ->whereNotNull('featured_image')
                 ->take(1)
                 ->get();
 
@@ -38,6 +39,7 @@ class Category extends Component
                 ->where('status', 'published')
                 ->whereDate('published_at', '<=', now())
                 ->orderBy('published_at', 'desc')
+                ->whereNotNull('featured_image')
                 ->skip(1)
                 ->take(5)
                 ->get();
@@ -46,6 +48,7 @@ class Category extends Component
             ->where('status', 'published')
             ->whereDate('published_at', '<=', now())
             ->orderBy('published_at', 'desc')
+            ->whereNotNull('featured_image')
             ->skip(6)
             ->take(3)
             ->get();

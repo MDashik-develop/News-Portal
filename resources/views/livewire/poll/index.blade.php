@@ -1,31 +1,31 @@
 <div>
    <div class="py-4">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+         <div class="bg-white dark:bg-zinc-700 border dark:border-zinc-600 overflow-hidden shadow-xl sm:rounded-lg p-6">
             <div class="mb-4">
                <input wire:model.live="search" type="text" placeholder="Search polls..."
-                  class="w-full px-4 py-2 border rounded-lg">
+                  class="w-full px-4 py-2 border rounded-lg dark:bg-zinc-600 dark:border-zinc-600">
             </div>
 
             <div class="overflow-x-auto">
-               <table class="min-w-full divide-y divide-gray-200">
-                  <thead class="bg-gray-50">
+               <table class="min-w-full divide-y divide-gray-200 dark:divide-zinc-600">
+                  <thead class="bg-gray-50 dark:bg-zinc-600">
                      <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                            Question</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                            Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start
+                        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Start
                            Date</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">End
+                        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">End
                            Date</th>
-                           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Options</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                           Options</th>
+                        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                            Actions</th>
                      </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
+                  <tbody class="bg-white divide-y divide-gray-200 dark:bg-zinc-800 dark:divide-zinc-700">
                      @if ($polls->isNotEmpty()) 
                         @foreach($polls as $poll)
                            <tr>

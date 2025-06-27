@@ -22,80 +22,92 @@
             </a>
 
             <flux:navlist variant="outline">
+                <!-- 1. Platform -->
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     @can('admin.panel')
                         <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                     @endcan
                     @can('user.edit')
-                    <flux:navlist.item icon="user" :href="route('users.index')" :current="request()->routeIs('users.index')"
+                    <flux:navlist.item icon="users" :href="route('users.index')" :current="request()->routeIs('users.index')"
                         wire:navigate>{{ __('Users') }}</flux:navlist.item>
                     @endcan
                 </flux:navlist.group>
+
+                <!-- 2. Permissions -->
                 @can('user.permission')
-                    <flux:navlist.group expandable :expanded="request()->routeIs('permissions.*')" heading="Permission"
+                    <flux:navlist.group expandable :expanded="request()->routeIs('permissions.*')" heading="Permissions"
                         class="lg:grid">
-                        <flux:navlist.item :href="route('permissions.index')" :current="request()->routeIs('permissions.index')"
+                        <flux:navlist.item icon="shield-check" :href="route('permissions.index')" :current="request()->routeIs('permissions.index')"
                             wire:navigate>{{ __('Permissions') }}</flux:navlist.item>
-                        <flux:navlist.item :href="route('permissions.roles.index')"
+                        <flux:navlist.item icon="user-group" :href="route('permissions.roles.index')"
                             :current="request()->routeIs('permissions.roles.index')" wire:navigate>{{ __('Roles') }}
                         </flux:navlist.item>
-                        <flux:navlist.item :href="route('permissions.user-roles.index')"
+                        <flux:navlist.item icon="user-circle" :href="route('permissions.user-roles.index')"
                             :current="request()->routeIs('permissions.user-roles.index')" wire:navigate>{{ __('User Roles') }}
                         </flux:navlist.item>
                     </flux:navlist.group>
                 @endcan
-                @can('website.maintenance')
-                    <flux:navlist.group expandable :expanded="request()->routeIs('website.*')" heading="Websites"
-                        class="lg:grid">
-                        <flux:navlist.item :href="route('website.index')" :current="request()->routeIs('website.index')"
-                            wire:navigate>{{ __('Details') }}</flux:navlist.item>
-                        <flux:navlist.item :href="route('website.logos')" :current="request()->routeIs('website.logos')"
-                            wire:navigate>{{ __('Logos') }}</flux:navlist.item>
-                    </flux:navlist.group>
-                @endcan
-                @can('ads')
-                        <flux:navlist.group expandable :expanded="request()->routeIs('admin.ads.*')" heading="Advertisements"
-                            class="lg:grid">
-                            <flux:navlist.item :href="route('admin.ads.slots.index')" :current="request()->routeIs('admin.ads.slots.index')"
-                                wire:navigate>{{ __('Advertisement') }}</flux:navlist.item>
-                            <flux:navlist.item :href="route('admin.ads.settings')"
-                                :current="request()->routeIs('admin.ads.settings')" wire:navigate>{{ __('AdSense Settings') }}
-                            </flux:navlist.item>
-                        </flux:navlist.group>
-                @endcan
+
+                <!-- 3. Categories -->
                 @can('categories.edit')
                     <flux:navlist.group expandable :expanded="request()->routeIs('categories.*')" heading="Categories"
                         class="lg:grid">
-                        <flux:navlist.item :href="route('categories.index')" :current="request()->routeIs('categories.index')"
+                        <flux:navlist.item icon="folder" :href="route('categories.index')" :current="request()->routeIs('categories.index')"
                             wire:navigate>{{__('All Categories') }}</flux:navlist.item>
-                        <flux:navlist.item :href="route('categories.create')" :current="request()->routeIs('categories.create')"
-                            wire:navigate>{{ __('Categories Create') }}</flux:navlist.item>
+                        <flux:navlist.item icon="plus-circle" :href="route('categories.create')" :current="request()->routeIs('categories.create')"
+                            wire:navigate>{{ __('Create Category') }}</flux:navlist.item>
                     </flux:navlist.group>
                 @endcan
+
+                <!-- 4. Posts -->
                 @canany(['post.maintenance', 'post.create', 'post.published', 'polls.edit', 'polls.create'])
                     <flux:navlist.group expandable :expanded="request()->routeIs('posts.*')" heading="Posts" class="lg:grid">
                         @can('post.maintenance')
-                            <flux:navlist.item :href="route('posts.index')" :current="request()->routeIs('posts.index')"
+                            <flux:navlist.item icon="document-text" :href="route('posts.index')" :current="request()->routeIs('posts.index')"
                                 wire:navigate>{{ __('All Posts') }}</flux:navlist.item>
                         @endcan
                         @canany(['post.maintenance', 'post.create'])
-                            <flux:navlist.item :href="route('posts.create')" :current="request()->routeIs('posts.create')"
-                                wire:navigate>{{ __('Post Create') }}</flux:navlist.item>
+                            <flux:navlist.item icon="plus" :href="route('posts.create')" :current="request()->routeIs('posts.create')"
+                                wire:navigate>{{ __('Create Post') }}</flux:navlist.item>
                         @endcanany
                         @canany(['post.maintenance', 'post.published'])
-                            <flux:navlist.item :href="route('posts.published')" :current="request()->routeIs('posts.published')"
-                                wire:navigate>{{ __('Posts Published') }}</flux:navlist.item>
+                            <flux:navlist.item icon="check-circle" :href="route('posts.published')" :current="request()->routeIs('posts.published')"
+                                wire:navigate>{{ __('Published Posts') }}</flux:navlist.item>
                         @endcanany
                         @canany(['post.maintenance', 'polls.create', 'polls.edit'])
-                            <flux:navlist.item :href="route('posts.polls.create')" :current="request()->routeIs('posts.polls.create')"
-                                wire:navigate>{{ __('Pull Create') }}</flux:navlist.item>
+                            <flux:navlist.item icon="chart-bar" :href="route('posts.polls.create')" :current="request()->routeIs('posts.polls.create')"
+                                wire:navigate>{{ __('Create Poll') }}</flux:navlist.item>
                         @endcanany
                         @canany(['post.maintenance', 'polls.edit'])
-                            <flux:navlist.item :href="route('posts.polls.index')" :current="request()->routeIs('posts.polls.index')"
+                            <flux:navlist.item icon="chart-pie" :href="route('posts.polls.index')" :current="request()->routeIs('posts.polls.index')"
                                 wire:navigate>{{ __('All Polls') }}</flux:navlist.item>
                         @endcanany
                     </flux:navlist.group>
                 @endcanany
+
+                <!-- 5. Advertisements -->
+                @can('ads')
+                        <flux:navlist.group expandable :expanded="request()->routeIs('admin.ads.*')" heading="Advertisements"
+                            class="lg:grid">
+                            <flux:navlist.item icon="megaphone" :href="route('admin.ads.slots.index')" :current="request()->routeIs('admin.ads.slots.index')"
+                                wire:navigate>{{ __('Advertisements') }}</flux:navlist.item>
+                            <flux:navlist.item icon="cog-6-tooth"
+                                :href="route('admin.ads.settings')"
+                                :current="request()->routeIs('admin.ads.settings')" wire:navigate>{{ __('AdSense Settings') }}
+                            </flux:navlist.item>
+                        </flux:navlist.group>
+                @endcan
+
+                <!-- 6. Website -->
+                @can('website.maintenance')
+                    <flux:navlist.group expandable :expanded="request()->routeIs('website.*')" heading="Website"
+                        class="lg:grid">
+                        <flux:navlist.item icon="information-circle" :href="route('website.index')" :current="request()->routeIs('website.index')"
+                            wire:navigate>{{ __('Details') }}</flux:navlist.item>
+                        <flux:navlist.item icon="photo" :href="route('website.logos')" :current="request()->routeIs('website.logos')"
+                            wire:navigate>{{ __('Logo') }}</flux:navlist.item>
+                    </flux:navlist.group>
+                @endcan
             </flux:navlist>
 
             <flux:spacer />

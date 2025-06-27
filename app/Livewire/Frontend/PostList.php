@@ -45,7 +45,8 @@ class PostList extends Component
                 }); 
         })
         ->where('status', 'published')
-        ->whereDate('published_at', '<=', now());
+        ->whereDate('published_at', '<=', now())
+        ->whereNotNull('featured_image');
 
         // ✨ Total matching post count
         $totalPosts = (clone $baseQuery)->count();

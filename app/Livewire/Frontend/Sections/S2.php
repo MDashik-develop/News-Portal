@@ -15,6 +15,7 @@ class S2 extends Component
             ->where('status', 'published')
             ->orderBy('published_at', 'desc')
             ->whereDate('published_at', '<=', now())
+            ->whereNotNull('featured_image')
             ->take(8)
             ->get();
     }

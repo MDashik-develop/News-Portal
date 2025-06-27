@@ -9,11 +9,11 @@
             <!-- Dashboard Header -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
                 <div>
-                    <h1 class="text-3xl font-bold text-slate-900">ড্যাশবোর্ড</h1>
-                    <p class="mt-1 text-slate-500">আপনার নিউজ পোর্টালের সকল কার্যক্রমের সারসংক্ষেপ।</p>
+                    <h1 class="text-3xl font-bold text-slate-900 dark:text-gray-100">ড্যাশবোর্ড</h1>
+                    <p class="mt-1 text-slate-500 dark:text-slate-300">আপনার নিউজ পোর্টালের সকল কার্যক্রমের সারসংক্ষেপ।</p>
                 </div>
                 <div class="mt-4 sm:mt-0 flex items-center gap-2">
-                     <a href="{{ route('posts.create') }}" wire:navigate class="px-8 py-2 cursor-pointer bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 flex items-center gap-2">
+                     <a href="{{ route('posts.create') }}" wire:navigate class="px-8 py-2 cursor-pointer dark:bg-zinc-700 dark:border-zinc-600 dark:text-white bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 flex items-center gap-2">
                         <!-- Plus Icon SVG -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                         <span>
@@ -26,11 +26,11 @@
             <!-- Stats Cards Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <!-- Card 1: Total Posts -->
-                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div class="bg-white dark:bg-zinc-700 dark:border-zinc-600 dark:text-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-sm font-medium text-slate-500">সর্বমোট পোস্ট</p>
-                            <p class="text-3xl font-bold text-slate-900 mt-1">{{ $this->formatToBengali($totalPosts) }}</p>
+                            <p class="text-sm font-medium text-slate-500 dark:text-slate-200">সর্বমোট পোস্ট</p>
+                            <p class="text-3xl font-bold text-slate-900 mt-1 dark:text-white">{{ $this->formatToBengali($totalPosts) }}</p>
                         </div>
                         <div class="bg-blue-100 p-3 rounded-full">
                             <!-- FileText Icon -->
@@ -39,11 +39,11 @@
                     </div>
                 </div>
                 <!-- Card 2: Published Posts -->
-                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div class="bg-white dark:bg-zinc-700 dark:border-zinc-600 dark:text-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-sm font-medium text-slate-500">প্রকাশিত পোস্ট</p>
-                            <p class="text-3xl font-bold text-slate-900 mt-1">{{ $this->formatToBengali($publishedPosts) }}</p>
+                            <p class="text-sm font-medium text-slate-500 dark:text-slate-200">প্রকাশিত পোস্ট</p>
+                            <p class="text-3xl font-bold text-slate-900 mt-1 dark:text-white">{{ $this->formatToBengali($publishedPosts) }}</p>
                         </div>
                          <div class="bg-green-100 p-3 rounded-full">
                             <!-- CheckCircle Icon -->
@@ -52,11 +52,11 @@
                     </div>
                 </div>
                 <!-- Card 3: Drafts -->
-                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div class="bg-white dark:bg-zinc-700 dark:border-zinc-600 dark:text-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-sm font-medium text-slate-500">পেন্ডিং পোস্ট</p>
-                            <p class="text-3xl font-bold text-slate-900 mt-1">{{ $this->formatToBengali($pendingPosts) }}</p>
+                            <p class="text-sm font-medium text-slate-500 dark:text-slate-200">পেন্ডিং পোস্ট</p>
+                            <p class="text-3xl font-bold text-slate-900 mt-1 dark:text-white">{{ $this->formatToBengali($pendingPosts) }}</p>
                         </div>
                          <div class="bg-amber-100 p-3 rounded-full">
                              <!-- Edit3 Icon -->
@@ -65,11 +65,11 @@
                     </div>
                 </div>
                 <!-- Card 4: Visitors -->
-                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div class="bg-white dark:bg-zinc-700 dark:border-zinc-600 dark:text-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-sm font-medium text-slate-500">আজকের ভিজিটর</p>
-                            <p class="text-3xl font-bold text-slate-900 mt-1">{{ $this->formatToBengali($todaysVisitors) }}</p>
+                            <p class="text-sm font-medium text-slate-500 dark:text-slate-200">আজকের ভিজিটর</p>
+                            <p class="text-3xl font-bold text-slate-900 mt-1 dark:text-white">{{ $this->formatToBengali($todaysVisitors) }}</p>
                         </div>
                          <div class="bg-red-100 p-3 rounded-full">
                             <!-- Users Icon -->
@@ -84,22 +84,22 @@
                 <!-- Left Column: Recent Posts & Chart -->
                 <div class="lg:col-span-2 space-y-8">
                     <!-- Visitor Statistics Chart -->
-                    <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
-                        <h3 class="text-lg font-semibold text-slate-900 mb-4">ভিজিটর পরিসংখ্যান (শেষ ৭ দিন)</h3>
-                        <div class="h-80">
+                    <div class="bg-white dark:bg-zinc-900 p-6 rounded-xl shadow-md border border-gray-700">
+                        <h3 class="text-lg font-semibold text-slate-900 dark:text-gray-300 mb-4">ভিজিটর পরিসংখ্যান (শেষ ৭ দিন)</h3>
+                        <div class="h-80 dark:text-white">
                             {{-- ক্যানভাস ট্যাগটি এখানে থাকবে --}}
-                            <canvas id="visitorsChart"></canvas>
+                            <canvas id="visitorsChart" class="dark:text-white"></canvas>
                         </div>
                     </div>
 
                     <!-- Recent Posts Table -->
-                    <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+                    <div class="bg-white dark:bg-zinc-900 dark:border-zinc-600 dark:text-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
                         <div class="p-6">
-                            <h3 class="text-lg font-semibold text-slate-900">সাম্প্রতিক পোস্টসমূহ</h3>
+                            <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-50">সাম্প্রতিক পোস্টসমূহ</h3>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-sm text-left">
-                                <thead class="bg-slate-50 border-b border-slate-200 text-slate-600">
+                                <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 dark:bg-zinc-800 dark:border-zinc-600 dark:text-white">
                                     <tr>
                                         <th scope="col" class="px-6 py-3 font-medium">শিরোনাম</th>
                                         <th scope="col" class="px-6 py-3 font-medium">ক্যাটেগরি</th>
@@ -107,14 +107,14 @@
                                         <th scope="col" class="px-6 py-3 font-medium">ভিউ</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-slate-200">
+                                <tbody class="divide-y divide-slate-200  dark:bg-zinc-700 dark:border-zinc-600 dark:text-white">
                                     @if ($letetstPosts->isNOtEmpty())
                                         @foreach ($letetstPosts as $letetstPost)
-                                            <tr class="hover:bg-slate-50 transition-colors">
-                                                <td class="px-6 py-4 font-medium text-slate-900">
+                                            <tr class="hover:bg-slate-50 dark:hover:bg-zinc-800 transition-colors">
+                                                <td class="px-6 py-4 font-medium text-slate-900 dark:text-slate-300">
                                                     {{ $letetstPost->title }}
                                                 </td>
-                                                <td class="px-6 py-4 text-slate-600">
+                                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">
                                                     {{ $this->convertToBengaliNumbers($letetstPost->category?->name ?? 'Uncategorized') }}
                                                 </td>
                                                 <td class="px-6 py-4">
@@ -130,7 +130,7 @@
                                                         @endif
                                                     </span>
                                                 </td>
-                                                <td class="px-6 py-4 text-slate-600">
+                                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">
                                                     {{ $this->getBengaliTimeAgo($letetstPost->published_at) }}
                                                 </td>
                                             </tr>
@@ -157,31 +157,31 @@
 
                 <!-- Right Column: Quick Actions & Categories -->
                 <div class="space-y-8">
-                    <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
-                        <h3 class="text-lg font-semibold text-slate-900 mb-4">জনপ্রিয় ক্যাটেগরি</h3>
+                    <div class="bg-white dark:bg-zinc-700 dark:border-zinc-600 dark:text-white p-6 rounded-xl shadow-md border border-slate-200">
+                        <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-50 mb-4">জনপ্রিয় ক্যাটেগরি</h3>
                         <div class="space-y-4">
                             @foreach ($popularCategories as $category)
                                 <div>
                                     <div class="flex justify-between mb-1">
-                                        <span class="text-sm font-medium text-slate-700">{{ $category['name'] }}</span>
-                                        <span class="text-sm font-medium text-slate-500">{{ $category['percentage'] }}%</span>
+                                        <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{{ $category['name'] }}</span>
+                                        <span class="text-sm font-medium text-slate-500 dark:text-slate-300">{{ $category['percentage'] }}%</span>
                                     </div>
-                                    <div class="w-full bg-slate-200 rounded-full h-2.5">
+                                    <div class="w-full bg-slate-200 dark:bg-zinc-800 rounded-full h-2.5">
                                         <div class="h-2.5 rounded-full bg-{{ $category['color'] }}" style="width: {{ $category['percentage'] }}%"></div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
-                        <h3 class="text-lg font-semibold text-slate-900 mb-4">জনপ্রিয় পোল</h3>
+                    <div class="bg-white dark:bg-zinc-700 dark:border-zinc-600 dark:text-white p-6 rounded-xl shadow-md border border-slate-200">
+                        <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-50 mb-4">জনপ্রিয় পোল</h3>
                         <div class="flex flex-col space-y-3">
                             @forelse ($popularPolls as $poll)
-                                <a href="#" class="w-full text-left p-3 rounded-lg hover:bg-slate-100 transition-colors">
+                                <a href="#" class="w-full text-left p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors">
                                     {{ $poll->question }} (ভোট: {{ $poll->total_votes }})
                                 </a>
                             @empty
-                                <p class="text-sm text-slate-500">কোনো জনপ্রিয় পোল পাওয়া যায়নি।</p>
+                                <p class="text-sm text-slate-500 dark:text-slate-300">কোনো জনপ্রিয় পোল পাওয়া যায়নি।</p>
                             @endforelse
                         </div>
                     </div>

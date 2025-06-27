@@ -24,13 +24,13 @@
 
 
                         <div class="p-1 sm:p-2">
-                            <div class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <div class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:bg-zinc-700">
                                 <a href="{{ route('post.view', ['slug' => $s4->slug]) }}" wire:navigate>
                                     <div class="h-[50%]">
                                         <img src="{{ asset('storage/' . $s4->featured_image) }}" alt="" class="w-full h-auto ">
                                     </div>
                                     <div class="px-2 py-1">
-                                        <p class="line-clamp-3">{{ $s4->title }}</p>
+                                        <p class="line-clamp-3 dark:text-gray-300">{{ $s4->title }}</p>
                                     </div>
                                 </a>
                             </div>

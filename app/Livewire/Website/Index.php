@@ -19,7 +19,8 @@ class Index extends Component
     public $meta_description;
     public $meta_tags;
     public $website;
-    public $fb_app_id;
+    public $fb_app_id, $youtube_url, $facebook_url, $twitter_url, $instagram_url, $reddit_url, $google_news_url, $linkedin_url;
+    
 
     public function mount()
     {
@@ -30,6 +31,13 @@ class Index extends Component
             $this->meta_description = $this->website->meta_description;
             $this->meta_tags = $this->website->meta_tags;
             $this->fb_app_id = $this->website->fb_app_id;
+            $this->youtube_url = $this->website->youtube_url;
+            $this->facebook_url = $this->website->facebook_url;
+            $this->twitter_url = $this->website->twitter_url;
+            $this->instagram_url = $this->website->instagram_url;
+            $this->reddit_url = $this->website->reddit_url;
+            $this->google_news_url = $this->website->google_news_url;
+            $this->linkedin_url = $this->website->linkedin_url;
 
             // Convert meta_tags to tags array
             $this->tags = array_filter(array_map('trim', explode(',', $this->website->meta_tags)));
@@ -44,6 +52,13 @@ class Index extends Component
             'meta_description' => 'nullable',
             'meta_tags' => 'nullable|max:255',
             'fb_app_id' => 'nullable|string|max:255',
+            'youtube_url' => 'nullable|url|max:255',
+            'facebook_url' => 'nullable|url|max:255',
+            'twitter_url' => 'nullable|url|max:255',
+            'instagram_url' => 'nullable|url|max:255',
+            'reddit_url' => 'nullable|url|max:255',
+            'google_news_url' => 'nullable|url|max:255',
+            'linkedin_url' => 'nullable|url|max:255',
         ]);
 
         // Set meta_tags from tagsString

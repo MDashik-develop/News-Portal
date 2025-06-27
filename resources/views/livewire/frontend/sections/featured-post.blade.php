@@ -31,13 +31,13 @@
             <a href="{{ route('post.view', ['slug' => $featuredPost->slug]) }}" wire:navigate
                 class="flex flex-col-reverse sm:flex-row gap-2">
                 <div class="w-full md:w-2/5 flex flex-col justify-between gap-2">
-                    <h2 class="line-clamp-4 text-2xl text-blue-500">
+                    <h2 class="line-clamp-4 text-2xl text-blue-500 dark:text-blue-400">
                         {{ $featuredPost->title }}
                     </h2>
                     {{-- <h1 class="line-clamp-3 text-2xl">
                         {{ $featuredPost->summary }}
                     </h1> --}}
-                    <p class="line-clamp-6 text-1xl">
+                    <p class="line-clamp-6 text-1xl dark:text-gray-300">
                         {{ $featuredPost->content }}
                     </p>
                 </div>

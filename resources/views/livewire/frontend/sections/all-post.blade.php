@@ -42,7 +42,7 @@
                                         class="w-full h-auto rounded-t">
                                 </div>
                                 <div class="px-2 py-1">
-                                    <p class="line-clamp-3">{{ $s5->title }}</p>
+                                    <p class="line-clamp-3 dark:text-gray-300">{{ $s5->title }}</p>
                                 </div>
                             </a>
                         </div>

@@ -23,10 +23,10 @@
             {{-- Actual Post --}}
             <template x-if="ready">
                 <a href="{{ route('post.view', ['slug' => $s3->slug]) }}" wire:navigate
-                   class="flex justify-between gap-2 p-2 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                   class="flex justify-between gap-2 p-2 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-zinc-800 dark:border-zinc-700">
                     <img src="{{ asset('storage/' . $s3->featured_image) }}" alt="{{ $s3->title }}"
                          class="w-[120px] h-[80px] object-cover rounded">
-                    <h5 class="w-full text-base line-clamp-3 tracking-tight text-gray-900 dark:text-white max-h-min"
+                    <h5 class="w-full text-base line-clamp-3 tracking-tight text-gray-900  dark:text-gray-300 max-h-min"
                          style="word-spacing: 1px;">
                         {{ $s3->title }}
                     </h5>

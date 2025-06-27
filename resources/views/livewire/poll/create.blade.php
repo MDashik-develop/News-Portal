@@ -1,8 +1,8 @@
 <section class="py-12">
    <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-grey-50 dark:bg-zinc-800 overflow-hidden border sm:rounded-lg">
+      <div class="bg-grey-50 dark:bg-zinc-700 overflow-hidden border dark:border-zinc-700 sm:rounded-lg">
          <div class="p-6 text-gray-900">
-            <h2 class="text-2xl font-semibold mb-6">Create Poll</h2>
+            <h2 class="text-2xl dark:text-white font-semibold mb-6">Create Poll</h2>
             <form wire:submit.prevent="submit" class="space-y-6">
                <flux:field>
                   <flux:label>Question</flux:label>

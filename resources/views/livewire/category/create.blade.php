@@ -1,9 +1,9 @@
 <div class="py-12">
     <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="bg-white dark:bg-zinc-700 border dark:border-zinc-600 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900">
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-semibold">Create Category</h2>
+                    <h2 class="text-2xl font-semibold dark:text-white">Create Category</h2>
                     <flux:button type="button" href="{{ route('categories.index') }}" 
                        wire:navigate
                        variant="filled"
@@ -15,7 +15,7 @@
 
                 <form wire:submit.prevent="submit" class="space-y-6">
                     <div class="grid grid-cols-1 gap-6">
-                        <div class="border p-4 rounded-lg">
+                        <div class="p-4 rounded-lg">
                             <flux:field class="mb-4">
                                 <flux:label>Category Name</flux:label>
                                 <flux:input wire:model.live="name" type="text" required />

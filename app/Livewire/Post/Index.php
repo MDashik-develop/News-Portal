@@ -55,7 +55,8 @@ class Index extends Component
                 $query->where(function($q) {
                     $q->where('title', 'like', '%' . $this->search . '%')
                       ->orWhere('id', 'like', '%' . $this->search . '%')
-                      ->orWhere('keywords', 'like', '%' . $this->search . '%');
+                      ->orWhere('keywords', 'like', '%' . $this->search . '%')
+                      ->orWhere('section', 'like', '%' . $this->search . '%');
                 })
             )
             ->latest()

@@ -1,7 +1,7 @@
 <div>
     <div class="p-6">
         <div class="max-w-7xl mx-auto">
-            <div class="bg-white dark:bg-zinc-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white dark:bg-zinc-600 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <h2 class="text-2xl font-semibold mb-4">Website Settings</h2>
 

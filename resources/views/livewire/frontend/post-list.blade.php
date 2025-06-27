@@ -2,7 +2,7 @@
    <!-- Post Content -->
    <div class="container mx-auto flex flex-col lg:flex-row gap-4">
        <div class="md:w-[70%]">
-         <div class="w-full min-h-screen mb-5 px-3 py-3 rounded-xl border bg-gray-50 dark:bg-gray-900 shadow-md">
+         <div class="w-full min-h-screen mb-5 px-3 py-3 rounded-xl border bg-gray-50 dark:bg-zinc-700 dark:border-zinc-600 shadow-md">
             <h2 class="text-xl font-bold mb-4">Search results for "{{ $searchQuery }}"</h2>
                <div class="grid grid-cols-2 md:grid-cols-3 w-full gap-2 p-2 mb-3">   
                   @forelse ($posts as $post)
@@ -31,13 +31,13 @@
                       {{-- Actual Post --}}
                       <template x-if="ready">
                           <div class="p-1 sm:p-2">
-                              <div class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                              <div class="bg-white border border-gray-200 rounded hover:bg-zinc-100 dark:bg-zinc-600 dark:border-gray-700 dark:hover:bg-gray-700">
                                   <a href="{{ route('post.view', ['slug' => $post->slug]) }}" wire:navigate>
                                       <div class="h-[50%]">
                                           <img src="{{ asset('storage/' . $post->featured_image) }}" alt="{{ $post->title }}" class="w-full h-auto rounded-t">
                                       </div>
                                       <div class="px-2 py-1">
-                                          <p class="line-clamp-3">{{ $post->title }}</p>
+                                          <p class="line-clamp-3 dark:text-gray-300">{{ $post->title }}</p>
                                       </div>
                                   </a>
                               </div>

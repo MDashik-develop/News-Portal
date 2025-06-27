@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="bn">
+{{-- <html lang="bn"> --}}
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="">
 @php
     $website = \App\Models\website::first();
 @endphp
 
 <head>
+    <script>
+        (function() {
+            try {
+                function applyTheme() {
+                    var currentTheme = localStorage.getItem('theme');
+                    if (!currentTheme) {
+                        currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                    }
+        
+                    const hasDarkClass = document.documentElement.classList.contains('dark');
+        
+                    if (currentTheme === 'dark' && !hasDarkClass) {
+                        document.documentElement.classList.add('dark');
+                    } else if (currentTheme !== 'dark' && hasDarkClass) {
+                        document.documentElement.classList.remove('dark');
+                    }
+                }
+        
+                // Initial
+                applyTheme();
+        
+                // Watch for className tampering
+                new MutationObserver(function() {
+                    applyTheme();
+                }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+        
+                // Watch for localStorage changes (from other tabs)
+                window.addEventListener('storage', function(e) {
+                    if (e.key === 'theme') {
+                        applyTheme();
+                    }
+                });
+            } catch (e) {}
+        })();
+    </script>
+        
+        
+    
+    
     {{-- <title>{{ $title ?? 'My Website' }}</title> --}}
     {{-- <meta name="theme-color" content="#ffffff"> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -42,6 +82,7 @@
             font-family: 'Hind Siliguri', 'Inter', sans-serif;
         }
     </style>
+    @stack('styles')
     {{-- @livewireStyles --}}
 
     @if($website && $website->adsense_publisher_id)
@@ -50,7 +91,7 @@
     @endif
 </head>
 
-<body class=" bg-white dark:bg-gray-800">
+<body class=" bg-white dark:bg-zinc-900">
 
     <!-- Facebook SDK -->
     <div id="fb-root"></div>
@@ -64,8 +105,7 @@
         <livewire:frontend.layouts.nav />
 
     {{-- Main Content --}}
-        <main class="min-h-screen max-w-7xl mx-auto  py-6">
-            {{-- Main content area --}}
+        <main class="min-h-screen max-w-7xl mx-auto py-4">
             {{ $slot }}
         </main>
 
@@ -91,39 +131,81 @@
                 }
             });
             
-        $(document).ready(function(){
-        $('.home-autoplay-carousel').slick({
-        slidesToShow: 6,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        responsive: [
-            {
-            breakpoint: 1024,
-            settings: {
+            $(document).ready(function(){
+                $('.home-autoplay-carousel').slick({
                 slidesToShow: 6,
-                slidesToScroll: 1
-            }
-            },
-            {
-            breakpoint: 768,
-            settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1
-            }
-            },
-            {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1
-            }
-            }
-        ]
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                responsive: [
+                    {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 6,
+                        slidesToScroll: 1
+                    }
+                    },
+                    {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1
+                    }
+                    },
+                    {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                    }
+                ]
+            });
+        
         });
-    
-    });
     </script>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('theme', {
+                dark: false,
+                toggle() {
+                    this.dark = !this.dark;
+                    this.apply();
+                },
+                apply() {
+                    if (this.dark) {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('theme', 'light');
+                    }
+                },
+                init() {
+                    this.dark = localStorage.getItem('theme') === 'dark' ||
+                        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                    this.apply();
+                }
+            });
+
+            Alpine.store('theme').init();
+        });
+
+        document.addEventListener('livewire:navigated', () => {
+            if (Alpine && Alpine.store) {
+                Alpine.store('theme').init();
+            }
+        });
+
+        document.addEventListener('livewire:load', () => {
+            Alpine.store('theme').init();
+        });
+
+        
+    </script>
+
+
+
     @stack('scripts')
     {{-- @livewireStyles --}}
 </body>

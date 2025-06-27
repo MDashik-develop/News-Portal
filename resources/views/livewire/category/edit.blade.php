@@ -1,10 +1,10 @@
 <div class="py-12">
     <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="bg-white dark:bg-zinc-700 border dark:border-zinc-600 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900">
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-semibold">Edit Category</h2>
-                    {{-- নিশ্চিত করুন 'categories.index' রাউটটি বিদ্যমান --}}
+                    <h2 class="text-2xl dark:text-white">Edit Category</h2> 
+                    
                     <a href="{{ route('categories.index') }}" wire:navigate class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
                         Back to Categories
                     </a>
@@ -12,7 +12,7 @@
 
                 <form wire:submit.prevent="update" class="space-y-6">
                     <div class="grid grid-cols-1 gap-6">
-                        <div class="border p-4 rounded-lg">
+                        <div class=" p-4 rounded-lg">
                             <flux:field class="mb-4">
                                 <flux:label>Category Name</flux:label>
                                 <flux:input wire:model.live="name" type="text" required />
@@ -65,25 +65,25 @@
                                 </flux:select>
                                 <flux:error name="status" />
                             </flux:field>
+                            <div class="grid grid-cols-2 gap-2">
+                                <flux:field>
+                                    <flux:label>Is Show Home Category</flux:label>
+                                    <flux:select wire:model="home_category_show">
+                                        <flux:select.option value="">Select options</flux:select.option>
+                                        <flux:select.option value="0">No</flux:select.option>
+                                        <flux:select.option value="1">yes</flux:select.option>
+                                    </flux:select>
+                                </flux:field>
+
+                                <flux:field>
+                                    <flux:label>Home Category Show Order</flux:label>
+                                    <flux:input wire:model="home_category_show_order" type="number" />
+                                    <flux:error name="home_category_show_order" />
+                                </flux:field>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-2">
-                        <flux:field>
-                            <flux:label>Is Show Home Category</flux:label>
-                            <flux:select wire:model="home_category_show">
-                                <flux:select.option value="">Select options</flux:select.option>
-                                <flux:select.option value="0">No</flux:select.option>
-                                <flux:select.option value="1">yes</flux:select.option>
-                            </flux:select>
-                        </flux:field>
-
-                        <flux:field>
-                            <flux:label>Home Category Show Order</flux:label>
-                            <flux:input wire:model="home_category_show_order" type="number" />
-                            <flux:error name="home_category_show_order" />
-                        </flux:field>
-                    </div>
 
                     <div class="flex items-center justify-end mt-6">
                         <flux:button type="button" wire:click="$refresh" variant="danger" class="mr-3 danger">

@@ -131,6 +131,7 @@ class PostView extends Component
         $this->relatedPosts = Post::where('category_id', $this->post->category_id)
             ->where('slug', '!=', $slug)
             ->where('status', 'published')
+            ->whereNotNull('featured_image')
             ->latest()
             ->take(15)
             ->get();

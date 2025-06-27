@@ -1,9 +1,9 @@
 <section class="py-12">
     <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden border shadow-sm sm:rounded-lg">
+        <div class="bg-white dark:bg-zinc-700 border dark:border-zinc-600 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900">
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-semibold">Create Post</h2>
+                    <h2 class="text-2xl dark:text-white font-semibold">Create Post</h2>
                     <flux:button type="button" href="{{ route('posts.index') }}" wire:navigate variant="filled"
                         icon="arrow-left"
                         class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
@@ -112,15 +112,11 @@
 
                         <flux:field>
                             <flux:label>Video URL</flux:label>
-                            <flux:input wire:model="video_url" type="url" />
+                            <small>Only YouTube Urls are allowed</small>
+                            <flux:input wire:model="video_url" type="url" placeholder="https://www.youtube.com/watch?v=xxxxxxxxxx" />
                             <flux:error name="video_url" />
                         </flux:field>
 
-                        {{-- <flux:field>
-                            <flux:label>Keywords</flux:label>
-                            <flux:input wire:model="keywords" type="text" />
-                            <flux:error name="keywords" />
-                        </flux:field> --}}
 
                         <flux:field>
                             <flux:label>Status</flux:label>

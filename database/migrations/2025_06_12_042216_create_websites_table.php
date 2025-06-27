@@ -19,6 +19,14 @@ return new class extends Migration
             $table->string('fb_app_id')->nullable();
             $table->text('meta_description')->nullable();
             $table->string('fb_app_id')->nullable();
+
+            $table->string('youtube_url')->nullable();
+            $table->string('facebook_url')->nullable();
+            $table->string('twitter_url')->nullable(); // For X/Twitter
+            $table->string('instagram_url')->nullable();
+            $table->string('reddit_url')->nullable();
+            $table->string('google_news_url')->nullable(); // For Google News
+            $table->string('linkedin_url')->nullable();
             $table->timestamps();
         });
     }

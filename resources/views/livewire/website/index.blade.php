@@ -39,6 +39,48 @@
                                 @error('fb_app_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
+                            <!-- Facebook URL -->
+                            <div>
+                                <label for="facebook_url" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Facebook URL</label>
+                                <input type="text" wire:model="facebook_url" id="facebook_url" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-zinc-700 dark:border-zinc-600">
+                                @error('facebook_url') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Twitter URL -->
+                            <div>
+                                <label for="twitter_url" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Twitter URL</label>
+                                <input type="text" wire:model="twitter_url" id="twitter_url" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-zinc-700 dark:border-zinc-600">
+                                @error('twitter_url') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Instagram URL -->
+                            <div>
+                                <label for="instagram_url" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Instagram URL</label>
+                                <input type="text" wire:model="instagram_url" id="instagram_url" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-zinc-700 dark:border-zinc-600">
+                                @error('instagram_url') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Reddit URL -->
+                            <div>
+                                <label for="reddit_url" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Reddit URL</label>
+                                <input type="text" wire:model="reddit_url" id="reddit_url" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-zinc-700 dark:border-zinc-600">
+                                @error('reddit_url') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Google News URL -->
+                            <div>
+                                <label for="google_news_url" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Google News URL</label>
+                                <input type="text" wire:model="google_news_url" id="google_news_url" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-zinc-700 dark:border-zinc-600">
+                                @error('google_news_url') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- LinkedIn URL -->
+                            <div>
+                                <label for="linkedin_url" class="block text-sm font-medium text-gray-700 dark:text-gray-300">LinkedIn URL</label>
+                                <input type="text" wire:model="linkedin_url" id="linkedin_url" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-zinc-700 dark:border-zinc-600">
+                                @error('linkedin_url') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
                             <!-- Save Button -->
                             <div class="flex justify-end">
                                 <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 ">Save Settings</button>

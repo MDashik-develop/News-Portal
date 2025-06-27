@@ -30,31 +30,63 @@
     </div>
     <div class="min-h-screen">
         <!-- Post Content -->
-        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-4">
             <div class="md:w-[70%]">
-                <div class=" mb-5 px-3 py-3 rounded-xl border bg-gray-50 dark:bg-gray-900 shadow-md">
-                    <div class="mb-8">
-                        <img src="{{  asset('storage/' . $post->featured_image) }}" alt="{{ $post->title }}"
-                            class="w-full h-auto object-cover rounded-lg shadow-lg">
+                <div class=" mb-5 px-3 py-3 rounded-xl border bg-gray-50 dark:bg-zinc-900 dark:border-zinc-700 shadow-md">
+
+                    @if ($post->featured_image && $post->video_url)
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    @else
+                        <div class="grid grid-cols-1 gap-4">
+                    @endif
+
+                        @if ($post->featured_image)
+                            <div class="mb-8">
+                                <img src="{{ asset('storage/' . $post->featured_image) }}" alt="{{ $post->title }}"
+                                    class="w-full h-auto object-cover rounded-lg shadow-lg">
+                            </div>
+                        @endif
+                    
+                        @if ($post->video_url)
+                            @php
+                                // ভিডিও লিঙ্ক থেকে শুধুমাত্র ভিডিও আইডি বের করার জন্য Regex
+                                preg_match('/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#&?]*).*/', $post->video_url, $matches);
+                                $videoId = $matches[2] ?? null;
+                            @endphp
+                        
+                            {{-- যদি একটি বৈধ ভিডিও আইডি পাওয়া যায়, তবেই iframe দেখানো হবে --}}
+                            @if ($videoId)
+                                <div class="mb-8">
+                                    <div class="relative w-full h-0 pb-[56.25%] rounded-lg overflow-hidden shadow-lg bg-black">
+                                        <iframe 
+                                            {{-- এখানে শুধু $videoId ব্যবহার করা হয়েছে --}}
+                                            src="https://www.youtube.com/embed/{{ $videoId }}?autoplay=1&controls=1" 
+                                            frameborder="0" 
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                            allowfullscreen
+                                            class="absolute top-0 left-0 w-full h-full rounded-lg">
+                                        </iframe>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                     </div>
+
                     <div class=" mb-8">
                         <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
                             {{ $post->title }}
                         </h1>
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between space-x-4 text-sm text-gray-600 dark:text-gray-400">
-                            <div class="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
-                                <span><i class="far fa-calendar-alt mr-1"></i>
-                                    {{ $this->formatToBengali($post->created_at->format('M j, Y')) }}</span>
-                                    <span>
-                                        {{-- আপনার কাস্টম হেলপার ক্লাস ব্যবহার করে তারিখ ফরম্যাট করা হচ্ছে --}}
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between flex-wrap space-x-4 text-sm text-gray-600 dark:text-gray-400">
+                            <div class="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 flex-wrap">
+                                <span class="whitespace-nowrap"><i class="far fa-calendar-alt mr-1"></i>
                                         {{ \App\Helpers\BanglaDateHelper::formattedLineThree($post->created_at) }}
-                                    </span>
-                                <span class="flex items-center gap-1.5">
+                                </span>
+                                <span class="flex items-center gap-1.5 flex-nowrap">
                                     <img src="{{ asset('storage/' . $post->user?->profile_image ?? 'Unknown') }}"
                                         alt="{{  $post->user?->name }}" class=" rounded-full w-6 h-6 mb-1">
                                     {{ $post->user?->name ?? 'Unknown' }}
                                 </span>
-                                <span><i class="far fa-eye mr-1"></i>{{ $this->convertToBengaliNumbers($post->view_count ?? 0) }} views</span>
+                                <span class="whitespace-nowrap"><i class="far fa-eye mr-1"></i>{{ $this->convertToBengaliNumbers($post->view_count ?? 0) }} views</span>
                             </div>
 
                             <div class="flex items-start space-x-4 text-sm text-gray-600 dark:text-gray-400">
@@ -175,7 +207,7 @@
                             </div>
                         </div>
                     </div>
-                    <article class=" text-[20.4px] md:text-[18px] md:leading-[1.66] leading-[1.85] prose prose-lg max-w-none dark:prose-invert my-12" style="word-spacing: 3.3px">
+                    <article class=" text-[20.4px] md:text-[18px] md:leading-[1.66] leading-[1.85] prose prose-lg max-w-none dark:prose-invert my-12 dark:text-gray-300" style="word-spacing: 3.3px">
                         {!! $post->content !!}
                     </article>
                 </div>
@@ -278,7 +310,7 @@
                                 <img src="{{ asset('storage/' . $relatedPost->featured_image) }}" alt="{{ $relatedPost->title }}" class="w-full h-auto rounded">
                             </div>
                             <div class="px-2 py-1">
-                                <p class="line-clamp-2">{{ $relatedPost->title }}</p>
+                                <p class="line-clamp-2 dark:text-gray-300">{{ $relatedPost->title }}</p>
                             </div>
                         </a>
                     </div>
