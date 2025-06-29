@@ -44,9 +44,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta property="og:type" content="website">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @if ($website->favicon->isNotEmpty())
-        <link rel="icon" href="{{ asset('storage/' . $website->favicon) }}" type="image/x-icon
-    @endif">
+    @if ($website->favicon)
+        <link rel="icon" href="{{ asset('storage/' . $website->favicon) }}" type="image/x-icon">
+    @else
+        <link rel="icon" href="{{ asset('storage/favicon.ico') }}" type="image/x-icon">
+    @endif
     @if (!trim($__env->yieldPushContent('post-head')))
         <title>{{ $website->title ?? 'My Website' }}</title>
         <meta name="description" content="{{ $website->meta_description ?? 'Default description' }}">
