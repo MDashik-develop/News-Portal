@@ -41,15 +41,12 @@
         })();
     </script>
         
-        
-    
-    
-    {{-- <title>{{ $title ?? 'My Website' }}</title> --}}
-    {{-- <meta name="theme-color" content="#ffffff"> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta property="og:type" content="website">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{ asset('storage/' . $website->favicon) }}" type="image/x-icon">
+    @if ($$website->favicon->isNotEmpty())
+        <link rel="icon" href="{{ asset('storage/' . $website->favicon) }}" type="image/x-icon
+    @endif">
     @if (!trim($__env->yieldPushContent('post-head')))
         <title>{{ $website->title ?? 'My Website' }}</title>
         <meta name="description" content="{{ $website->meta_description ?? 'Default description' }}">
@@ -91,25 +88,23 @@
 </head>
 
 <body class=" bg-white dark:bg-zinc-900">
-
-    <!-- Facebook SDK -->
+    <div>
+            <!-- Facebook SDK -->
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous"
         src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0&appId={{ $website->fb_app_id }}&autoLogAppEvents=1"
         nonce="abcd1234">
     </script>
-
-    <!-- Header with logo and social icons -->
         <livewire:frontend.layouts.header />
         <livewire:frontend.layouts.nav />
 
-    {{-- Main Content --}}
         <main class="min-h-screen max-w-7xl mx-auto py-4">
             {{ $slot }}
         </main>
 
-    {{-- Footer --}}
         <livewire:frontend.layouts.footer />
+    </div>
+    
 
     <!-- Footer Scripts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" defer></script>
