@@ -60,9 +60,9 @@
             <meta name="keywords" content="{{ $keywords }}">
             <meta property="og:title" content="{{ $title }}">
             <meta property="og:description" content="{{ $description }}">
-@if ($website && $website->logo)
-<meta property="og:image" content="{{ asset('storage/' . $website->logo) }}">
-@endif
+            @if ($website && $website->logo)
+                <meta property="og:image" content="{{ asset('storage/' . $website->logo) }}">
+            @endif
             <meta property="og:url" content="{{ url('/') }}">
             <meta name="author" content="{{ $title }}">
         @else
