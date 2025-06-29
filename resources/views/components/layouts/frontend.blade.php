@@ -44,20 +44,21 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta property="og:type" content="website">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @if ($website->favicon)
+    @if ($website && $website->favicon)
         <link rel="icon" href="{{ asset('storage/' . $website->favicon) }}" type="image/x-icon">
     @else
         <link rel="icon" href="{{ asset('storage/favicon.ico') }}" type="image/x-icon">
     @endif
+
     @if (!trim($__env->yieldPushContent('post-head')))
-        <title>{{ $website->title ?? 'My Website' }}</title>
-        <meta name="description" content="{{ $website->meta_description ?? 'Default description' }}">
-        <meta name="keywords" content="{{ $website->meta_tags ?? 'default, tags' }}">
-        <meta property="og:title" content="{{ $website->title ?? 'My Website' }}">
-        <meta property="og:description" content="{{ $website->meta_description ?? 'Default description' }}">
-        <meta property="og:image" content="{{ asset('storage/' . $website->logo) }}">
+        <title>{{ $website ? $website->title : 'My Website' }}</title>
+        <meta name="description" content="{{ $website ? $website->meta_description : 'Default description' }}">
+        <meta name="keywords" content="{{ $website ? $website->meta_tags : 'default, tags' }}">
+        <meta property="og:title" content="{{ $website ? $website->title : 'My Website' }}">
+        <meta property="og:description" content="{{ $website ? $website->meta_description : 'Default description' }}">
+        <meta property="og:image" content="{{ $website && $website->logo ? asset('storage/' . $website->logo) : asset('storage/default-logo.png') }}">
         <meta property="og:url" content="{{ url('/') }}">
-        <meta name="author" content="{{ $website->title ?? 'My Website' }}">
+        <meta name="author" content="{{ $website ? $website->title : 'My Website' }}">
     @else
         @stack('post-head')
     @endif
