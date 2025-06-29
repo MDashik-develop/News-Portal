@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{{-- <html lang="bn"> --}}
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="">
 @php
     $website = \App\Models\website::first();

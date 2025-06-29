@@ -1,3 +1,3 @@
 <x-layouts.frontend>
-      <livewire:frontend.home />
+      @livewire('frontend.home')
 </x-layouts.frontend>
