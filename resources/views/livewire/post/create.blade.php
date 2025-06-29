@@ -83,8 +83,6 @@
                                 <flux:error name="content" />
                         </flux:field>
 
-
-
                         <flux:field>
                             <flux:label>Featured Image</flux:label>
                             <label for="file-upload"
