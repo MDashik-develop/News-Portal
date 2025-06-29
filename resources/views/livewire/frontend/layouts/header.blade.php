@@ -11,11 +11,15 @@
                 </p>
             </div>
             <div class="flex justify-center flex-1 w-full md:w-auto order-first md:order-none mb-2 md:mb-0 h-16 md:h-20 max-h-20">
+                @php
+                    $logo = $website && $website->logo ? $website->logo : 'default-logo.png';
+                @endphp
                 <a href="{{ route('home') }}"
-                wire:navigate 
-                class="flex items-center justify-center max-h-full">
-                    <img src="{{ asset('storage/' . $logo) }}" class="h-full w-auto" alt="{{ $logo }}"">
+                    wire:navigate 
+                    class="flex items-center justify-center max-h-full">
+                        <img src="{{ asset('storage/' . $logo) }}" class="h-full w-auto" alt="Site Logo">
                 </a>
+
             </div>
             <div
                 class="flex items-center space-x-2 text-[12px] text-[#b30000] font-normal flex-1 w-full md:w-auto justify-center md:justify-end">
