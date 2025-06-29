@@ -6,7 +6,9 @@ use App\Models\Category;
 use App\Models\Post;
 use Livewire\Component;
 use App\Traits\HasBengaliNumbers;
+use Livewire\Attributes\Layout;
 
+#[Layout('components.layouts.frontend')]
 class Home extends Component
 
 {

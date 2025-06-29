@@ -5,9 +5,6 @@ namespace App\Livewire\Frontend;
 use App\Models\Category;
 use Livewire\Component;
 use App\Models\Post;
-use Livewire\Attributes\Layout;
-
-#[Layout('components.layouts.frontend')]
 class PostCategory extends Component
 {
 

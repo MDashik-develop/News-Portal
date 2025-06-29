@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('log_visitor')->group(function () {
 
-    // Route::get('/', Home::class)->name('home');
+    Route::get('/', Home::class)->name('home');
 
-    Route::get('/', function () {
-        return view('home');
-    })->name('home');
+    // Route::get('/', function () {
+    //     return view('home');
+    // })->name('home');
 
     Route::get('post/{slug}', PostView::class)->name('post.view');
     Route::get('search/{searchQuery}', PostList::class)->name('search.post');
