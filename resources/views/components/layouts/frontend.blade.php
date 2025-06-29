@@ -44,24 +44,29 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta property="og:type" content="website">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @if ($website && $website->favicon)
-        <link rel="icon" href="{{ asset('storage/' . $website->favicon) }}" type="image/x-icon">
-    @else
-        <link rel="icon" href="{{ asset('storage/favicon.ico') }}" type="image/x-icon">
-    @endif
+    @php
+        $favicon = $website && $website->favicon ? $website->favicon : 'favicon.ico';
+        $title = $website && $website->title ? $website->title : 'My Website';
+        $description = $website && $website->meta_description ? $website->meta_description : 'Default description';
+        $keywords = $website && $website->meta_tags ? $website->meta_tags : 'default, tags';
+        $logo = $website && $website->logo ? $website->logo : 'default-logo.png';
+    @endphp
 
-    @if (!trim($__env->yieldPushContent('post-head')))
-        <title>{{ $website ? $website->title : 'My Website' }}</title>
-        <meta name="description" content="{{ $website ? $website->meta_description : 'Default description' }}">
-        <meta name="keywords" content="{{ $website ? $website->meta_tags : 'default, tags' }}">
-        <meta property="og:title" content="{{ $website ? $website->title : 'My Website' }}">
-        <meta property="og:description" content="{{ $website ? $website->meta_description : 'Default description' }}">
-        <meta property="og:image" content="{{ $website && $website->logo ? asset('storage/' . $website->logo) : asset('storage/default-logo.png') }}">
-        <meta property="og:url" content="{{ url('/') }}">
-        <meta name="author" content="{{ $website ? $website->title : 'My Website' }}">
-    @else
-        @stack('post-head')
-    @endif
+        <link rel="icon" href="{{ asset('storage/' . $favicon) }}" type="image/x-icon">
+
+        @if (!trim($__env->yieldPushContent('post-head')))
+            <title>{{ $title }}</title>
+            <meta name="description" content="{{ $description }}">
+            <meta name="keywords" content="{{ $keywords }}">
+            <meta property="og:title" content="{{ $title }}">
+            <meta property="og:description" content="{{ $description }}">
+            <meta property="og:image" content="{{ asset('storage/' . $logo) }}">
+            <meta property="og:url" content="{{ url('/') }}">
+            <meta name="author" content="{{ $title }}">
+        @else
+            @stack('post-head')
+        @endif
+
 
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css" />
