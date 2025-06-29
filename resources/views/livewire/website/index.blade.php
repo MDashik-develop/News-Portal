@@ -158,11 +158,11 @@
                         //     initializeTagsField();
                         // });
 
-Livewire.hook('message.processed', () => {
-    setTimeout(() => {
-        initializeTagsField();
-    }, 50);
-});
+                        Livewire.hook('message.processed', () => {
+                            setTimeout(() => {
+                                initializeTagsField();
+                            }, 50);
+                        });
                     </script>
                     
                 </div>

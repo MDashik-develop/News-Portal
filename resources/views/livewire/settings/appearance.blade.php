@@ -46,7 +46,7 @@ new class extends Component {
             }
         }
     }"
->
+    >
     {{-- Your settings-heading and layout components --}}
     @include('partials.settings-heading')
 

@@ -1,4 +1,3 @@
-<!-- Toast container -->
 <div id="toast" 
      class="fixed top-5 right-5 max-w-xs w-full bg-green-600 text-white px-5 py-3 rounded shadow-lg z-50
             opacity-0 translate-x-20 pointer-events-none
@@ -20,58 +19,58 @@
             </svg>
         </button>
     </div>
-</div>
 
-<script>
-    window.addEventListener('notify', event => {
-        const toast = document.getElementById('toast');
-        const messageSpan = document.getElementById('toast-message');
-        const toastIcon = document.getElementById('toast-icon');
-
-        // Event.detail can be array or object
-        const detail = Array.isArray(event.detail) ? event.detail[0] : event.detail;
-
-        // Change background and icon color based on type
-        toast.classList.remove('bg-green-600', 'bg-red-600');
-        toastIcon.classList.remove('text-green-300', 'text-red-300');
-
-        if(detail.type === 'error') {
-            toast.classList.add('bg-red-600');
-            toastIcon.classList.add('text-red-300');
-        } else {
-            toast.classList.add('bg-green-600');
-            toastIcon.classList.add('text-green-300');
-        }
-
-        messageSpan.textContent = detail.message;
-
-        // Show toast with animation
-        toast.style.display = 'block';
-
-        // Animate in (opacity 0 -> 1, translate-x-20 -> 0)
-        setTimeout(() => {
-            toast.classList.remove('opacity-0', 'translate-x-20', 'pointer-events-none');
-            toast.classList.add('opacity-100', 'translate-x-0');
-        }, 10);
-
-        // Hide after 3 seconds with animation
-        setTimeout(() => {
+    <script>
+        window.addEventListener('notify', event => {
+            const toast = document.getElementById('toast');
+            const messageSpan = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
+    
+            // Event.detail can be array or object
+            const detail = Array.isArray(event.detail) ? event.detail[0] : event.detail;
+    
+            // Change background and icon color based on type
+            toast.classList.remove('bg-green-600', 'bg-red-600');
+            toastIcon.classList.remove('text-green-300', 'text-red-300');
+    
+            if(detail.type === 'error') {
+                toast.classList.add('bg-red-600');
+                toastIcon.classList.add('text-red-300');
+            } else {
+                toast.classList.add('bg-green-600');
+                toastIcon.classList.add('text-green-300');
+            }
+    
+            messageSpan.textContent = detail.message;
+    
+            // Show toast with animation
+            toast.style.display = 'block';
+    
+            // Animate in (opacity 0 -> 1, translate-x-20 -> 0)
+            setTimeout(() => {
+                toast.classList.remove('opacity-0', 'translate-x-20', 'pointer-events-none');
+                toast.classList.add('opacity-100', 'translate-x-0');
+            }, 10);
+    
+            // Hide after 3 seconds with animation
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-x-0');
+                toast.classList.add('opacity-0', 'translate-x-20', 'pointer-events-none');
+                // After animation ends, hide from DOM
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 500);
+            }, 3000);
+        });
+    
+        // Close button to manually hide toast
+        document.getElementById('toast-close').addEventListener('click', () => {
+            const toast = document.getElementById('toast');
             toast.classList.remove('opacity-100', 'translate-x-0');
             toast.classList.add('opacity-0', 'translate-x-20', 'pointer-events-none');
-            // After animation ends, hide from DOM
             setTimeout(() => {
                 toast.style.display = 'none';
             }, 500);
-        }, 3000);
-    });
-
-    // Close button to manually hide toast
-    document.getElementById('toast-close').addEventListener('click', () => {
-        const toast = document.getElementById('toast');
-        toast.classList.remove('opacity-100', 'translate-x-0');
-        toast.classList.add('opacity-0', 'translate-x-20', 'pointer-events-none');
-        setTimeout(() => {
-            toast.style.display = 'none';
-        }, 500);
-    });
-</script>
+        });
+    </script>
+</div>

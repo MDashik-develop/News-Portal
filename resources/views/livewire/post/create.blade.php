@@ -80,6 +80,7 @@
                                 <div wire:ignore>
                                     <textarea x-ref="editor">{!! $content !!}</textarea>
                                 </div>
+                            </div>
                                 <flux:error name="content" />
                         </flux:field>
 
@@ -212,8 +213,6 @@
                             <flux:textarea wire:model="meta_description" rows="3" />
                             <flux:error name="meta_description" />
                         </flux:field>
-
-
 
                     </div>
 

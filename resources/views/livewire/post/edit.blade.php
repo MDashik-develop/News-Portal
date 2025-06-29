@@ -74,6 +74,7 @@
                                 <div wire:ignore>
                                     <textarea x-ref="editor">{!! $content !!}</textarea>
                                 </div>
+                            </div>
                                 <flux:error name="content" />
                         </flux:field>
 
@@ -257,37 +258,37 @@
                                 <flux:error name="section" />
                             </flux:field>
                         </div>
+                        {{-- </div> --}}
+
+                        <flux:field>
+                            <flux:label>Published At</flux:label>
+                            <flux:input type="datetime-local" wire:model="published_at" />
+                            <flux:error name="published_at" />
+                        </flux:field>
+
+                        <flux:field>
+                            <flux:label>Meta Title</flux:label>
+                            <flux:input wire:model="meta_title" type="text" />
+                            <flux:error name="meta_title" />
+                        </flux:field>
+
+                        <flux:field>
+                            <flux:label>Meta Description</flux:label>
+                            <flux:textarea wire:model="meta_description" rows="3" />
+                            <flux:error name="meta_description" />
+                        </flux:field>
+
+                        <div class="flex justify-end gap-3">
+                            <flux:button type="button" wire:click="$refresh" variant="danger">
+                                Reset
+                            </flux:button>
+                            <flux:button type="submit" variant="primary" icon="pencil">
+                                Update Post
+                            </flux:button>
+                        </div>
                     </div>
-
-                    <flux:field>
-                        <flux:label>Published At</flux:label>
-                        <flux:input type="datetime-local" wire:model="published_at" />
-                        <flux:error name="published_at" />
-                    </flux:field>
-
-                    <flux:field>
-                        <flux:label>Meta Title</flux:label>
-                        <flux:input wire:model="meta_title" type="text" />
-                        <flux:error name="meta_title" />
-                    </flux:field>
-
-                    <flux:field>
-                        <flux:label>Meta Description</flux:label>
-                        <flux:textarea wire:model="meta_description" rows="3" />
-                        <flux:error name="meta_description" />
-                    </flux:field>
-
-                    <div class="flex justify-end gap-3">
-                        <flux:button type="button" wire:click="$refresh" variant="danger">
-                            Reset
-                        </flux:button>
-                        <flux:button type="submit" variant="primary" icon="pencil">
-                            Update Post
-                        </flux:button>
-                    </div>
+                </form>
             </div>
-            </form>
         </div>
     </div>
-</div>
 </div>
