@@ -1,7 +1,7 @@
-<section class="mb-5 px-3 py-3 rounded-xl border bg-gray-50 dark:bg-gray-900 shadow-md">
+<section class="mb-5 px-3 py-3 rounded-xl border bg-gray-50 dark:bg-zinc-800 dark:border-zinc-700 shadow-md">
     <div class="inline-flex items-center justify-center w-full">
-        <hr class="w-full h-[4px] my-8 bg-gray-200 border-0 dark:bg-gray-700 rounded-lg">
-        <span class="absolute px-3 font-semibold text-2xl text-gray-900 -translate-x-1/2 bg-gray-50 dark:bg-gray-900 left-1/2 dark:text-white">সকল</span>
+        <hr class="w-full h-[4px] my-8 bg-gray-200 border-0 dark:bg-zinc-900 rounded-lg">
+        <span class="absolute px-3 font-semibold text-2xl text-gray-900 -translate-x-1/2 bg-gray-50 dark:bg-zinc-800 left-1/2 dark:text-white">সকল</span>
     </div>
 
     <div class="w-full">
@@ -35,14 +35,14 @@
                 <template x-if="ready">
                     <div class="p-1 sm:p-2">
                         <div
-                            class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            class="bg-white border border-gray-200 rounded hover:bg-gray-100 dark:bg-zinc-700 dark:border-zinc-600 dark:hover:bg-zinc-900">
                             <a href="{{ route('post.view', ['slug' => $s5->slug]) }}" wire:navigate>
                                 <div class="h-[50%]">
                                     <img src="{{ asset('storage/' . $s5->featured_image) }}" alt="{{ $s5->title }}"
                                         class="w-full h-auto rounded-t">
                                 </div>
                                 <div class="px-2 py-1">
-                                    <p class="line-clamp-3 dark:text-gray-300">{{ $s5->title }}</p>
+                                    <p class="line-clamp-2 dark:text-gray-400">{{ $s5->title }}</p>
                                 </div>
                             </a>
                         </div>

@@ -37,7 +37,7 @@
                     {{-- <h1 class="line-clamp-3 text-2xl">
                         {{ $featuredPost->summary }}
                     </h1> --}}
-                    <p class="line-clamp-6 text-1xl dark:text-gray-300">
+                    <p class="line-clamp-6 text-1xl dark:text-gray-400">
                         {{ $featuredPost->content }}
                     </p>
                 </div>

@@ -14,7 +14,8 @@ class AdSenseManager extends Component
     use HasNotifications;
     public ?Website $website;
 
-    #[Rule('required|string|starts_with:ca-pub-')]
+    // #[Rule('required|string|starts_with:ca-pub-')]
+    #[Rule('nullable|max:255')]
     public $publisher_id = '';
 
     public function mount(): void

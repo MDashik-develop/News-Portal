@@ -3,7 +3,7 @@
         <div class="inline-flex items-center justify-center w-full">
             <hr class="w-full h-[4px] my-8 bg-gray-200 border-0 dark:bg-gray-700 rounded-lg">
             <span
-                class="absolute px-3 font-semibold text-2xl text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">{{ $cetagories }}</span>
+                class="absolute px-3 font-semibold text-2xl text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white  dark:bg-zinc-900">{{ $cetagories }}</span>
         </div>
         <div class="flex flex-col lg:flex-row gap-6 my-4">
             <!-- Left column -->
@@ -16,7 +16,7 @@
                             {{ $sportsLeft->title }}
                         </p>
                     </a>
-                    <hr class="border-gray-200" />
+                    <hr class="border-gray-200 dark:border-zinc-700" />
                 @endforeach
                 
             </div>
@@ -29,9 +29,9 @@
                         <h3 class="mt-3 text-base font-semibold leading-tight text-justify dark:text-gray-300">
                             {{ $sportsCenter->title }}
                         </h3>
-                        <p class="mt-1 text-sm text-gray-500 text-justify h-min overflow-hidden line-clamp-2">
-                            {{ $sportsCenter->content }}
-                        </p>
+                        <article class="mt-1 text-sm text-gray-500 text-justify h-min overflow-hidden line-clamp-2">
+                            {!! $sportsCenter->content !!}
+                        </article>
                     </a>
                 @endforeach
             </div>
@@ -46,7 +46,7 @@
                             {{ $sportsRight->title }}
                         </p>
                     </a>
-                    <hr class="border-gray-200 mb-[7px]" />
+                    <hr class="border-gray-200 mb-[7px] dark:border-zinc-700" />
                 @endforeach
                 <div class="ads-aside" class="max-w-full h-auto">
                     <livewire:ads.display-ad :locationKey="'home_cetagory'" lazy />

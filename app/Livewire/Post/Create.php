@@ -16,7 +16,9 @@ class Create extends Component
     use HasNotifications;
     use WithFileUploads;
 
-    public $title, $slug, $sub_title, $summary, $content;
+    // public $title, $slug, $sub_title, $summary, $content;
+    public $title, $slug, $sub_title, $summary;
+    public $content = '';
     public $section = 0;
     public $tags = []; // tags as array
     public $tagsString = ''; // to hold tags as CSV string for binding
@@ -54,7 +56,7 @@ class Create extends Component
         $validated = $this->validate([
             'title'          => 'required',
             'category_id'    => 'required|exists:categories,id',
-            'content'        => 'required|string',
+            'content'        => 'required',
             'featured_image' => 'nullable|image|max:1024',
             'status'         => 'required|in:draft,pending,published,archived',
             'sub_title'      => 'nullable|string',

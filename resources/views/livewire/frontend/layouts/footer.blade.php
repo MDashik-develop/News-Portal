@@ -41,22 +41,21 @@
                     আজকের পত্রিকা
                 </h3>
                 <ul class="space-y-2 text-gray-600">
-                    <li>
-                        <a class="hover:text-gray-900 transition-colors" href="#">প্রথম পাতা</a>
-                    </li>
-                    <li>
-                        <a class="hover:text-gray-900 transition-colors" href="#">খেলা</a>
-                    </li>
-                    <li>
-                        <a class="hover:text-gray-900 transition-colors" href="#">ভূতপূর্ব</a>
-                    </li>
+                    @if ($letestPosts and $letestPosts->isNOtEmpty())
+                        @foreach ($letestPosts as $letestPost)
+                            <li>
+                                <a class="hover:text-gray-900 transition-colors" href="{{ route('post.view', ['slug' => $letestPost->slug]) }}">{{ $letestPost->title }}</a>
+                            </li>
+                        @endforeach
+                    @else
+                    @endif
                 </ul>
             </div>
     
             <div>
                 <h3
                     class="invisible md:visible md:static font-bold text-base mb-4 border-b-2 border-[#f97316] inline-block pb-1">
-                    &nbsp;
+                    
                 </h3>
                 <ul class="space-y-2 text-gray-400">
                     <li>
@@ -100,7 +99,7 @@
     
         <div
             class="mt-12 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 space-y-4 md:space-y-0">
-            <p class="font-semibold select-text">সম্পাদক : হাসান হাকিম</p>
+            <p class="font-semibold select-text">সম্পাদক : xxx xxxxx</p>
             <nav class="flex space-x-8 text-center">
                 <a class="hover:text-gray-900 transition-colors" href="#">আমাদের সম্পর্কে</a>
                 <a class="hover:text-gray-900 transition-colors" href="#">শর্তাবলী</a>

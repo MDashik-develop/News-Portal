@@ -1,9 +1,28 @@
 <section class="w-full">
-    <nav class="mb-2 sticky top-0 z-50 bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700">
+    <nav class="mb-2 sticky top-0 z-50 bg-zinc-200 dark:bg-zinc-700 border-b border-zinc-200 dark:border-zinc-700">
         <flux:header container class="header-nav-main">
             <style>
                 .header-nav-main > div{
                     padding: 0;
+                }
+                .header-nav-main  div  a div{
+                    color: black !important;
+                    color: var(--color-accent-content) !important;
+                    padding: 0 !important;
+                }
+                .header-nav-main div a:hover div::after {
+                    content: var(--tw-content);
+                    background-color: var(--color-accent-content) !important;
+                    height: 1px;
+                    width: 100%;
+                    position: absolute;
+                    bottom: -12px;
+                    left: 0;
+                    transition: width 0.8s ease-in-out;
+                }
+                .header-nav-main div ui-dropdown button{
+                    color: black ;
+                    color: var(--color-accent-content) !important;
                 }
             </style>
             <flux:modal.trigger name="menu-flyout" class="md:hidden">

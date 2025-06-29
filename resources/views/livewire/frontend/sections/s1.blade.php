@@ -3,7 +3,7 @@
     <div 
         x-data="{ ready: false }" 
         x-init="setTimeout(() => ready = true, 1000)"
-        class=" min-w-full border-b-1"
+        class=" min-w-full border-b-1 dark:border-zinc-700"
         >
         {{-- Placeholder Skeleton --}}
         <template x-if="!ready" class="min-w-full">
@@ -25,7 +25,7 @@
             <a href="{{ route('post.view', ['slug' => $s1->slug]) }}" wire:navigate 
                 class="flex justify-between items-center gap-2 max-h-min mt-[8px]">
                 <h5
-                    class="mb-2 w-50 leading-[24px] flex-3/4 text-base line-clamp-3 tracking-tight text-gray-900  dark:text-gray-300 overflow-hidden max-h-[70px]">
+                    class="mb-2 w-50 leading-[24px] flex-3/4 text-base line-clamp-3 tracking-tight text-gray-900  dark:text-gray-400 overflow-hidden max-h-[70px]">
                     {{ $s1->title }}
                 </h5>
                 <img src="{{ asset('storage/' . $s1->featured_image) }}" alt="{{ $s1->title }}"

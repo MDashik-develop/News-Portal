@@ -17,7 +17,7 @@ class S4 extends Component
             ->where('status', 'published')
             ->orderBy('published_at', 'desc')
             ->whereNotNull('featured_image')
-            ->take(9)
+            ->take(8)
             ->get();
     }
     public function render()

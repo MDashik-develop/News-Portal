@@ -32,7 +32,7 @@
         <!-- Post Content -->
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-4">
             <div class="md:w-[70%]">
-                <div class=" mb-5 px-3 py-3 rounded-xl border bg-gray-50 dark:bg-zinc-900 dark:border-zinc-700 shadow-md">
+                <div class=" mb-5 px-3 py-3 rounded-xl border bg-gray-50 dark:bg-zinc-800 dark:border-zinc-700 shadow-md">
 
                     @if ($post->featured_image && $post->video_url)
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -214,7 +214,7 @@
 
                 @if ($poll)
                 <div
-                    class="mb-6 px-6 py-6 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-md">
+                    class="mb-6 px-6 py-6 rounded-xl border border-gray-300  bg-white dark:bg-zinc-800 dark:border-zinc-700 shadow-md"> 
                     <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">{{ $poll->question }}</h2>
 
                     @php
@@ -257,7 +257,7 @@
                                 {{ $option->option_text }}
                             </div>
                             <div
-                                class="relative w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 overflow-hidden cursor-pointer {{ $disabled ? 'cursor-not-allowed' : 'hover:opacity-90' }}">
+                                class="relative w-full bg-gray-200 dark:bg-zinc-900 rounded-full h-6 overflow-hidden cursor-pointer {{ $disabled ? 'cursor-not-allowed' : 'hover:opacity-90' }}">
                                 <div class="{{ $color }} h-6 rounded-full flex items-center justify-center font-semibold text-sm transition-all duration-500 {{ $barOpacity }}"
                                     style="width: {{ $percent }}%; min-width: 60px;"
                                     aria-label="{{ $option->option_text }} votes progress bar" role="progressbar"
@@ -278,7 +278,7 @@
                 </div>
                 @endif
 
-                <div class=" mb-3 px-3 py-3 rounded-xl border bg-gray-50 dark:bg-gray-900 shadow-md">
+                <div class=" mb-3 px-3 py-3 rounded-xl border bg-gray-50 dark:bg-zinc-800 dark:border-zinc-700 shadow-md">
                     <div class="mb-6">
                         <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Comments</h2>
 
@@ -296,7 +296,7 @@
 
     <div>
         @if ($relatedPosts->count())
-        <div class="bg-[#e8f1ff] border rounded-xl dark:bg-gray-900">
+        <div class="bg-[#e8f1ff] border rounded-xl dark:bg-zinc-800 dark:border-zinc-700">
             <div class="container mx-auto px-2 pb-2 pt-3 text-center">
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white">সম্পর্কিত পোস্ট</h2>
             </div>
@@ -304,7 +304,7 @@
                 @foreach ($relatedPosts as $relatedPost)
                 <div class="p-2">
                     <div
-                        class="p-1.5 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        class="p-1.5 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 dark:bg-zinc-700 dark:border-zinc-600 dark:hover:bg-zinc-600"> 
                         <a href="{{ route('post.view', ['slug' => $relatedPost->slug]) }}" wire:navigate>
                             <div class="h-[50%]">
                                 <img src="{{ asset('storage/' . $relatedPost->featured_image) }}" alt="{{ $relatedPost->title }}" class="w-full h-auto rounded">

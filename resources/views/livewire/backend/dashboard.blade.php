@@ -84,7 +84,7 @@
                 <!-- Left Column: Recent Posts & Chart -->
                 <div class="lg:col-span-2 space-y-8">
                     <!-- Visitor Statistics Chart -->
-                    <div class="bg-white dark:bg-zinc-900 p-6 rounded-xl shadow-md border border-gray-700">
+                    <div class="bg-white dark:bg-zinc-900 p-6 rounded-xl shadow-md border dark:border-gray-700">
                         <h3 class="text-lg font-semibold text-slate-900 dark:text-gray-300 mb-4">ভিজিটর পরিসংখ্যান (শেষ ৭ দিন)</h3>
                         <div class="h-80 dark:text-white">
                             {{-- ক্যানভাস ট্যাগটি এখানে থাকবে --}}

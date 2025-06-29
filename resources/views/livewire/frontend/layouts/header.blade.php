@@ -60,10 +60,10 @@
                         @click="$store.theme.toggle()"
                         :aria-label="$store.theme.dark ? 'Switch to light mode' : 'Switch to dark mode'"
                         class="ml-2 p-2 rounded-full border border-gray-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 hover:bg-gray-100 dark:hover:bg-zinc-700 transition" >
-                        <svg x-show="!$store.theme.dark" class="h-5 w-5 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg x-show="$store.theme.dark" class="h-5 w-5 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="currentColor"/>
                         </svg>
-                        <svg x-show="$store.theme.dark" class="h-5 w-5 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg x-show="!$store.theme.dark" class="h-5 w-5 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke="currentColor" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" fill="currentColor"/>
                         </svg>
                 </button>

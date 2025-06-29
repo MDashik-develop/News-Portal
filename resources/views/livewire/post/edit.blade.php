@@ -55,9 +55,26 @@
                         </flux:field>
 
                         <flux:field>
-                            <flux:label>Content</flux:label>
-                            <flux:textarea wire:model="content" rows="5" />
-                            <flux:error name="content" />
+                            {{-- <flux:label>Content</flux:label>
+                            <flux:textarea wire:model="content" rows="5" /> --}}
+                            <div x-data x-init="
+                                    const summernote = $($refs.editor).summernote({
+                                        height: 300,
+                                        callbacks: {
+                                            onChange: (contents) => $wire.content = contents
+                                        }
+                                    });
+                            
+                                    $watch('$wire.content', value => {
+                                        if (value !== $($refs.editor).summernote('code')) {
+                                            $($refs.editor).summernote('code', value);
+                                        }
+                                    });
+                                ">
+                                <div wire:ignore>
+                                    <textarea x-ref="editor">{!! $content !!}</textarea>
+                                </div>
+                                <flux:error name="content" />
                         </flux:field>
 
                         <flux:field>

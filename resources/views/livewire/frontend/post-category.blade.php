@@ -2,7 +2,7 @@
     <!-- Post Content -->
     <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4">
         <div class="md:w-[70%]">
-          <div class="w-full min-h-screen mb-5 px-3 py-3 rounded-xl border bg-gray-50 dark:bg-zinc-700 dark:border-zinc-600 shadow-md">
+          <div class="w-full min-h-screen mb-5 px-3 py-3 rounded-xl border bg-gray-50 dark:bg-zinc-800 dark:border-zinc-600 shadow-md">
             <div class="container mx-auto px-2 py-6 text-ellipsis whitespace-nowrap">
                 <flux:breadcrumbs>
                     <flux:breadcrumbs.item href="{{ route('home') }}">Home</flux:breadcrumbs.item>
@@ -36,7 +36,7 @@
                        {{-- Actual Post --}}
                        <template x-if="ready">
                            <div class="p-1 sm:p-2">
-                               <div class="bg-white border border-gray-200 rounded hover:bg-zinc-100 dark:bg-zinc-600 dark:border-gray-700 dark:hover:bg-gray-700">
+                               <div class="bg-white border border-gray-200 rounded hover:bg-zinc-100 dark:bg-zinc-700 dark:border-zinc-600 dark:hover:bg-gray-600">
                                    <a href="{{ route('post.view', ['slug' => $post->slug]) }}" wire:navigate>
                                        <div class="h-[50%]">
                                            <img src="{{ asset('storage/' . $post->featured_image) }}" alt="{{ $post->title }}" class="w-full h-auto rounded-t">

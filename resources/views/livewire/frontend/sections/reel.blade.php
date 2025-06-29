@@ -1,7 +1,7 @@
 <section>
     <div class="w-full mx-auto py-8">
         <div class="inline-flex items-center justify-center w-full">
-            <hr class="w-full h-[4px] my-8 bg-gray-200 border-0 dark:bg-gray-700 rounded-lg">
+            <hr class="w-full h-[4px] my-8 bg-gray-200 border-0 dark:bg-zinc-900 rounded-lg">
             <span
                 class="absolute px-3 font-semibold text-2xl text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">খবরের ভিডিও</span>
         </div>
@@ -96,9 +96,19 @@
 @endpush
 @push('scripts')
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+    let allReelsData = [];
+    let currentModalIndex = 0;
+
+    const closeModal = () => {
+        document.getElementById('reel-modal').classList.add('hidden');
+        document.body.classList.remove('modal-open');
+        document.getElementById('modal-content-wrapper').innerHTML = ""; 
+    };
+
     const initializeReels = () => {
-        let allReelsData = [];
-        let currentModalIndex = 0;
+        allReelsData = [];
+        currentModalIndex = 0;
 
         const modalContentWrapper = document.getElementById('modal-content-wrapper');
         const modalPrevBtn = document.getElementById('modal-prev');
@@ -118,17 +128,14 @@
             if (index < 0 || index >= allReelsData.length) return;
             currentModalIndex = index;
             const reelData = allReelsData[index];
-            
-            // Update Video
+
             modalContentWrapper.innerHTML = `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${reelData.videoid}?autoplay=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-            
-            // Update Info
+
             modalAvatar.src = reelData.avatar;
             modalUsername.textContent = reelData.username;
             modalTitle.textContent = reelData.title;
-            modalTitleLink.href = `/post/${reelData.slug}`; // Assuming your route is /post/{slug}
-            
-            // Update button states
+            modalTitleLink.href = `/post/${reelData.slug}`;
+
             modalPrevBtn.disabled = currentModalIndex === 0;
             modalNextBtn.disabled = currentModalIndex === allReelsData.length - 1;
         };
@@ -154,79 +161,100 @@
             if (img) img.style.opacity = '1';
             if (playIcon) playIcon.style.opacity = '0.8';
         };
-        
+
         const handleCardClick = (e) => {
             const card = e.currentTarget;
             const videoId = card.dataset.videoid;
             if (!videoId) return;
-            
+
             handleMouseLeave({ currentTarget: card });
-            
+
             currentModalIndex = allReelsData.findIndex(reel => reel.videoid === videoId);
             showModalVideo(currentModalIndex);
-            
+
             document.getElementById('reel-modal').classList.remove('hidden');
             document.body.classList.add('modal-open');
         };
 
         const attachAllListeners = () => {
             populateReelsData();
+
             const currentReelCards = document.querySelectorAll('.reel-card');
             if (currentReelCards.length === 0) return;
 
             currentReelCards.forEach(card => {
+                card.removeEventListener('click', handleCardClick);
+                card.removeEventListener('mouseenter', handleMouseEnter);
+                card.removeEventListener('mouseleave', handleMouseLeave);
+
                 card.addEventListener('click', handleCardClick);
                 card.addEventListener('mouseenter', handleMouseEnter);
                 card.addEventListener('mouseleave', handleMouseLeave);
             });
 
-            setupNavButtons(currentReelCards);
-            modalPrevBtn.addEventListener('click', () => showModalVideo(currentModalIndex - 1));
-            modalNextBtn.addEventListener('click', () => showModalVideo(currentModalIndex + 1));
+            // Modal nav buttons
+            if (modalPrevBtn) modalPrevBtn.onclick = () => showModalVideo(currentModalIndex - 1);
+            if (modalNextBtn) modalNextBtn.onclick = () => showModalVideo(currentModalIndex + 1);
         };
 
         const setupNavButtons = (cards) => {
-             const carousel = document.getElementById('reels-carousel');
-             const leftButton = document.getElementById('scroll-left');
-             const rightButton = document.getElementById('scroll-right');
-             if (!carousel || cards.length === 0) return;
+            const carousel = document.getElementById('reels-carousel');
+            const leftButton = document.getElementById('scroll-left');
+            const rightButton = document.getElementById('scroll-right');
+            if (!carousel || cards.length === 0) return;
 
-             const checkScrollButtons = () => {
+            const checkScrollButtons = () => {
                 const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
                 leftButton.disabled = carousel.scrollLeft <= 1; 
                 rightButton.disabled = carousel.scrollLeft >= maxScrollLeft - 1;
             };
-            leftButton.onclick = () => {
+
+            const getCardWidthAndGap = () => {
                 const cardWidth = cards[0].offsetWidth;
-                const gap = parseInt(window.getComputedStyle(carousel).gap);
+                const gap = parseInt(window.getComputedStyle(carousel).gap) || 0;
+                return { cardWidth, gap };
+            };
+
+            leftButton.onclick = () => {
+                const { cardWidth, gap } = getCardWidthAndGap();
                 carousel.scrollBy({ left: -(cardWidth + gap), behavior: 'smooth' });
             };
             rightButton.onclick = () => {
-                const cardWidth = cards[0].offsetWidth;
-                const gap = parseInt(window.getComputedStyle(carousel).gap);
+                const { cardWidth, gap } = getCardWidthAndGap();
                 carousel.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
             };
+
+            carousel.removeEventListener('scroll', checkScrollButtons);
             carousel.addEventListener('scroll', checkScrollButtons);
+            window.removeEventListener('resize', checkScrollButtons);
             window.addEventListener('resize', checkScrollButtons);
             checkScrollButtons();
         };
-        
-        attachAllListeners(); 
+
+        // Attach all
+        attachAllListeners();
+        setupNavButtons(document.querySelectorAll('.reel-card'));
+
+        // NEW IMPORTANT: Add modal close buttons each time, since Livewire may have replaced them
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const modalBgClose = document.getElementById('modal-bg-close');
+        if (modalCloseBtn) {
+            modalCloseBtn.removeEventListener('click', closeModal);
+            modalCloseBtn.addEventListener('click', closeModal);
+        }
+        if (modalBgClose) {
+            modalBgClose.removeEventListener('click', closeModal);
+            modalBgClose.addEventListener('click', closeModal);
+        }
     };
 
-    const closeModal = () => {
-        document.getElementById('reel-modal').classList.add('hidden');
-        document.body.classList.remove('modal-open');
-        document.getElementById('modal-content-wrapper').innerHTML = ""; 
-    };
-    
-    document.getElementById('modal-close-btn').addEventListener('click', closeModal);
-    document.getElementById('modal-bg-close').addEventListener('click', closeModal);
-
+    // Initial load
     initializeReels();
 
+    // Livewire SPA navigation
     document.addEventListener('livewire:navigated', () => {
         initializeReels();
     });
+});
 </script>
 @endpush
