@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('meta_tags')->nullable();
             $table->string('fb_app_id')->nullable();
             $table->text('meta_description')->nullable();
-            $table->string('fb_app_id')->nullable();
 
             $table->string('youtube_url')->nullable();
             $table->string('facebook_url')->nullable();
