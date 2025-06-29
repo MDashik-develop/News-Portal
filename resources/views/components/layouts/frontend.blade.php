@@ -44,7 +44,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta property="og:type" content="website">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @if ($$website->favicon->isNotEmpty())
+    @if ($website->favicon->isNotEmpty())
         <link rel="icon" href="{{ asset('storage/' . $website->favicon) }}" type="image/x-icon
     @endif">
     @if (!trim($__env->yieldPushContent('post-head')))
