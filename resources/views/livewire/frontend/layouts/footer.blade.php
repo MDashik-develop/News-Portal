@@ -1,5 +1,5 @@
 <footer class="bg-[#e8f1ff] dark:bg-gray-900">
-    <footer class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-12 pb-10 text-gray-700 dark:text-gray-50  text-sm select-none">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-12 pb-10 text-gray-700 dark:text-gray-50  text-sm select-none">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-y-10 gap-x-8 border-b border-gray-300 pb-10">
             <div>
                 <h3 class="font-bold text-base mb-4 border-b-2 border-[#f97316] inline-block pb-1">
@@ -111,5 +111,5 @@
         <p class="mt-8 text-center text-gray-400 text-xs select-text">
             স্বত্ব © ২০২৫ কালের কণ্ঠ
         </p>
-    </footer>
+    </div>
 </footer>

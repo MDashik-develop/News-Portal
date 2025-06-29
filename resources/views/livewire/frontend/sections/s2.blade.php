@@ -1,5 +1,4 @@
 <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-10">
-    
     @foreach ($section2 as $s2)
     <div 
         x-data="{ ready: false }" 

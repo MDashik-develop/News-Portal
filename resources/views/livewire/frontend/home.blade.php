@@ -196,65 +196,65 @@
 
     <livewire:frontend.sections.reel />
     @push('scripts')
-    <script>
+        <script>
 
-        // Data based on the provided image
-        const stockData = [
-            { name: 'RINS', price: 35.00, change: -0.28, percent: -0.28 },
-            { name: 'STANDBANKL', price: 5.10, change: 0.10, percent: 1.92 },
-            { name: 'STYLECRAFT', price: 51.50, change: 1.00, percent: 1.98 },
-            { name: 'SUMITPOWER', price: 42.40, change: 0.00, percent: 0.00 },
-            { name: 'SUNLIFEINS', price: 65.80, change: 2.50, percent: 3.95 },
-            { name: 'TAKAFULINS', price: 30.80, change: -0.90, percent: -2.84 },
-            { name: 'TALLUSPIN', price: 5.10, change: 0.10, percent: 2.00 },
-            { name: 'TAMITEX', price: 95.20, change: 0.50, percent: 0.53 },
-            { name: 'TITASGAS', price: 'N/A', change: 0.40, percent: 'N/A' } // Example for N/A data
-        ];
+            // Data based on the provided image
+            const stockData = [
+                { name: 'RINS', price: 35.00, change: -0.28, percent: -0.28 },
+                { name: 'STANDBANKL', price: 5.10, change: 0.10, percent: 1.92 },
+                { name: 'STYLECRAFT', price: 51.50, change: 1.00, percent: 1.98 },
+                { name: 'SUMITPOWER', price: 42.40, change: 0.00, percent: 0.00 },
+                { name: 'SUNLIFEINS', price: 65.80, change: 2.50, percent: 3.95 },
+                { name: 'TAKAFULINS', price: 30.80, change: -0.90, percent: -2.84 },
+                { name: 'TALLUSPIN', price: 5.10, change: 0.10, percent: 2.00 },
+                { name: 'TAMITEX', price: 95.20, change: 0.50, percent: 0.53 },
+                { name: 'TITASGAS', price: 'N/A', change: 0.40, percent: 'N/A' } // Example for N/A data
+            ];
 
-        function buildMarqueeItem(stock) {
-            let changeStatus = 'neutral';
-            let iconClass = 'icon-neutral';
-            
-            if (stock.change > 0) {
-                changeStatus = 'positive';
-                iconClass = 'icon-up';
-            } else if (stock.change < 0) {
-                changeStatus = 'negative';
-                iconClass = 'icon-down';
+            function buildMarqueeItem(stock) {
+                let changeStatus = 'neutral';
+                let iconClass = 'icon-neutral';
+                
+                if (stock.change > 0) {
+                    changeStatus = 'positive';
+                    iconClass = 'icon-up';
+                } else if (stock.change < 0) {
+                    changeStatus = 'negative';
+                    iconClass = 'icon-down';
+                }
+
+                const changeValueText = stock.change > 0 ? `+${stock.change.toFixed(2)}` : stock.change.toFixed(2);
+                const percentText = typeof stock.percent === 'number' ? `${stock.percent.toFixed(2)}%` : '0.00%';
+
+                return `
+                    <div class="stock-item">
+                        <div class="stock-info">
+                            <span class="stock-name">${stock.name}</span>
+                            <span class="stock-price">${typeof stock.price === 'number' ? stock.price.toFixed(2) : stock.price}</span>
+                        </div>
+                        <div class="stock-change-info ${changeStatus}">
+                            <span class="change-value ${iconClass}">${changeValueText}</span>
+                            <span class="change-percent">${percentText}</span>
+                        </div>
+                    </div>
+                `;
             }
 
-            const changeValueText = stock.change > 0 ? `+${stock.change.toFixed(2)}` : stock.change.toFixed(2);
-            const percentText = typeof stock.percent === 'number' ? `${stock.percent.toFixed(2)}%` : '0.00%';
+            function populateMarquee() {
+                const marqueeContent = document.getElementById('marquee-content');
+                let generatedHTML = '';
+                stockData.forEach(stock => {
+                    generatedHTML += buildMarqueeItem(stock);
+                });
+                
+                // To create a seamless loop, we duplicate the content
+                marqueeContent.innerHTML = generatedHTML + generatedHTML;
+            }
 
-            return `
-                <div class="stock-item">
-                    <div class="stock-info">
-                        <span class="stock-name">${stock.name}</span>
-                        <span class="stock-price">${typeof stock.price === 'number' ? stock.price.toFixed(2) : stock.price}</span>
-                    </div>
-                    <div class="stock-change-info ${changeStatus}">
-                        <span class="change-value ${iconClass}">${changeValueText}</span>
-                        <span class="change-percent">${percentText}</span>
-                    </div>
-                </div>
-            `;
-        }
+            // Load the data when the page opens
+            document.addEventListener('DOMContentLoaded', populateMarquee);
 
-        function populateMarquee() {
-            const marqueeContent = document.getElementById('marquee-content');
-            let generatedHTML = '';
-            stockData.forEach(stock => {
-                generatedHTML += buildMarqueeItem(stock);
-            });
             
-            // To create a seamless loop, we duplicate the content
-            marqueeContent.innerHTML = generatedHTML + generatedHTML;
-        }
-
-        // Load the data when the page opens
-        document.addEventListener('DOMContentLoaded', populateMarquee);
-
-        
-    </script>
-@endpush
+        </script>
+    @endpush
 </section>

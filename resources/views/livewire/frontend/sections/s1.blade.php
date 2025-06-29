@@ -33,6 +33,5 @@
             </a>
         </template>
     </div>
-
     @endforeach
 </div>

@@ -1,25 +1,25 @@
 <section >
-@push('post-head')
-    @php
-        $website = \App\Models\website::first();
-    @endphp
-    <title>{{ $website->title}}-{{ $post->title }} - {{ config('app.name') }}</title>
-    <meta name="description" content="{{ Str::limit(strip_tags($post->content), 150) }}">
-    <meta name="keywords" content="{{ $post->keywords ?? $website->meta_tags }}">
-    <meta property="og:title" content="{{ $post->title }}">
-    <meta property="og:description" content="{{ Str::limit(strip_tags($post->content), 150) }}">
-    <meta property="og:image" content="{{ asset('storage/' . $post->featured_image) }}">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $post->title }}">
-    <meta name="twitter:description" content="{{ Str::limit(strip_tags($post->content), 150) }}">
-    <meta name="twitter:image" content="{{ asset('storage/' . $post->featured_image) }}">
-    <meta name="author" content="{{ $post->user?->name ?? 'Unknown' }}">
-    <link rel="canonical" href="{{ url()->current() }}">
-    <link rel="alternate" href="{{ url()->current() }}" hreflang="en">
-    <link rel="alternate" href="{{ url()->current() }}" hreflang="bn">
-    <link rel="alternate" href="{{ url()->current() }}" hreflang="x-default">
-@endpush
+    @push('post-head')
+        @php
+            $website = \App\Models\website::first();
+        @endphp
+        <title>{{ $website->title}}-{{ $post->title }} - {{ config('app.name') }}</title>
+        <meta name="description" content="{{ Str::limit(strip_tags($post->content), 150) }}">
+        <meta name="keywords" content="{{ $post->keywords ?? $website->meta_tags }}">
+        <meta property="og:title" content="{{ $post->title }}">
+        <meta property="og:description" content="{{ Str::limit(strip_tags($post->content), 150) }}">
+        <meta property="og:image" content="{{ asset('storage/' . $post->featured_image) }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ $post->title }}">
+        <meta name="twitter:description" content="{{ Str::limit(strip_tags($post->content), 150) }}">
+        <meta name="twitter:image" content="{{ asset('storage/' . $post->featured_image) }}">
+        <meta name="author" content="{{ $post->user?->name ?? 'Unknown' }}">
+        <link rel="canonical" href="{{ url()->current() }}">
+        <link rel="alternate" href="{{ url()->current() }}" hreflang="en">
+        <link rel="alternate" href="{{ url()->current() }}" hreflang="bn">
+        <link rel="alternate" href="{{ url()->current() }}" hreflang="x-default">
+    @endpush
     <!-- Breadcrumbs -->
     <div class="container mx-auto px-2 py-6 text-ellipsis whitespace-nowrap">
         <flux:breadcrumbs>
@@ -320,57 +320,58 @@
         </div>
         @endif
     </div>
+
+    @push('scripts')
+        <script>
+            function reinitializeAll() {
+                // Flowbite re-init
+                if (window.initFlowbite) {
+                    window.initFlowbite();
+                }
+        
+                // Facebook comment plugin
+                if (typeof FB !== 'undefined' && FB.XFBML) {
+                    FB.XFBML.parse();
+                }
+        
+                // Slick carousel re-init
+                const $carousel = $('.post-view-autoplay-carousel');
+        
+                if ($carousel.hasClass('slick-initialized')) {
+                    $carousel.slick('unslick'); // destroy previous instance
+                }
+        
+                $carousel.slick({
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                    responsive: [
+                        { breakpoint: 1024, settings: { slidesToShow: 6 } },
+                        { breakpoint: 768, settings: { slidesToShow: 3 } },
+                        { breakpoint: 480, settings: { slidesToShow: 2 } }
+                    ]
+                });
+            }
+        
+            // Fire on initial load
+            document.addEventListener('DOMContentLoaded', () => {
+                reinitializeAll();
+            });
+        
+            // Fire on Livewire navigation
+            document.addEventListener('livewire:navigated', () => {
+                reinitializeAll();
+            });
+        
+            // Fire after DOM update (e.g., polling, event, action)
+            document.addEventListener('livewire:updated', () => {
+                reinitializeAll();
+            });
+            console.log("Livewire DOM updated – reinitializing");
+        
+        </script>
+    @endpush
 </section>
 
 
-@push('scripts')
-<script>
-    function reinitializeAll() {
-        // Flowbite re-init
-        if (window.initFlowbite) {
-            window.initFlowbite();
-        }
-
-        // Facebook comment plugin
-        if (typeof FB !== 'undefined' && FB.XFBML) {
-            FB.XFBML.parse();
-        }
-
-        // Slick carousel re-init
-        const $carousel = $('.post-view-autoplay-carousel');
-
-        if ($carousel.hasClass('slick-initialized')) {
-            $carousel.slick('unslick'); // destroy previous instance
-        }
-
-        $carousel.slick({
-            slidesToShow: 5,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            responsive: [
-                { breakpoint: 1024, settings: { slidesToShow: 6 } },
-                { breakpoint: 768, settings: { slidesToShow: 3 } },
-                { breakpoint: 480, settings: { slidesToShow: 2 } }
-            ]
-        });
-    }
-
-    // Fire on initial load
-    document.addEventListener('DOMContentLoaded', () => {
-        reinitializeAll();
-    });
-
-    // Fire on Livewire navigation
-    document.addEventListener('livewire:navigated', () => {
-        reinitializeAll();
-    });
-
-    // Fire after DOM update (e.g., polling, event, action)
-    document.addEventListener('livewire:updated', () => {
-        reinitializeAll();
-    });
-    console.log("Livewire DOM updated – reinitializing");
-
-</script>
-@endpush
