@@ -49,7 +49,7 @@
         $title = $website && $website->title ? $website->title : 'My Website';
         $description = $website && $website->meta_description ? $website->meta_description : 'Default description';
         $keywords = $website && $website->meta_tags ? $website->meta_tags : 'default, tags';
-        $logo = $website && $website->logo ? $website->logo : 'default-logo.png';
+        // $logo = $website && $website->logo ? $website->logo : 'default-logo.png';
     @endphp
 
         <link rel="icon" href="{{ asset('storage/' . $favicon) }}" type="image/x-icon">
@@ -60,7 +60,9 @@
             <meta name="keywords" content="{{ $keywords }}">
             <meta property="og:title" content="{{ $title }}">
             <meta property="og:description" content="{{ $description }}">
-            <meta property="og:image" content="{{ asset('storage/' . $logo) }}">
+@if ($website && $website->logo)
+<meta property="og:image" content="{{ asset('storage/' . $website->logo) }}">
+@endif
             <meta property="og:url" content="{{ url('/') }}">
             <meta name="author" content="{{ $title }}">
         @else
