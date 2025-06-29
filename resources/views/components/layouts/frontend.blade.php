@@ -94,10 +94,14 @@
     <div>
             <!-- Facebook SDK -->
     <div id="fb-root"></div>
+    @php
+        $fbAppId = $website && $website->fb_app_id ? $website->fb_app_id : '12345678';
+    @endphp
     <script async defer crossorigin="anonymous"
-        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0&appId={{ $website->fb_app_id }}&autoLogAppEvents=1"
+        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0&appId={{ $fbAppId }}&autoLogAppEvents=1"
         nonce="abcd1234">
     </script>
+
         <livewire:frontend.layouts.header />
         <livewire:frontend.layouts.nav />
 
