@@ -10,7 +10,7 @@
     @elseif ($adSlot->ad_type === 'personal' && $personalAd)
         <a href="{{ $personalAd->target_link }}" target="_blank" rel="noopener noreferrer sponsored"
             class="container mx-auto">
-            <div class="h-[90px] w-full max-w-[970px] mx-auto">
+            <div class="max-h-[90px] w-full max-w-[970px] mx-auto">
                 <img src="{{ asset('storage/' . $personalAd->ad_image) }}" alt="Banner Advertisement">
             </div>
         </a>
