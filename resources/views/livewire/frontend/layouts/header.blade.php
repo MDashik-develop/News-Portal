@@ -19,7 +19,6 @@
                     class="flex items-center justify-center max-h-full">
                         <img src="{{ asset('storage/' . $logo) }}" class="h-full w-auto" alt="Site Logo">
                 </a>
-
             </div>
             <div
                 class="flex items-center space-x-2 text-[12px] text-[#b30000] font-normal flex-1 w-full md:w-auto justify-center md:justify-end">
