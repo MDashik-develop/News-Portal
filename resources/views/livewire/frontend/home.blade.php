@@ -195,8 +195,7 @@
     <livewire:frontend.sections.all-post />
 
     <livewire:frontend.sections.reel />
-</section>
-@push('scripts')
+    @push('scripts')
     <script>
 
         // Data based on the provided image
@@ -258,3 +257,4 @@
         
     </script>
 @endpush
+</section>
