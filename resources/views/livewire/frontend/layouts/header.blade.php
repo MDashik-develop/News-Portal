@@ -18,8 +18,9 @@
                     wire:navigate 
                     class="flex items-center justify-center max-h-full">
                     @if ($website && $website->logo)
-                        
-                    <img src="{{ asset('storage/' . $website->logo) }}" class="h-full w-auto" alt="Site Logo">
+                       <img src="{{ asset('storage/' . $website->logo) }}" class="h-full w-auto" alt="Site Logo">
+                    @else
+                        <img src="{{ asset('storage/website/defoultlogo.png') }}" class="h-full w-auto" alt="Site Logo">
                     @endif
                 </a>
             </div>
