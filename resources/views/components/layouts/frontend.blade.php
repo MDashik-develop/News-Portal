@@ -93,8 +93,8 @@
 <body class=" bg-white dark:bg-zinc-900">
     <div>
             <!-- Facebook SDK -->
-            @if ($fbAppId)
-                <div id="fb-root"></div>
+            <div id="fb-root"></div>
+            @if ($fbAppId = $website ? $website->facebook_app_id : null)
                 <script async defer crossorigin="anonymous"
                     src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0&appId={{ $fbAppId }}&autoLogAppEvents=1"
                     nonce="abcd1234">
@@ -114,7 +114,7 @@
     
 
     <!-- Footer Scripts -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" defer></>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
