@@ -5,8 +5,6 @@
     @if (!empty($website) && !empty($website->logo))
         <img src="{{ asset('storage/' . $website->logo) }}">
     @else
-        <div>
-            
-        </div>
+        <img src="{{ asset('storage/website/defoultlogo.png') }}">
     @endif
 </div>
